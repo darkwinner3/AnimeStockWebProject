@@ -25,19 +25,10 @@
                     <a asp-area="" asp-controller="Home" asp-action="Index" target="_self">Home</a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="All" target="_self">Products</a>
+                    <a asp-area="" asp-controller="Home" asp-action="All" target="_self">Books</a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="All" target="_self">Events</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="All" target="_self">Contact</a>
-                </li>
-                <li>
-                    @if (User?.Identity?.IsAuthenticated ?? false)
-                    {
-                        <a asp-area="" asp-controller="Books" asp-action="All">Books</a>
-                    }
+                    <a asp-area="" asp-controller="Home" asp-action="All" target="_self">Games</a>
                 </li>
                 <partial name="_LoginPartial" />
             </ul>
@@ -49,7 +40,7 @@
         @RenderBody()
     </main>
     
-    @if (ViewBag.ShowFooter ?? false)
+    @if (ViewBag.ShowFooter ?? true)
     {
         <footer class="border-top footer text-muted">
             <div class="container">

@@ -11,24 +11,27 @@
             <div class="user-container">
                 @if (string.IsNullOrWhiteSpace(this.User.GetProfilePicturePath()))
                 {
-                    <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><i class="fa-regular fa-user" id="user-icon"></i> </a>
-
+                    <a id="user-tag" onclick="toggleMenu()">
+                        <i class="fa-regular fa-user" id="user-icon">
+                        </i>
+                    </a>
                 }
                 else
                 {
-                    <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><img src="~/@this.User.GetProfilePicturePath()"> </a>
+                    <a id="user-tag" onclick="toggleMenu()" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()">
+                        <img src="~/@this.User.GetProfilePicturePath()"> 
+                    </a>
                 }
-                <i class="fa-solid fa-caret-down"></i>
             </div>
-            <ul class="user-menu">
+        <ul id="subMenu" class="user-menu">
                 <li>
                     <a asp-controller="User" asp-action="Personalization" asp-route-id="@User.GetId()">Profile</a>
                 </li>
                 <li>
-                    <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@User.GetId()">Favorite Hotels</a>
+                    <a asp-controller="User" asp-action="UserFavoriteProducts" asp-route-id="@User.GetId()">Favorite Products</a>
                 </li>
                 <li>
-                    <a asp-controller="User" asp-action="UserReservations" asp-route-id="@User.GetId()">Your Reservations</a>
+                    <a asp-controller="User" asp-action="UserOrders" asp-route-id="@User.GetId()">Your Orders</a>
                 </li>
             </ul>
         </li>
