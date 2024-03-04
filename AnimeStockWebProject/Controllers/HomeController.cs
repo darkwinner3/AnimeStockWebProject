@@ -15,7 +15,7 @@ namespace AnimeStockWebProject.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.ShowTopBar = true;
+            ViewBag.ShowFooter = false;
             return View();
         }
 
