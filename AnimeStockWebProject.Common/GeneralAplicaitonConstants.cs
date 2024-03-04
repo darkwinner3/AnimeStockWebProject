@@ -15,5 +15,9 @@ namespace AnimeStockWebProject.Common
         public const string AdminAreaName = "Admin";
         public const string ModeratorRoleName = "Moderator";
         public const string UserRoleName = "User";
+
+        //Cache keys and durations
+        public const string AdminUsersCacheKey = "AllUsers";
+        public const int AdminUsersDuration = 2;
     }
 }
