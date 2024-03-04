@@ -11,14 +11,14 @@
         <h1>@ViewData["Title"]</h1>
 
         <section class="input-container">
-            <label asp-for="@Model.Username">Username</label>
-            <input type="text" autocomplete="username" aria-required="true" asp-for="@Model.Username" />
-            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+            <label asp-for="@Model.UsernameOrEmail" asp-for="@Model.UsernameOrEmail">Username or Email</label>
+            <input type="text" autocomplete="username email" aria-required="true" asp-for="@Model.UsernameOrEmail" />
+            <span asp-validation-for="@Model.UsernameOrEmail" class="text-danger"></span>
         </section>
 
         <section class="input-container">
             <label asp-for="@Model.Password">Password</label>
-            <input type="text" autocomplete="password" aria-required="true" asp-for="@Model.Password" />
+            <input type="password" autocomplete="password" aria-required="true" asp-for="@Model.Password" />
             <span asp-validation-for="@Model.Password" class="text-danger"></span>
         </section>
 
