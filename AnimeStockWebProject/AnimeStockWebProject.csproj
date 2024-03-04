@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\canva root.css" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
@@ -27,6 +31,7 @@
     <Folder Include="wwwroot\img\Games\FINAL FANTASY VII REMAKE INTERGRADE\" />
     <Folder Include="wwwroot\img\Games\Little Witch Nobeta\" />
     <Folder Include="wwwroot\img\Games\STEINS GATE\" />
+    <Folder Include="wwwroot\img\ProfilePictures\" />
   </ItemGroup>
 
 </Project>
