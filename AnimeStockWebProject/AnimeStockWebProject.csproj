@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-AnimeStockWebProject-b2b73eb7-3254-4359-8e79-ded419f4be60</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
+	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
+	  <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9" />
+	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AnimeStockWebProject.Common\AnimeStockWebProject.Common.csproj" />
+    <ProjectReference Include="..\AnimeStockWebProject.Core\AnimeStockWebProject.Core.csproj" />
+    <ProjectReference Include="..\AnimeStockWebProject.Infrastructure\AnimeStockWebProject.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\Games\Atelier Ryza 2\" />
+    <Folder Include="wwwroot\img\Games\FINAL FANTASY VII REMAKE INTERGRADE\" />
+    <Folder Include="wwwroot\img\Games\Little Witch Nobeta\" />
+    <Folder Include="wwwroot\img\Games\STEINS GATE\" />
+  </ItemGroup>
+
+</Project>

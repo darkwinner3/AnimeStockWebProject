@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+    <link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/HomeStyles/Home.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <section class="section1">
+        <div class="left-div">
+            <div class="animated-container">
+                <p class="main-title">
+                    AniBooks
+                </p>
+            </div>
+
+            <div class="animated-container">
+                <a href="">
+                    Shop Now
+                </a>
+            </div>
+        </div>
+
+        <div calss="right-div">
+            <div class="animated-container">
+                <div class="section1-picture-container">
+                    <img src="/img/HomePage/collage3.webp" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section2">
+        <div class="animated-container">
+            <div class="section2-items-container">
+                <div class="section2-img"></div>
+                <div class="section2-collection">
+                    <h2>
+                        Aprils's Video Games Sale
+                    </h2>
+
+                    <a href="">
+                        Complete your collection now!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section3">
+        <div class="animated-container">
+            <div class="sections-title-container">
+                <h1>
+                    Shop by category
+                </h1>
+            </div>
+
+            <div class="card-container">
+                <div class="card">
+                    <div>
+                        <img src="~/img/HomePage/fullset_torture_princess_light_1683768052_5eeb2ef3_progressive.jpg" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Light Novels</h2>
+
+                        <p>
+                            New releases and back issues for the reader
+                        </p>
+
+                        <a href="">
+                            <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <img src="~/img/HomePage/download.webp" />
+                    </div>
+
+                    <div class="details">
+                        <h2>Mangas</h2>
+
+                        <p>
+                            New releases
+                        </p>
+
+                        <a href="">
+                            <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section4">
+        <div class="animated-container">
+            <div class="sections-title-container">
+                <h1>
+                    News
+                </h1>
+            </div>
+        </div>
+
+        <div class="news-container">
+            <h1>
+                Date A Live Season 5 Announcement
+            </h1>
+
+            <p>
+                The series Date a Live is getting a fifth season, set to release in April 2024.
+            </p>
+        </div>
+    </section>
+
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="main-picture-container">
+                <div class="animated-container">
+                    <div class="picture-container">
+                        <div class="picture-placeholder">
+                            <img src="~/img/HomePage/2022top100.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="main-footer-title-container">
+                <div class="animated-container">
+                    <div class="footer-title-container">
+                        <p class="footer-title">
+                            <span>
+                                AniBooks
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-links-container">
+                <div class="linksTitle-container">
+                    <div class="animated-container">
+                        <div class="links-title">
+                            <p>
+                                <span>
+                                    Links
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="links-collection">
+                    <div class="animated-container">
+                        <div class="links">
+                            <p>
+                                <a asp-area="" asp-controller="Book" asp-action="All">
+                                    Books
+                                </a>
+                            </p>
+                            <p>
+                                <a asp-area="" asp-controller="Game" asp-action="All">
+                                    Games
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>

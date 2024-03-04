@@ -1,0 +1,390 @@
+﻿/*Keyframes*/
+@keyframes linear_fade {
+    0% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes pan-LEFT-animation {
+    0% {
+        transform: translate(-80px, 0px);
+        animation-timing-function: cubic-bezier(0.4, 0.8, 0.74, 1.0);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+/*creates the animated effect for everything*/
+.animated-container {
+    width: 100%;
+    height: 100%;
+    animation: 1000ms ease 100ms 1 normal both running pan-LEFT-animation, 400ms linear 0s 1 normal both linear_fade;
+}
+
+
+/*section 1*/
+.section1 {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.left-div{
+    display: flex;
+    flex-direction:column;
+    width: 93%;
+    align-items:center;
+}
+
+.left-div .animated-container{
+    text-align:center;
+}
+
+    .left-div p {
+        font-family: "Roboto Mono", monospace;
+        font-weight: 700;
+        font-size: 90px;
+        padding-bottom: 150px;
+        color: #fe502d;
+    }
+
+    .left-div a {
+        text-decoration: none;
+        font-family: "Roboto Mono", monospace;
+        font-weight: 400;
+        border: 2px solid;
+        padding: 10px 35px;
+        font-size: 35px;
+        color: black;
+    }
+
+.right-div {
+    margin-right: 90px;
+}
+
+.section1-picture-container {
+    background: linear-gradient(90deg, rgba(255, 87, 87, 1.000000) 0%, rgba(140, 82, 255, 1.000000) 100%);
+    margin-right: 90px;
+    padding:40px;
+    width: 100%;
+}
+
+/*section 2*/
+.section2{
+    overflow:hidden;
+}
+
+.section2-items-container {
+    position:relative;
+    display: flex;
+    width: 100%;
+}
+.section2-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    background-image: url('/img/HomePage/2022collage.jpg');
+    background-size: contain;
+    background-position: center;
+    z-index: -1;
+}
+
+.section2-collection {
+    background: linear-gradient(90deg, rgba(255, 49, 49, 1.000000) 0%, rgba(255, 145, 77, 1.000000) 100%);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-top: 8%;
+    padding-bottom: 5%;
+    margin: 9% 25% 13%;
+    align-items: center;
+}
+
+    .section2-collection h2 {
+        font-family: "Roboto Mono", monospace;
+        font-weight: 600;
+        font-size: 40px;
+        margin-left: 100px;
+        margin-right: 100px;
+        text-align:center;
+        padding-bottom: 100px;
+        color: black;
+    }
+
+    .section2-collection a {
+        text-decoration: none;
+        font-family: "Roboto Mono", monospace;
+        font-weight: 400;
+        border: 2px solid;
+        padding: 10px 35px;
+        font-size: 20px;
+        color: black;
+    }
+
+
+/*section 3*/
+.section3 {
+    overflow: hidden;
+}
+
+.sections-title-container{
+    width: 87%;
+    margin-left: 100px;
+    border-bottom: 3px solid black;
+}
+    .sections-title-container h1 {
+        font-size: 40px;
+        font-weight: 400;
+        color: white;
+        background-color: black;
+        padding: 20px 10px;
+        width: 30%;
+        text-align: center;
+    }
+
+.section3 .animated-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+
+.card{
+    width: 70%;
+    margin: 4% 12%;
+}
+
+.card img{
+    height: 410px;
+}
+
+.details {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 70px;
+    border: 1px solid;
+    border-top: none;
+}
+
+.details h2 {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 400;
+    font-size: 20px;
+}
+    .details p {
+        font-family: "Roboto Mono", monospace;
+        font-size: 15px;
+        padding-top:10px;
+        padding-bottom:45px;
+    }
+
+    .details a {
+        text-decoration: none;
+        font-family: "Roboto Mono", monospace;
+        font-weight: 400;
+        border: 1px solid;
+        padding: 10px 35px;
+        font-size: 15px;
+        color: black;
+    }
+
+
+/*section 4*/
+.section4{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.news-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width: 60%;
+    margin: 15px 0px 95px 0px;
+    padding: 150px 30px 150px 30px;
+    border: 1px solid black;
+}
+
+    .news-container h1 {
+        font-family: "Roboto Mono", monospace;
+        font-weight: 600;
+        padding: 10px 35px;
+        font-size: 45px;
+        text-align:center;
+        color: black;
+    }
+    .news-container p {
+        font-family: "Roboto Mono", monospace;
+        font-weight: 400;
+        padding: 10px 35px;
+        font-size: 30px;
+        text-align: center;
+        color: black;
+    }
+/*footer*/
+.main-footer {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 100rem auto;
+    z-index: 0;
+    margin-top: -1px;
+}
+
+.footer-container {
+    display: grid;
+    position: relative;
+    grid-area: 1 / 2 / 2 / 3;
+    grid-template-columns: 0 5.62225476rem 5.82575352rem 7.75739679rem 2.59085374rem 3.91314027rem 14.5705918rem 2.55514509rem 18.44802343rem 38.7168406rem;
+    grid-template-rows: minmax(0.01372685rem, max-content) minmax(28.09754694rem, max-content) minmax(4.81278311rem, max-content) minmax(4.14701067rem, max-content) minmax(5.95180658rem, max-content) 0 0 minmax(5.32797173rem, max-content) 0 minmax(0.14714152rem, max-content) minmax(7.72456018rem, max-content);
+}
+
+.main-picture-container {
+    z-index: 1;
+    grid-area: 2 / 2 / 3 / 11;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: calc(min(1366px - 100vw, 0px) / 2);
+    right: calc(min(1366px - 100vw, 0px) / 2);
+    box-sizing: border-box;
+}
+
+.picture-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 1.0;
+    transform: scale(1, 1);
+    overflow: hidden;
+}
+
+.picture-placeholder {
+    width: calc(100% * max(1, var(--scale-fill, 1)));
+    height: calc(200.19541247% / min(1, var(--scale-fill, 1)));
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    animation: auto ease 0s 1 normal none running none;
+}
+
+    .picture-placeholder img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: 50% 50%;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+
+.main-footer-title-container {
+    z-index: 2;
+    grid-area: 4 / 4 / 5 / 7;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 14.29799402rem;
+}
+
+.footer-title-container {
+    opacity: 1.0;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-title {
+    font-family: "Roboto Mono", monospace;
+    line-height: 1.08317816em;
+    text-align: center;
+    letter-spacing: -0.015em;
+    font-size: 45px;
+}
+
+    .footer-title span {
+        color: #fe502d;
+        font-weight: 700;
+    }
+
+.main-links-container {
+    display: grid;
+    position: relative;
+    grid-area: 6 / 3 / 9 / 5;
+}
+
+.linksTitle-container {
+    z-index: 5;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.links-title {
+    opacity: 1.0;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+    .links-title p {
+        color: #000000;
+        font-family: "Roboto Mono", monospace;
+        line-height: 1.26562698em;
+        text-transform: none;
+        letter-spacing: 0em;
+    }
+
+        .links-title p span {
+            color: #000000;
+            font-weight: 700;
+            font-size: 1.60em;
+        }
+
+.links-collection {
+    z-index: 4;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.links {
+    opacity: 1.0;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+    .links p a {
+        color: #000000;
+        font-family: "Roboto Mono", monospace;
+        line-height: 1.25em;
+        text-decoration: none;
+        font-size: 1.20em;
+    }

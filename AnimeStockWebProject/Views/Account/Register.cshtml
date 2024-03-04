@@ -1,0 +1,47 @@
+﻿@model AnimeStockWebProject.Core.Models.Account.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<link rel="stylesheet" href="~/css/AccountStyles/account.css" asp-append-version="true" />
+<div class="content-container">
+    <div class="background-img"></div>
+
+
+    <form class="login-form" method="post">
+        <h1>@ViewData["Title"]</h1>
+
+        <section class="input-container">
+            <label asp-for="@Model.Username">Username</label>
+            <input type="text" autocomplete="username" aria-required="true" placeholder="username" asp-for="@Model.Username" />
+            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+        </section>
+
+        <section class="input-container">
+            <label asp-for="@Model.Email">Email</label>
+            <input type="text" autocomplete="email" aria-required="true" placeholder="email" asp-for="@Model.Email" />
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </section>
+
+        <section class="input-container">
+            <label asp-for="@Model.Password">Password</label>
+            <input type="text" autocomplete="password" aria-required="true" placeholder="Enter password" asp-for="@Model.Password" />
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        </section>
+
+        <section class="input-container">
+            <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
+            <input type="password" placeholder="Confirm password..." aria-required="true" asp-for="@Model.ConfirmPassword" />
+            <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+        </section>
+
+        <button class="submit" type="submit">Register</button>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
+    </form>
+</div>
+
+<script src="~/js/input.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,35 @@
+﻿@model AnimeStockWebProject.Core.Models.Account.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+<link rel="stylesheet" href="~/css/AccountStyles/account.css" asp-append-version="true" />
+<div class="content-container">
+    <div class="background-img"></div>
+
+    <form class="login-form" method="post" asp-route-returnUrl="@Model.ReturnUrl">
+        <h1>@ViewData["Title"]</h1>
+
+        <section class="input-container">
+            <label asp-for="@Model.Username">Username</label>
+            <input type="text" autocomplete="username" aria-required="true" asp-for="@Model.Username" />
+            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+        </section>
+
+        <section class="input-container">
+            <label asp-for="@Model.Password">Password</label>
+            <input type="text" autocomplete="password" aria-required="true" asp-for="@Model.Password" />
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        </section>
+
+        <button class="submit" type="submit">Login</button>
+        <p class="create-account-msg">Create account! <a asp-action="Register" asp-controller="Account">Create Now</a></p>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
+    </form>
+</div>
+
+<script src="~/js/input.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

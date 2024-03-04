@@ -1,0 +1,132 @@
+*,
+*::before,
+*::after {
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    padding-top: 60px;
+    font-family: "Roboto Mono", monospace;
+}
+
+.navbar {
+    position: fixed;
+    top: 0px;
+    font-family: "Roboto Mono", monospace;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    z-index: 100;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+#logo {
+    color: #fe502d;
+    text-decoration: none;
+    font-size: 30px;
+    margin-left: 30px;
+    font-family: "Roboto Mono", monospace;
+}
+
+.navbar-menu {
+    margin: 0px;
+    padding: 0px;
+    visibility: visible;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar-menu li {
+    color: #304254;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    white-space: nowrap;
+    flex-direction: column;
+}
+
+.navbar-menu li a {
+    display: inline-block;
+    text-decoration-line: none;
+    font-family: "Roboto Mono", monospace;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 10px 16px;
+    margin-right: auto;
+    color: #304254;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#user-tag:hover {
+    cursor: pointer;
+}
+
+.not-active {
+    height: 0px;
+    display: none;
+}
+
+.user-menu li {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid white;
+}
+
+.user-menu li a {
+    font-size: 0.90rem;
+    transition: 0.5s ease all;
+}
+
+.user-menu {
+    padding-left: 0;
+    border-radius: 20px;
+}
+
+.user-menu li a:before {
+    height: 0px;
+}
+
+.user-menu li a:hover {
+    opacity: 0.7;
+}
+
+.user-menu-list {
+    opacity: 0;
+    height: 0;
+}
+
+.drop-down-menu .user-container {
+    text-align: center;
+}
+
+.user-menu-list {
+    text-align: center;
+}
+
+.user-menu-list li a {
+    font-size: 1rem;
+    display: block;
+    padding: 0.4rem;
+    text-decoration: none;
+}
+
+.user-menu-list li {
+    margin: 1rem 0rem;
+}
+
+.active-user-menu-res {
+    height: auto;
+    opacity: 1;
+}

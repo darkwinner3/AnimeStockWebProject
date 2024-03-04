@@ -1,0 +1,66 @@
+﻿@using AnimeStockWebProject.Extensions
+@using AnimeStockWebProject.Infrastructure.Data.Models
+@using Microsoft.AspNetCore.Identity
+@using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    {
+        <li>
+            <div class="user-container">
+                @if (string.IsNullOrWhiteSpace(this.User.GetProfilePicturePath()))
+                {
+                    <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><i class="fa-regular fa-user" id="user-icon"></i> </a>
+
+                }
+                else
+                {
+                    <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><img src="~/@this.User.GetProfilePicturePath()"> </a>
+                }
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <ul class="user-menu">
+                <li>
+                    <a asp-controller="User" asp-action="Personalization" asp-route-id="@User.GetId()">Profile</a>
+                </li>
+                <li>
+                    <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@User.GetId()">Favorite Hotels</a>
+                </li>
+                <li>
+                    <a asp-controller="User" asp-action="UserReservations" asp-route-id="@User.GetId()">Your Reservations</a>
+                </li>
+            </ul>
+        </li>
+        @if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
+        {
+            <li>
+                <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Panel</a>
+            </li>
+        }
+        <li>
+            <a asp-action="Logout" asp-controller="Account">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <div class="user-container">
+            <a id="user-tag" onclick="toggleMenu()"><i class="fa-regular fa-user" id="user-icon"></i> </a>
+            </div>
+        <ul id="subMenu" class="user-menu">
+                <li>
+                    <a asp-area="" asp-action="Register" asp-controller="Account"> Register</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>
+                </li>
+            </ul>
+        </li>
+    }
+<script>
+    function toggleMenu() {
+        let subMenu = document.getElementById("subMenu");
+        subMenu.classList.toggle("not-active");
+    }
+</script>

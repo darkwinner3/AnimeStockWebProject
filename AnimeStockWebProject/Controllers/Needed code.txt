@@ -1,0 +1,11 @@
+//footer hider
+public class MyAwesomeController : Controller
+{
+
+    public ActionResult About()
+    {
+        ViewBag.ShowTopBar = true;
+        return View();
+    }
+
+}
