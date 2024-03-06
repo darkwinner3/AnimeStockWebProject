@@ -1,9 +1,4 @@
 ﻿using AnimeStockWebProject.Core.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimeStockWebProject.Core.Contracts
 {
@@ -12,5 +7,7 @@ namespace AnimeStockWebProject.Core.Contracts
         Task<UserViewModel> GetUserByIdAsync(Guid id);
         Task<UserInfoViewModel> GetUserInfoByIdAsync(Guid id);
         Task SaveUserInfoAsync(Guid id, UserInfoViewModel user);
+        Task DeleteUserProfilePictureAsync(Guid id, string path);
+        Task<string> UploadUserImageAsync(UserInfoViewModel userInfo, Guid userId);
     }
 }

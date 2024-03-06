@@ -13,7 +13,7 @@ namespace AnimeStockWebProject.Extensions
         public static string GetProfilePicturePath(this ClaimsPrincipal user)
         {
             Claim claim = user.Claims.FirstOrDefault(u => u.Type == "ProfilePicturePath");
-            return claim?.Value ?? string.Empty;
+            return claim?.Value ?? "";
         }
     }
 }
