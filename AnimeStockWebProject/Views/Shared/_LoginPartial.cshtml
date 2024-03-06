@@ -1,5 +1,4 @@
 ﻿@using AnimeStockWebProject.Extensions
-@using AnimeStockWebProject.Infrastructure.Data.Models
 @using Microsoft.AspNetCore.Identity
 @using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
 @inject SignInManager<User> SignInManager
@@ -18,20 +17,23 @@
                 }
                 else
                 {
-                    <a id="user-tag" onclick="toggleMenu()" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()">
+                    <a id="user-tag" onclick="toggleMenu()">
                         <img src="~/@this.User.GetProfilePicturePath()"> 
                     </a>
                 }
             </div>
-        <ul id="subMenu" class="user-menu">
+        <ul id="subMenu" class="user-menu not-active">
                 <li>
-                    <a asp-controller="User" asp-action="Personalization" asp-route-id="@User.GetId()">Profile</a>
+                    <a asp-controller="User" asp-action="UserProfile" asp-route-id="@User.GetId()">Profile</a>
                 </li>
                 <li>
                     <a asp-controller="User" asp-action="UserFavoriteProducts" asp-route-id="@User.GetId()">Favorite Products</a>
                 </li>
                 <li>
                     <a asp-controller="User" asp-action="UserOrders" asp-route-id="@User.GetId()">Your Orders</a>
+                </li>
+                <li>
+                    <a asp-action="Logout" asp-controller="Account">Logout</a>
                 </li>
             </ul>
         </li>
@@ -41,9 +43,6 @@
                 <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Panel</a>
             </li>
         }
-        <li>
-            <a asp-action="Logout" asp-controller="Account">Logout</a>
-        </li>
     }
     else
     {
@@ -51,7 +50,7 @@
             <div class="user-container">
             <a id="user-tag" onclick="toggleMenu()"><i class="fa-regular fa-user" id="user-icon"></i> </a>
             </div>
-        <ul id="subMenu" class="user-menu">
+        <ul id="subMenu" class="user-menu not-active">
                 <li>
                     <a asp-area="" asp-action="Register" asp-controller="Account"> Register</a>
                 </li>

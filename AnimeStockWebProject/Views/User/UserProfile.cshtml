@@ -1,0 +1,50 @@
+﻿@model UserInfoViewModel
+
+<link rel="stylesheet" href="~/css/User/UserStyles.css" asp-append-version="true" />
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="profile-container">
+    <div class="profile-img-container">
+        @if (!string.IsNullOrWhiteSpace(Model.ProfilePicturePath))
+        {
+            <img src="~/@Model.ProfilePicturePath" alt="Profile Picture">
+            <p class="profile-picture-content">Profile Picture</p>
+        }
+        else
+        {
+            <i class="fa-regular fa-user" id="default-icon"></i>
+            <p class="profile-picture-content">Profile Picture</p>
+        }
+    </div>
+
+    <form class="user-input-container" method="post" enctype="multipart/form-data">
+        <div class="input-container">
+            <label asp-for="@Model.FirstName"></label>
+            <input asp-for="@Model.FirstName" value="@Model.FirstName" />
+            <span asp-validation-for="@Model.FirstName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.PhoneNumber"></label>
+            <input asp-for="@Model.PhoneNumber" value="@Model.PhoneNumber" />
+            <span asp-validation-for="@Model.PhoneNumber"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Email"></label>
+            <input asp-for="@Model.Email" value="@Model.Email" />
+            <span asp-validation-for="@Model.Email"></span>
+        </div>
+        <input type="hidden" asp-for="@Model.ProfilePicturePath" value="@Model.ProfilePicturePath" class="file-input" />
+        <div class="file-container">
+            <label for="@Model.ProfilePictureFile">Choose image to upload (PNG, JPG, JPEG, WEBP)</label>
+            <button type="button" class="select-file-button">
+                Select Image
+                <input type="file"
+                       name="ProfilePictureFile"
+                       accept=".jpg, .jpeg, .png, .webp" />
+            </button>
+        </div>
+        <button class="edit-btn" type="submit">Edit</button>
+    </form>
+</div>
