@@ -31,8 +31,14 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddControllersWithViews();
 
-
 builder.Services.AddServices();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Home/Index";
+    options.ExpireTimeSpan = TimeSpan.FromDays(3);
+});
 
 var app = builder.Build();
 
@@ -58,9 +64,21 @@ app.UseAuthorization();
 
 app.SeedAdministrator("ee8ddd02-ce94-4f77-8608-819b08dbbb32");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.UseEndpoints(config =>
+{
+    config.MapControllerRoute(
+        name: "areas",
+        pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+    config.MapControllerRoute(
+        name: "default",
+     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+    config.MapDefaultControllerRoute();
+
+    config.MapRazorPages();
+});
 
 app.Run();
