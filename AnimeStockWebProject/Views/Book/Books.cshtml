@@ -1,0 +1,141 @@
+﻿@model BookQueryViewModel
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions{
+    public string GetAntiXsrfRequestToken(){
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/BookStyles/Books.css" asp-append-version="true" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="items-container">
+    <section class="sidebar">
+        <form method="get" class="sort-container">
+            <h2>Sort By</h2>
+
+            <select class="sort" asp-for="@Model.BookSortEnum">
+                <option value="0">Order by newest</option>
+                <option value="1">Order by oldest</option>
+                <option value="2">Order by A-Z</option>
+                <option value="3">Order by Z-A</option>
+            </select>
+
+            @if (Model.SelectedTagIds.Any())
+            {
+                @foreach (int tagId in Model.SelectedTagIds)
+                {
+                    <input type="hidden" name="SelectedTagIds" value="@tagId" />
+                }
+            }
+            <button type="submit">Sort</button>
+        </form>
+    </section>
+
+    <section class="main-page-content">
+        <div class="pagination-container">
+            @if (Model.Pager.TotalPages > 0)
+            {
+                <ul class="page-list">
+                    @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                            href="@Url.Action("Books", "Book", new
+                            {
+                                currentPage = Model.Pager.CurrentPage - 1,
+                                bookSortOption = (int)Model.BookSortEnum,
+                                SelectedTagIds = Model.SelectedTagIds
+                            })">Previous</a>
+                        </li>
+                    }
+
+                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage; page++)
+                    {
+                        <li class="page-item">
+                            <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
+                            href="@Url.Action("Books", "Book", new{
+                                currentPage = page,
+                                bookSortOption = (int)Model.BookSortEnum,
+                                SelectedTagIds = Model.SelectedTagIds
+                            })">@(page)</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                            href="@Url.Action("Books", "Book", new{
+                                currentPage = Model.Pager.CurrentPage + 1,
+                                bookSortOption = (int)Model.BookSortEnum,
+                                SelectedTagIds = Model.SelectedTagIds
+                            })">Next</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+
+
+        @if (!Model.BookViewModels.Any())
+        {
+            <p class="not-found">No matches found</p>
+        }
+
+        <section class="book-cards">
+            <partial name="_AllBooks" model="@Model.BookViewModels" />
+        </section>
+
+        <div class="pagination-container">
+            @if (Model.Pager.TotalPages > 0)
+            {
+                <ul class="page-list">
+                    @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="@Url.Action("Books", "Book", new
+                            {
+                                currentPage = Model.Pager.CurrentPage - 1,
+                                bookSortOption = (int)Model.BookSortEnum,
+                                SelectedTagIds = Model.SelectedTagIds
+                            })">Previous</a>
+                        </li>
+                    }
+
+                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage; page++)
+                    {
+                        <li class="page-item">
+                            <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
+                               href="@Url.Action("Books", "Book", new{
+                                currentPage = page,
+                                bookSortOption = (int)Model.BookSortEnum,
+                                SelectedTagIds = Model.SelectedTagIds
+                            })">@(page)</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="@Url.Action("Books", "Book", new{
+                                currentPage = Model.Pager.CurrentPage + 1,
+                                bookSortOption = (int)Model.BookSortEnum,
+                                SelectedTagIds = Model.SelectedTagIds
+                            })">Next</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </section>
+</div>
+
+<script src="AnimeStockWebProject\wwwroot\js\Home\home.js"></script>

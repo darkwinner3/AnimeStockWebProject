@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BookViewModel>
+
+@foreach (BookViewModel book in Model)
+{
+    <div class="book-card">
+        <input type="hidden" value="@book.Id" />
+        <div class="cover-img">
+            <img src="@book.PicturePath" />
+        </div>
+
+        <div class="book-card-content">
+            <h1 class="book-title">@book.Title</h1>
+            <p class="book-author">Author: @book.Author</p>
+            <p class="book-illustrator">Artist: @book.Illustrator</p>
+            <p class="book-description">@book.Description</p>
+            <p class="book-price">@book.Price $</p>
+            <p class="book-type">@book.BookType</p>
+            <p class="book-print-type">@book.PrintType</p>
+            <p class="book-ReleaseDate">@book.ReleaseDate</p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (book.IsFavorite)
+                {
+                    <p class="unfavorite-container">Unfavorite</p>
+                }
+                else
+                {
+                    <p class="favorite-container">Favorite</p>
+                }
+            }
+        </div>
+    </div>
+}
