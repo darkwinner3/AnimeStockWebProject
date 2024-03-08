@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeStockWebProject.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeStockWebProject.Infrastructure", "AnimeStockWebProject.Infrastructure\AnimeStockWebProject.Infrastructure.csproj", "{92397B7E-A003-4EDA-90F1-01C269148F3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeStockWebProject.Core", "AnimeStockWebProject.Core\AnimeStockWebProject.Core.csproj", "{73F40225-C672-4750-B9AC-E221629F33C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeStockWebProject.Core", "AnimeStockWebProject.Core\AnimeStockWebProject.Core.csproj", "{73F40225-C672-4750-B9AC-E221629F33C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

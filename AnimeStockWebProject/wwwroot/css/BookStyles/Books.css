@@ -1,0 +1,8 @@
+﻿.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    width: 300px;
+    background-color: #f0f0f0; /* Example background color */
+    overflow-y: auto;
+}
