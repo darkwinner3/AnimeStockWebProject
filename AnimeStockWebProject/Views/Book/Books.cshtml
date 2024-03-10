@@ -19,7 +19,7 @@
         <form method="get" class="sort-container">
             <h2>Sort By</h2>
 
-            <select class="sort" asp-for="@Model.BookSortEnum">
+            <select class="sort" name="bookSortEnum" asp-for="@Model.BookSortEnum" onchange="this.form.submit()">
                 <option value="0">Order by newest</option>
                 <option value="1">Order by oldest</option>
                 <option value="2">Order by A-Z</option>
@@ -33,12 +33,108 @@
                     <input type="hidden" name="SelectedTagIds" value="@tagId" />
                 }
             }
-            <button type="submit">Sort</button>
+            @if (Model.SelectedBookTypeIds.Any())
+            {
+                @foreach (int typeId in Model.SelectedBookTypeIds)
+                {
+                    <input type="hidden" name="SelectedBookTypeIds" value="@typeId" />
+                }
+            }
+            <input type="hidden" name="PrintType" value="@Model.PrintType" />
+
+        </form>
+
+        <form method="get" class="filter-container">
+            <h2 class="filter-title">
+                Filter tags
+            </h2>
+
+            @foreach (TagViewModel tag in Model.BookTags)
+            {
+                <div class="tag-container">
+                    <label>@tag.Name</label>
+                    <input type="checkbox" value="@tag.Id" name="SelectedTagIds" onchange="this.form.submit()" @(Model.SelectedTagIds.Contains(tag.Id) ? "checked" : "") />
+                </div>
+            }
+
+            @if (Model.SelectedBookTypeIds.Any())
+            {
+                @foreach (int typeId in Model.SelectedBookTypeIds)
+                {
+                    <input type="hidden" name="SelectedBookTypeIds" value="@typeId" />
+                }
+            }
+            <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
+
+            <input type="hidden" name="PrintType" value="@Model.PrintType" />
+        </form>
+
+        <form method="get" class="print-type-container">
+            <h2 class="print-type-title">
+                Print Types
+            </h2>
+
+           <div class="print-type-container">
+                <label>
+                    <input type="radio" class="sort-option" name="PrintType" value="0" @(Model.PrintType == PrintTypeEnum.Default ? "checked" : "") onchange="this.form.submit()"> All Series
+                </label>
+                <label>
+                    <input type="radio" class="sort-option" name="PrintType" value="2" @(Model.PrintType == PrintTypeEnum.Digital ? "checked" : "") onchange="this.form.submit()"> Digital
+                </label>
+                <label>
+                    <input type="radio" class="sort-option" name="PrintType" value="1" @(Model.PrintType == PrintTypeEnum.Phisycal ? "checked" : "") onchange="this.form.submit()"> Physical
+                </label>
+           </div>
+
+            @if (Model.SelectedBookTypeIds.Any())
+            {
+                @foreach (int typeId in Model.SelectedBookTypeIds)
+                {
+                    <input type="hidden" name="SelectedBookTypeIds" value="@typeId" />
+                }
+            }
+
+            @if (Model.SelectedTagIds.Any())
+            {
+                @foreach (int tagId in Model.SelectedTagIds)
+                {
+                    <input type="hidden" name="SelectedTagIds" value="@tagId" />
+                }
+            }
+            <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
+        </form>
+
+        <form method="get" class="book-type-container">
+            <h2 class="book-type-title">
+                Book Types
+            </h2>
+            @foreach (BookTypeViewModel bookType in Model.BookTypes)
+                {
+                <div class="book-type-container">
+                
+                     <label>
+                         @bookType.Name
+                     </label>
+                     <input type="checkbox" value="@bookType.Id" name="SelectedBookTypeIds" onchange="this.form.submit()" @(Model.SelectedBookTypeIds.Contains(bookType.Id) ? "checked" : "")/>
+               
+                </div>
+                }
+
+            @if (Model.SelectedTagIds.Any())
+            {
+                @foreach (int tagId in Model.SelectedTagIds)
+                {
+                    <input type="hidden" name="SelectedTagIds" value="@tagId" />
+                }
+            }
+            <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
+
+            <input type="hidden" name="PrintType" value="@Model.PrintType" />
         </form>
     </section>
 
     <section class="main-page-content">
-        <div class="pagination-container">
+        <div class="pagination-container top">
             @if (Model.Pager.TotalPages > 0)
             {
                 <ul class="page-list">
@@ -49,8 +145,10 @@
                             href="@Url.Action("Books", "Book", new
                             {
                                 currentPage = Model.Pager.CurrentPage - 1,
-                                bookSortOption = (int)Model.BookSortEnum,
-                                SelectedTagIds = Model.SelectedTagIds
+                                bookSortEnum = (int)Model.BookSortEnum,
+                                selectedTagIds = Model.SelectedTagIds,
+                                printType = (int)Model.PrintType,
+                                selectedBookTypeIds = Model.SelectedBookTypeIds 
                             })">Previous</a>
                         </li>
                     }
@@ -61,8 +159,10 @@
                             <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
                             href="@Url.Action("Books", "Book", new{
                                 currentPage = page,
-                                bookSortOption = (int)Model.BookSortEnum,
-                                SelectedTagIds = Model.SelectedTagIds
+                                bookSortEnum = (int)Model.BookSortEnum,
+                                selectedTagIds = Model.SelectedTagIds,
+                                printType = (int)Model.PrintType,
+                                selectedBookTypeIds = Model.SelectedBookTypeIds
                             })">@(page)</a>
                         </li>
                     }
@@ -73,8 +173,10 @@
                             <a class="page-link"
                             href="@Url.Action("Books", "Book", new{
                                 currentPage = Model.Pager.CurrentPage + 1,
-                                bookSortOption = (int)Model.BookSortEnum,
-                                SelectedTagIds = Model.SelectedTagIds
+                                bookSortEnum = (int)Model.BookSortEnum,
+                                selectedTagIds = Model.SelectedTagIds,
+                                printType = (int)Model.PrintType,
+                                selectedBookTypeIds = Model.SelectedBookTypeIds
                             })">Next</a>
                         </li>
                     }
@@ -92,7 +194,7 @@
             <partial name="_AllBooks" model="@Model.BookViewModels" />
         </section>
 
-        <div class="pagination-container">
+        <div class="pagination-container bottom">
             @if (Model.Pager.TotalPages > 0)
             {
                 <ul class="page-list">
@@ -103,8 +205,10 @@
                                href="@Url.Action("Books", "Book", new
                             {
                                 currentPage = Model.Pager.CurrentPage - 1,
-                                bookSortOption = (int)Model.BookSortEnum,
-                                SelectedTagIds = Model.SelectedTagIds
+                                bookSortEnum = (int)Model.BookSortEnum,
+                                selectedTagIds = Model.SelectedTagIds,
+                                printType = (int)Model.PrintType,
+                                selectedBookTypeIds = Model.SelectedBookTypeIds
                             })">Previous</a>
                         </li>
                     }
@@ -115,8 +219,10 @@
                             <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
                                href="@Url.Action("Books", "Book", new{
                                 currentPage = page,
-                                bookSortOption = (int)Model.BookSortEnum,
-                                SelectedTagIds = Model.SelectedTagIds
+                                bookSortEnum = (int)Model.BookSortEnum,
+                                selectedTagIds = Model.SelectedTagIds,
+                                printType = (int)Model.PrintType,
+                                selectedBookTypeIds = Model.SelectedBookTypeIds
                             })">@(page)</a>
                         </li>
                     }
@@ -127,8 +233,10 @@
                             <a class="page-link"
                                href="@Url.Action("Books", "Book", new{
                                 currentPage = Model.Pager.CurrentPage + 1,
-                                bookSortOption = (int)Model.BookSortEnum,
-                                SelectedTagIds = Model.SelectedTagIds
+                                bookSortEnum = (int)Model.BookSortEnum,
+                                selectedTagIds = Model.SelectedTagIds,
+                                printType = (int)Model.PrintType,
+                                selectedBookTypeIds = Model.SelectedBookTypeIds
                             })">Next</a>
                         </li>
                     }
@@ -137,5 +245,3 @@
         </div>
     </section>
 </div>
-
-<script src="AnimeStockWebProject\wwwroot\js\Home\home.js"></script>
