@@ -1,0 +1,92 @@
+﻿.book-card {
+    display: flex;
+    width: 90%;
+    min-height: 18%;
+    max-height: 100%;
+}
+
+
+    .cover-img img {
+        max-width:250px;
+        min-width:250px;
+        max-height: 100%;
+        min-height: 100%;
+    }
+
+.more-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: auto;
+}
+
+.book-card-content {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align items vertically with space between them */
+    height: 100%; /* Ensure the container takes up full height */
+}
+
+    .book-card-content a{
+        text-decoration:none;
+        color:black;
+    }
+
+.book-title{
+    margin-top:10px;
+}
+
+.book-title a:hover {
+    color: lightcoral;
+    cursor: pointer;
+}
+
+.book-description {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.more-details li {
+    padding: 10px;
+}
+
+.book-type a:hover {
+    color: lightblue;
+    cursor: pointer;
+}
+
+.book-print-type a:hover {
+    color: lightblue;
+    cursor: pointer;
+}
+
+.favorite-container {
+    width: 100px;
+    margin: 0px 20px 20px 0px;
+    margin-left: auto;
+    background: linear-gradient(90deg, rgba(255, 49, 49, 0.3) 0%, rgba(255, 145, 77, 0.3) 100%);
+    backdrop-filter: blur(4px);
+    border-radius: 30px;
+    border: none;
+}
+
+    .favorite-container:hover {
+        background: linear-gradient(90deg, rgba(255, 49, 49, 0.8) 0%, rgba(255, 145, 77, 0.7) 100%);
+        backdrop-filter: blur(8px);
+    }
+
+.book-price {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.book-author{
+    font-weight:600;
+}
+
+.book-illustrator {
+    font-weight: 500;
+}

@@ -9,8 +9,33 @@
 }
 
 body {
-    padding-top: 60px;
     font-family: "Roboto Mono", monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the handle */
+    border-radius: 10px;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Color of the handle on hover */
+    }
+
+.pb-3 {
+    padding-top: 60px;
 }
 
 .navbar {
@@ -28,6 +53,12 @@ body {
     height: 60px;
     box-sizing: border-box;
     align-items: flex-start;
+}
+
+.layout-footer {
+    bottom: unset;
+    padding: 20px;
+    flex-shrink: 0;
 }
 
 #logo {
