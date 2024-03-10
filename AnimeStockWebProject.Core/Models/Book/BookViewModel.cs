@@ -24,13 +24,13 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public string BookType { get; set; } = null!;
 
-        public string ReleaseDate { get; set; } = null!;
+        public DateTime ReleaseDate { get; set; }
 
         public string? PrintType { get; set; }
 
         public decimal Price { get; set; }
 
-        public string? PicturePath { get; set; }
+        public string PicturePath { get; set; } = null!;
 
         public bool IsFavorite { get; set; }
     }

@@ -51,7 +51,7 @@ namespace AnimeStockWebProject.Common
             public const int MaxPages = 10000;
             public const int MinPages = 1;
 
-            public const string ReleaseDate = "";
+            public const string ReleaseDate = "MMMM dd, yyyy";
         }
 
         public static class GameEntity
@@ -71,7 +71,7 @@ namespace AnimeStockWebProject.Common
             public const string MinPrice = "0.00";
             public const string MaxPrice = "1000.00";
 
-            public const string ReleaseDate = "";
+            public const string ReleaseDate = "MMMM dd, yyyy";
         }
 
         public static class BookTypeEntity

@@ -4,6 +4,7 @@ using AnimeStockWebProject.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimeStockWebProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AnimeStockDbContext))]
-    partial class AnimeStockDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310175050_updated-DateTime")]
+    partial class updatedDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,7 +134,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                             IsFavorite = false,
                             Pages = 223,
                             Price = 6.54m,
-                            PrintType = 2,
+                            PrintType = 0,
                             Publisher = "J-Novel Club",
                             Quantity = 0,
                             ReleaseDate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -149,7 +151,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                             IsFavorite = false,
                             Pages = 266,
                             Price = 7.12m,
-                            PrintType = 2,
+                            PrintType = 0,
                             Publisher = "Seven Seas Entertainment, Seven Seas Siren",
                             Quantity = 0,
                             ReleaseDate = new DateTime(2019, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -545,7 +547,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 1,
                             BookId = 1,
-                            CreatedDate = new DateTime(2024, 3, 10, 23, 35, 23, 819, DateTimeKind.Local).AddTicks(4484),
+                            CreatedDate = new DateTime(2024, 3, 10, 19, 50, 50, 337, DateTimeKind.Local).AddTicks(2725),
                             Description = "Test Comment",
                             GameId = 1,
                             IsDeleted = false,
@@ -556,7 +558,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 2,
                             BookId = 2,
-                            CreatedDate = new DateTime(2024, 3, 10, 23, 35, 23, 819, DateTimeKind.Local).AddTicks(4498),
+                            CreatedDate = new DateTime(2024, 3, 10, 19, 50, 50, 337, DateTimeKind.Local).AddTicks(2737),
                             Description = "Test Comment",
                             GameId = 2,
                             IsDeleted = false,
@@ -567,7 +569,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 3,
                             BookId = 3,
-                            CreatedDate = new DateTime(2024, 3, 10, 23, 35, 23, 819, DateTimeKind.Local).AddTicks(4500),
+                            CreatedDate = new DateTime(2024, 3, 10, 19, 50, 50, 337, DateTimeKind.Local).AddTicks(2739),
                             Description = "Test Comment",
                             GameId = 3,
                             IsDeleted = false,
@@ -578,7 +580,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 4,
                             BookId = 4,
-                            CreatedDate = new DateTime(2024, 3, 10, 23, 35, 23, 819, DateTimeKind.Local).AddTicks(4502),
+                            CreatedDate = new DateTime(2024, 3, 10, 19, 50, 50, 337, DateTimeKind.Local).AddTicks(2740),
                             Description = "Test Comment",
                             GameId = 4,
                             IsDeleted = false,
@@ -662,7 +664,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                             Developer = "KOEI TECMO GAMES CO., LTD.",
                             Name = "Atelier Ryza 2: Lost Legends & the Secret Fairy",
                             Price = 59.99m,
-                            PrintType = 2,
+                            PrintType = 0,
                             Publisher = "KOEI TECMO GAMES CO., LTD.",
                             Quantity = 0,
                             ReleaseDate = new DateTime(2021, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -675,7 +677,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                             Developer = "MAGES. Inc.",
                             Name = "STEINS;GATE",
                             Price = 26.99m,
-                            PrintType = 2,
+                            PrintType = 0,
                             Publisher = "Spike Chunsoft Co., Ltd.",
                             Quantity = 0,
                             ReleaseDate = new DateTime(2016, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1443,7 +1445,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                     b.Property<DateTime>("JoinTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 3, 10, 23, 35, 23, 818, DateTimeKind.Local).AddTicks(9184));
+                        .HasDefaultValue(new DateTime(2024, 3, 10, 19, 50, 50, 336, DateTimeKind.Local).AddTicks(9153));
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -1498,16 +1500,16 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("b9a4d407-7518-4aea-a72d-b94c7e389b70"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b1c08882-79bf-4398-83c4-a20b5e785b29",
+                            ConcurrencyStamp = "35a846b3-2ed8-4e52-abf4-f7064f1a0ecd",
                             Email = "testuser123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2024, 3, 10, 23, 35, 23, 817, DateTimeKind.Local).AddTicks(1451),
+                            JoinTime = new DateTime(2024, 3, 10, 19, 50, 50, 335, DateTimeKind.Local).AddTicks(1414),
                             LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER123@GMAIL.COM",
                             NormalizedUserName = "TEST USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDdjcV6IND099Hp6EnxMkHJB8oMF3RSMjk7mL9k0KTf6gQfAotSWI1PwV4enB/ZPyQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENDD/sN62aXSmS2oRGh0XpJxsEqlHS+MUSRFLk1LXCxBVwAGcdMSEPVNEYlwCSGmsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d010fa0e-55a4-4a47-ab5a-d41467cd2303",
+                            SecurityStamp = "143f4fa6-61c6-4a81-9da6-7cc148332c21",
                             TwoFactorEnabled = false,
                             UserName = "Test User"
                         },
@@ -1515,16 +1517,16 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("ee8ddd02-ce94-4f77-8608-819b08dbbb32"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "639ff9c4-bea5-43b7-bfd0-68d2287a72ee",
+                            ConcurrencyStamp = "c99a3a76-0b51-494e-ab3e-95956f06a4d1",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2024, 3, 10, 23, 35, 23, 817, DateTimeKind.Local).AddTicks(1460),
+                            JoinTime = new DateTime(2024, 3, 10, 19, 50, 50, 335, DateTimeKind.Local).AddTicks(1428),
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMLaF4uGBtaIwMOQyitTX9ZIJkBcGfRp/qCnjxEjVVDlFgDKwLUhG5FmPCte3osbnQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDh9wie2kd45ATehmuuk1b0pfdXgKHhKz0pnQek6pc8xnJ597Qm4MrhcqF3qwVQIIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "91555806-8d5a-4827-a5e2-f2fd0dd30921",
+                            SecurityStamp = "780a3e61-bc0b-4ea4-a919-0e5c8d2bd136",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

@@ -3,6 +3,7 @@ using AnimeStockWebProject.Core.Models.Book;
 using AnimeStockWebProject.Core.Models.Book.Enum;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
+using static AnimeStockWebProject.Infrastructure.Data.Enums.PrintTypeEnum;
 using Microsoft.EntityFrameworkCore;
 
 namespace AnimeStockWebProject.Core.Services
@@ -18,7 +19,10 @@ namespace AnimeStockWebProject.Core.Services
 
         public async Task<AllBooksSortedDataModel> GetAllBooksSortedDataModelAsync(Guid? userId, BookQueryViewModel bookQueryViewModel)
         {
-            IQueryable<Book> books = animeStockDbContext.Books.Where(b => !b.IsDeleted).AsQueryable();
+            IQueryable<Book> books = animeStockDbContext.Books
+                .Include(b => b.Pictures)
+                .Where(b => !b.IsDeleted)
+                .AsQueryable();
             books = FilterBooks(bookQueryViewModel, books);
             int pagesToSkip = (bookQueryViewModel.Pager.CurrentPage - 1) * bookQueryViewModel.Pager.PageSize;
             IEnumerable<BookViewModel> allBooks = await books.Skip(pagesToSkip)
@@ -31,10 +35,10 @@ namespace AnimeStockWebProject.Core.Services
                     Illustrator = b.Illustrator,
                     Description = b.Description,
                     BookType = b.BookType.Name,
-                    ReleaseDate = b.ReleaseDate,
+                    ReleaseDate = b.ReleaseDate.Date,
                     PrintType = b.PrintType.ToString(),
                     Price = b.Price,
-                    PicturePath = b.Pictures.FirstOrDefault(p => !p.IsDeleted).Path,
+                    PicturePath = b.Pictures.FirstOrDefault(p => !p.IsDeleted && p.Path.Contains("cover")).Path,
                     IsFavorite = b.FavoriteProducts.Any(fp => fp.BookId == b.Id && fp.UserId == userId)
                 }).ToArrayAsync();
 
@@ -56,10 +60,10 @@ namespace AnimeStockWebProject.Core.Services
             switch (bookQueryViewModel.BookSortEnum)
             {
                 case BookSortEnum.ByNewestBook:
-                    books = books.OrderByDescending(b => b.ReleaseDate);
+                    books = books.OrderByDescending(b => b.ReleaseDate.Date);
                     break;
                 case BookSortEnum.ByOldestBook:
-                    books = books.OrderBy(b => b.ReleaseDate);
+                    books = books.OrderBy(b => b.ReleaseDate.Date);
                     break;
                 case BookSortEnum.ByAToZ:
                     books = books.OrderBy(b => b.Title);
@@ -69,8 +73,20 @@ namespace AnimeStockWebProject.Core.Services
                     break;
                 default:
                     // By default, sort by newest
-                    books = books.OrderByDescending(b => b.ReleaseDate);
+                    books = books.OrderByDescending(b => b.ReleaseDate.Date);
                     break;
+            }
+
+            switch (bookQueryViewModel.PrintType)
+            {
+                case Default:
+                    break;
+                case Digital:
+                    books = books.Where(b => b.PrintType == Digital);
+                    break;
+                case Phisycal:
+                    books = books.Where(b => b.PrintType == Phisycal);
+                    break;   
             }
 
             if (bookQueryViewModel.SelectedTagIds.Any())
@@ -78,6 +94,14 @@ namespace AnimeStockWebProject.Core.Services
                 foreach (var selectedTagId in bookQueryViewModel.SelectedTagIds)
                 {
                     books = books.Where(b => b.BookTags.Any(bt => bt.TagId == selectedTagId));
+                }
+            }
+
+            if (bookQueryViewModel.SelectedBookTypeIds.Any())
+            {
+                foreach (var selectedTypeId in bookQueryViewModel.SelectedBookTypeIds)
+                {
+                    books = books.Where(b => b.BookType.Id == selectedTypeId);
                 }
             }
 

@@ -46,7 +46,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
         public BookType BookType { get; set; } = null!;
 
         [Required]
-        public string ReleaseDate { get; set; } = null!;
+        public DateTime ReleaseDate { get; set; }
 
         [Required]
         [MaxLength(MaxPages)]

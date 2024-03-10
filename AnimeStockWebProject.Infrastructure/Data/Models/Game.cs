@@ -35,7 +35,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        public string ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         [Required]
         public PrintTypeEnum PrintType { get; set; }

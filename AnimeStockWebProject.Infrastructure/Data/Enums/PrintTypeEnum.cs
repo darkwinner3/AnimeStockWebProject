@@ -8,7 +8,8 @@ namespace AnimeStockWebProject.Infrastructure.Data.Enums
 {
     public enum PrintTypeEnum
     {
-        Digital = 0,
+        Digital = 2,
         Phisycal = 1,
+        Default = 0,
     }
 }

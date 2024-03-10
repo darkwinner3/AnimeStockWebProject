@@ -27,6 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\Books\Date a Live Vol 1%28Light Novel%29\cover\" />
+    <Folder Include="wwwroot\img\Books\Date a Live Vol 2%28Light Novel%29\cover\" />
+    <Folder Include="wwwroot\img\Books\Mushoku Tensei Vol 1 %28Light Novel%29\cover\" />
+    <Folder Include="wwwroot\img\Books\Mushoku Tensei Vol 1 %28Manga%29\cover\" />
+    <Folder Include="wwwroot\img\Books\Spirit Chronicles Vol 23%28Light Nove%29\cover\" />
     <Folder Include="wwwroot\img\Games\Atelier Ryza 2\" />
     <Folder Include="wwwroot\img\Games\FINAL FANTASY VII REMAKE INTERGRADE\" />
     <Folder Include="wwwroot\img\Games\Little Witch Nobeta\" />

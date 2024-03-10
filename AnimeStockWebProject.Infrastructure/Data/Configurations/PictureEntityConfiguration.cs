@@ -33,7 +33,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 {
                     Id = 1,
                     BookId = 1,
-                    Path = "/img/Books/Date a Live Vol 1(Light Novel)/picture1.png"
+                    Path = "/img/Books/Date a Live Vol 1(Light Novel)/cover/picture1.png"
                 },
                 new Picture()
                 {
@@ -51,7 +51,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 {
                     Id = 4,
                     BookId = 2,
-                    Path = "/img/Books/Date a Live Vol 2(Light Novel)/Picture_1.png"
+                    Path = "/img/Books/Date a Live Vol 2(Light Novel)/cover/Picture_1.png"
                 },
                 new Picture()
                 {
@@ -69,7 +69,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 {
                     Id = 7,
                     BookId = 3,
-                    Path = "/img/Books/Spirit Chronicles Vol 23(Light Nove)/picture1.png"
+                    Path = "/img/Books/Spirit Chronicles Vol 23(Light Nove)/cover/picture1.png"
                 },
                 new Picture()
                 {
@@ -87,7 +87,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 {
                     Id = 10,
                     BookId = 4,
-                    Path = "/img/Books/Mushoku Tensei Vol 1 (Light Novel)/picture 1.png"
+                    Path = "/img/Books/Mushoku Tensei Vol 1 (Light Novel)/cover/picture 1.png"
                 },
                 new Picture()
                 {
@@ -105,7 +105,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 {
                     Id = 13,
                     BookId = 5,
-                    Path = "/img/Books/Mushoku Tensei Vol 1 (Manga)/81vgliRXgRL._SL1500_.jpg"
+                    Path = "/img/Books/Mushoku Tensei Vol 1 (Manga)/cover/81vgliRXgRL._SL1500_.jpg"
                 },
                 new Picture()
                 {
@@ -129,7 +129,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 {
                     Id = 17,
                     BookId = 6,
-                    Path = "/img/Books/Chainsaw Man, Vol. 13(Manga)/81WO4SsaNzL._SL1500_.jpg"
+                    Path = "/img/Books/Chainsaw Man, Vol. 13(Manga)/cover/81WO4SsaNzL._SL1500_.jpg"
                 },
                 new Picture()
                 {
