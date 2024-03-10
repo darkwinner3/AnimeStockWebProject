@@ -1,6 +1,7 @@
 ﻿using AnimeStockWebProject.Core.Contracts;
 using AnimeStockWebProject.Core.Models.Book;
 using AnimeStockWebProject.Core.Models.BookTags;
+using AnimeStockWebProject.Core.Models.BookType;
 using AnimeStockWebProject.Core.Models.Pager;
 using AnimeStockWebProject.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,14 @@ namespace AnimeStockWebProject.Controllers
         private readonly ITagService tagService;
         private readonly IBookService bookService;
         private readonly IMemoryCache memoryCache;
+        private readonly ITypeService typeService;
         public BookController(ITagService tagService, IBookService bookService,
-            IMemoryCache memoryCache)
+            IMemoryCache memoryCache, ITypeService typeService)
         {
             this.tagService = tagService;
             this.bookService = bookService;
             this.memoryCache = memoryCache;
+            this.typeService = typeService;
         }
 
         [HttpGet]
@@ -39,6 +42,7 @@ namespace AnimeStockWebProject.Controllers
             bookQueryViewModel.Pager = pager;
             AllBooksSortedDataModel sortedBooks = await bookService.GetAllBooksSortedDataModelAsync(userId, bookQueryViewModel);
             bookQueryViewModel.BookViewModels = sortedBooks.Books;
+            
             IEnumerable<TagViewModel> tags = this.memoryCache.Get<IEnumerable<TagViewModel>>(BookTagsCacheKey);
             if (tags == null)
             {
@@ -47,6 +51,17 @@ namespace AnimeStockWebProject.Controllers
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(BookTagsCacheDuration));
                 this.memoryCache.Set(BookTagsCacheKey, tags, cacheOptions);
             }
+
+            IEnumerable<BookTypeViewModel> types = this.memoryCache.Get<IEnumerable<BookTypeViewModel>>(BookTypesCacheKey);
+            if(types == null)
+            {
+                types = await typeService.GetAllTypesAsync();
+                MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(BookTypesCacheDuration));
+                this.memoryCache.Set(BookTypesCacheKey, types, cacheOptions);
+            }
+
+            bookQueryViewModel.BookTypes = types;
             bookQueryViewModel.BookTags = tags;
 
             return View(bookQueryViewModel);
