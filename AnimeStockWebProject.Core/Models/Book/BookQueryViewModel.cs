@@ -22,6 +22,7 @@
 
         public int currentPage { get; set; }
 
+        public string SearchQuery { get; set; }
         public PrintTypeEnum PrintType { get; set; }
 
         public IEnumerable<TagViewModel> BookTags { get; set; }

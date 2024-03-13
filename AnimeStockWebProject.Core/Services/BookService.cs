@@ -99,10 +99,20 @@ namespace AnimeStockWebProject.Core.Services
 
             if (bookQueryViewModel.SelectedBookTypeIds.Any())
             {
-                foreach (var selectedTypeId in bookQueryViewModel.SelectedBookTypeIds)
+                bool allTypesSelected = bookQueryViewModel.SelectedBookTypeIds.Count() == bookQueryViewModel.BookTypes.Count();
+
+                if (!allTypesSelected)
                 {
-                    books = books.Where(b => b.BookType.Id == selectedTypeId);
+                    foreach (var selectedTypeId in bookQueryViewModel.SelectedBookTypeIds)
+                    {
+                        books = books.Where(b => b.BookType.Id == selectedTypeId);
+                    }
                 }
+            }
+
+            if (!string.IsNullOrEmpty(bookQueryViewModel.SearchQuery))
+            {
+                books = books.Where(b => b.Title.Contains(bookQueryViewModel.SearchQuery));
             }
 
             return books;

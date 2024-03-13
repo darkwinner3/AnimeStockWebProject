@@ -10,7 +10,7 @@
 
         private void Configure(int totalItems, int currentPage)
         {
-            int totalPages = (int)Math.Ceiling((double)totalItems / DefaultPageSize);
+            int totalPages = (int)Math.Ceiling((decimal)totalItems / DefaultPageSize);
             int startPage = Math.Max(1, currentPage - 2);
             int endPage = Math.Min(startPage + 3, totalPages);
 
