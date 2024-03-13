@@ -74,6 +74,8 @@ namespace AnimeStockWebProject.Controllers
             {
                 ModelState.AddModelError("", error.Description);
             }
+
+            ViewBag.ShowFooter = false;
             return View(registerViewModel);
         }
 
@@ -123,6 +125,7 @@ namespace AnimeStockWebProject.Controllers
                     }
                 }
             }
+            ViewBag.ShowFooter = false;
 
             ModelState.AddModelError("", "Invalid username, email or password");
             return View(loginViewModel);

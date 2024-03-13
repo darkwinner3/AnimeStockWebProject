@@ -30,6 +30,7 @@
         [HttpGet]
         public async Task<IActionResult> UserProfile(Guid id)
         {
+            ViewBag.ShowFooter = false;
             if (id != this.User.GetId())
             {
                 return Unauthorized();
@@ -52,6 +53,8 @@
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home");
             }
+
+           
         }
 
         [HttpPost]

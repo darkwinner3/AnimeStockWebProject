@@ -26,22 +26,21 @@ namespace AnimeStockWebProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Books([FromQuery] BookQueryViewModel bookQueryViewModel)
+        public async Task<IActionResult> Books([FromQuery] BookQueryViewModel bookQueryViewModel, int bookTypeId)
         {
             if (bookQueryViewModel.currentPage < 1)
             {
                 bookQueryViewModel.currentPage = 1;
             }
-            
+
+
             Guid? userId = null;
             if (User.Identity.IsAuthenticated)
             {
                 userId = User.GetId();
             }
-            Pager pager = new Pager(await bookService.GetCountAsync(bookQueryViewModel), bookQueryViewModel.currentPage);
-            bookQueryViewModel.Pager = pager;
-            AllBooksSortedDataModel sortedBooks = await bookService.GetAllBooksSortedDataModelAsync(userId, bookQueryViewModel);
-            bookQueryViewModel.BookViewModels = sortedBooks.Books;
+
+            
             
             IEnumerable<TagViewModel> tags = this.memoryCache.Get<IEnumerable<TagViewModel>>(BookTagsCacheKey);
             if (tags == null)
@@ -63,6 +62,18 @@ namespace AnimeStockWebProject.Controllers
 
             bookQueryViewModel.BookTypes = types;
             bookQueryViewModel.BookTags = tags;
+
+            var selectedBookTypeId = types.FirstOrDefault(t => t.Id == bookTypeId);
+
+            if (selectedBookTypeId != null)
+            {
+                bookQueryViewModel.SelectedBookTypeIds = new List<int> { selectedBookTypeId.Id };
+            }
+
+            Pager pager = new Pager(await bookService.GetCountAsync(bookQueryViewModel), bookQueryViewModel.currentPage);
+            bookQueryViewModel.Pager = pager;
+            AllBooksSortedDataModel sortedBooks = await bookService.GetAllBooksSortedDataModelAsync(userId, bookQueryViewModel);
+            bookQueryViewModel.BookViewModels = sortedBooks.Books;
 
             return View(bookQueryViewModel);
         }
