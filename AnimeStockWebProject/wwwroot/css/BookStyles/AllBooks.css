@@ -1,6 +1,5 @@
 ﻿.book-card {
     display: flex;
-    width: 90%;
     min-height: 18%;
     max-height: 100%;
 }
@@ -45,8 +44,11 @@
 }
 
 .book-description {
-    padding: 10px;
-    overflow-y: auto;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    max-height: 100px;
+    overflow: auto; 
+    overflow-wrap: break-word;
 }
 
 .more-details li {

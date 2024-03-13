@@ -1,5 +1,5 @@
-﻿body, html {
-    height: 100%;
+﻿main {
+    min-height: 83vh;
 }
 
 .items-container{
@@ -14,17 +14,16 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
+    z-index:0;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: gray;
-    flex: 0 0 280px; /* Set initial width of the sidebar */
-    min-width: 200px; /* Set minimum width to prevent it from becoming too narrow */
-    max-width: 30%; /* Set maximum width to ensure it doesn't take up too much space */
-    height: 800px;
-    background-color: #f0f0f0; /* Example background color */
+    background-color: #f0f0f0;
+    z-index: 1;
+    position: relative;
+    max-width: 295px;
 }
 
 .pagination-container {
@@ -51,4 +50,236 @@
 .book-card{
     margin: 20px;
     border: 1px solid gray;
+}
+
+.search-container input[type=text] {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+
+.search-input-container {
+    position: relative;
+}
+
+    .search-input-container input[type="text"] {
+        padding: 3px 40px 3px 0px;
+    }
+
+.search-button {
+    position: absolute;
+    top: 51%;
+    right: 24px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 17px;
+}
+
+.sidebar form{
+    margin: 15px 0px 0px 15px;
+}
+
+.sidebar form h2{
+    font-size: 20px;
+}
+
+.sort{
+    margin-top:7px;
+    width: 200px;
+    height:30px;
+    border: none;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.tag-container {
+    padding-top: 5px;
+    flex-basis: calc(50% - 5px);
+    box-sizing: border-box;
+}
+
+    .tag-container label {
+        white-space: nowrap;
+    }
+
+.book-type-form{
+    padding-bottom:15px;
+}
+
+.book-type-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.book-type-input-container {
+    padding-top: 5px;
+    flex-basis: calc(50% - 5px);
+    box-sizing: border-box;
+}
+
+    .book-type-input-container label {
+        white-space: nowrap;
+        padding-right: 6px;
+    }
+
+.custom-radio {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+    .custom-radio input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .custom-radio .checkmark {
+        border: 1px solid;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    .custom-radio:hover .checkmark {
+        background-color: #ccc;
+    }
+
+    .custom-radio input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    .custom-radio .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .custom-radio input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .custom-radio .checkmark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+.custom-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+    .custom-checkbox input {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.checkmark-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+.custom-checkbox:hover .checkmark-box {
+    background-color: #ccc;
+}
+
+.custom-checkbox input:checked ~ .checkmark-box {
+    background-color: #2196F3;
+}
+
+.checkmark-symbol {
+    position: absolute;
+    display: none;
+    top: 2px;
+    left: 2px;
+    cursor: pointer;
+}
+
+.custom-checkbox input:checked ~ .checkmark-symbol {
+    display: block;
+}
+
+.checkmark-symbol:after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+    .page-link:hover {
+        background-color: #f0f0f0;
+    }
+
+    .page-link.active {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+.not-found {
+    margin-top:300px;
+    display: flex;
+    text-align: end;
+    width: 100%;
+    justify-content: center;
+    font-size: 60px;
 }
