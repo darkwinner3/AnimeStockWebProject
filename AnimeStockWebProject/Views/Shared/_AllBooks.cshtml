@@ -26,12 +26,12 @@
             <ul class="more-details">
                 <li class ="book-price">@book.Price$</li>
                 <li class ="book-type">
-                    <a href="">
+                    <a onclick="selectBookType('@book.BookType')">
                         @book.BookType
                     </a>
                 </li>
                 <li class="book-print-type">
-                    <a href="">
+                    <a onclick="selectPrintType('@book.PrintType')">
                         @book.PrintType
                     </a>
                 </li>

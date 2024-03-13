@@ -16,7 +16,33 @@
 
 <div class="items-container">
     <section class="sidebar">
-        <form method="get" class="sort-container">
+        <form method="get" class="search-form" autocomplete="off">
+            <div class="search-input-container">
+                <input type="text" placeholder="search" name="searchQuery" asp-for="@Model.SearchQuery" />
+                <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+            </div>
+            
+            
+            @if (Model.SelectedTagIds.Any())
+            {
+                @foreach (int tagId in Model.SelectedTagIds)
+                {
+                    <input type="hidden" name="SelectedTagIds" value="@tagId" />
+                }
+            }
+            @if (Model.SelectedBookTypeIds.Any())
+            {
+                @foreach (int typeId in Model.SelectedBookTypeIds)
+                {
+                    <input type="hidden" name="SelectedBookTypeIds" value="@typeId" />
+                }
+            }
+            <input type="hidden" name="PrintType" value="@Model.PrintType" />
+
+            <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
+        </form>
+
+        <form method="get" class="sort-form">
             <h2>Sort By</h2>
 
             <select class="sort" name="bookSortEnum" asp-for="@Model.BookSortEnum" onchange="this.form.submit()">
@@ -42,20 +68,27 @@
             }
             <input type="hidden" name="PrintType" value="@Model.PrintType" />
 
+            <input type="hidden" name="searchQuery" value="@Model.SearchQuery" />
         </form>
 
-        <form method="get" class="filter-container">
+        <form method="get" class="filter-form">
             <h2 class="filter-title">
                 Filter tags
             </h2>
 
-            @foreach (TagViewModel tag in Model.BookTags)
-            {
-                <div class="tag-container">
-                    <label>@tag.Name</label>
-                    <input type="checkbox" value="@tag.Id" name="SelectedTagIds" onchange="this.form.submit()" @(Model.SelectedTagIds.Contains(tag.Id) ? "checked" : "") />
-                </div>
-            }
+            <div class="tags-container">
+                @foreach (TagViewModel tag in Model.BookTags)
+                {
+                    <div class="tag-container">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" value="@tag.Id" name="SelectedTagIds" onchange="this.form.submit()" @(Model.SelectedTagIds.Contains(tag.Id) ? "checked" : "") />
+                            <span class="checkmark-box"></span>
+                            <span class="checkmark-symbol"></span>
+                            @tag.Name
+                        </label>
+                    </div>
+                }
+            </div>
 
             @if (Model.SelectedBookTypeIds.Any())
             {
@@ -67,22 +100,30 @@
             <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
 
             <input type="hidden" name="PrintType" value="@Model.PrintType" />
+
+            <input type="hidden" name="searchQuery" value="@Model.SearchQuery" />
         </form>
 
-        <form method="get" class="print-type-container">
+        <form method="get" class="print-type-form">
             <h2 class="print-type-title">
                 Print Types
             </h2>
 
            <div class="print-type-container">
-                <label>
-                    <input type="radio" class="sort-option" name="PrintType" value="0" @(Model.PrintType == PrintTypeEnum.Default ? "checked" : "") onchange="this.form.submit()"> All Series
+                <label class="custom-radio">
+                    <input type="radio" class="sort-option" name="PrintType" value="0" @(Model.PrintType == PrintTypeEnum.Default ? "checked" : "") onchange="this.form.submit()">
+                    <span class="checkmark"></span>
+                    All Series
                 </label>
-                <label>
-                    <input type="radio" class="sort-option" name="PrintType" value="2" @(Model.PrintType == PrintTypeEnum.Digital ? "checked" : "") onchange="this.form.submit()"> Digital
+                <label class ="custom-radio">
+                    <input type="radio" class="sort-option" name="PrintType" value="2" @(Model.PrintType == PrintTypeEnum.Digital ? "checked" : "") onchange="this.form.submit()">
+                    <span class="checkmark"></span>
+                    Digital
                 </label>
-                <label>
-                    <input type="radio" class="sort-option" name="PrintType" value="1" @(Model.PrintType == PrintTypeEnum.Phisycal ? "checked" : "") onchange="this.form.submit()"> Physical
+                <label class ="custom-radio">
+                    <input type="radio" class="sort-option" name="PrintType" value="1" @(Model.PrintType == PrintTypeEnum.Phisycal ? "checked" : "") onchange="this.form.submit()">
+                    <span class="checkmark"></span>
+                    Phisycal
                 </label>
            </div>
 
@@ -102,23 +143,32 @@
                 }
             }
             <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
+
+            <input type="hidden" name="searchQuery" value="@Model.SearchQuery" />
         </form>
 
-        <form method="get" class="book-type-container">
+        <form method="get" class="book-type-form">
             <h2 class="book-type-title">
                 Book Types
             </h2>
-            @foreach (BookTypeViewModel bookType in Model.BookTypes)
+
+            <div class="book-type-container">
+                @foreach (BookTypeViewModel bookType in Model.BookTypes)
                 {
-                <div class="book-type-container">
-                
-                     <label>
-                         @bookType.Name
-                     </label>
-                     <input type="checkbox" value="@bookType.Id" name="SelectedBookTypeIds" onchange="this.form.submit()" @(Model.SelectedBookTypeIds.Contains(bookType.Id) ? "checked" : "")/>
-               
-                </div>
+                    <div class="book-type-input-container">
+
+                        <label class="custom-checkbox">
+                            <input type="checkbox" class="checkBox" value="@bookType.Id" name="SelectedBookTypeIds" onchange="this.form.submit()" @(Model.SelectedBookTypeIds.Contains(bookType.Id) ? "checked" : "") />
+                            <span class="checkmark-box"></span>
+                            <span class="checkmark-symbol"></span>
+                            @bookType.Name
+                        </label>
+
+
+                    </div>
                 }
+            </div>
+           
 
             @if (Model.SelectedTagIds.Any())
             {
@@ -130,6 +180,8 @@
             <input type="hidden" name="bookSortEnum" value="@Model.BookSortEnum" />
 
             <input type="hidden" name="PrintType" value="@Model.PrintType" />
+
+            <input type="hidden" name="searchQuery" value="@Model.SearchQuery" />
         </form>
     </section>
 
@@ -148,7 +200,8 @@
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
                                 printType = (int)Model.PrintType,
-                                selectedBookTypeIds = Model.SelectedBookTypeIds 
+                                selectedBookTypeIds = Model.SelectedBookTypeIds,
+                                searchQuery = Model.SearchQuery
                             })">Previous</a>
                         </li>
                     }
@@ -162,7 +215,8 @@
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
                                 printType = (int)Model.PrintType,
-                                selectedBookTypeIds = Model.SelectedBookTypeIds
+                                selectedBookTypeIds = Model.SelectedBookTypeIds,
+                                searchQuery = Model.SearchQuery
                             })">@(page)</a>
                         </li>
                     }
@@ -176,7 +230,8 @@
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
                                 printType = (int)Model.PrintType,
-                                selectedBookTypeIds = Model.SelectedBookTypeIds
+                                selectedBookTypeIds = Model.SelectedBookTypeIds,
+                                searchQuery = Model.SearchQuery
                             })">Next</a>
                         </li>
                     }
@@ -208,7 +263,8 @@
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
                                 printType = (int)Model.PrintType,
-                                selectedBookTypeIds = Model.SelectedBookTypeIds
+                                selectedBookTypeIds = Model.SelectedBookTypeIds,
+                                searchQuery = Model.SearchQuery
                             })">Previous</a>
                         </li>
                     }
@@ -222,7 +278,8 @@
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
                                 printType = (int)Model.PrintType,
-                                selectedBookTypeIds = Model.SelectedBookTypeIds
+                                selectedBookTypeIds = Model.SelectedBookTypeIds,
+                                searchQuery = Model.SearchQuery
                             })">@(page)</a>
                         </li>
                     }
@@ -236,7 +293,8 @@
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
                                 printType = (int)Model.PrintType,
-                                selectedBookTypeIds = Model.SelectedBookTypeIds
+                                selectedBookTypeIds = Model.SelectedBookTypeIds,
+                                searchQuery = Model.SearchQuery
                             })">Next</a>
                         </li>
                     }
@@ -245,3 +303,5 @@
         </div>
     </section>
 </div>
+
+<script src="~/js/Books/Book.js"></script>
