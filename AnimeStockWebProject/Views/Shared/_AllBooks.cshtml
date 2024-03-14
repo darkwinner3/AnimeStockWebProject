@@ -11,12 +11,14 @@
     <div class="book-card">
         <input type="hidden" value="@book.Id" />
         <div class="cover-img">
-            <img src="@book.PicturePath" />
+            <a asp-area="" asp-controller="Book" asp-action="Info" asp-route-id="@book.Id">
+                <img src="@book.PicturePath" />
+            </a>
         </div>
 
         <div class="book-card-content">
             <h1 class="book-title">
-                <a href="">
+                <a asp-area="" asp-controller="Book" asp-action="Info" asp-route-id="@book.Id">
                     @book.Title
                 </a>
             </h1>

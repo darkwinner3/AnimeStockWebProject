@@ -3,6 +3,8 @@ using AnimeStockWebProject.Core.Models.Book;
 using AnimeStockWebProject.Core.Models.BookTags;
 using AnimeStockWebProject.Core.Models.BookType;
 using AnimeStockWebProject.Core.Models.Pager;
+using static AnimeStockWebProject.Common.NotifiactionMessages;
+using static AnimeStockWebProject.Common.NotificationKeys;
 using AnimeStockWebProject.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -76,6 +78,33 @@ namespace AnimeStockWebProject.Controllers
             bookQueryViewModel.BookViewModels = sortedBooks.Books;
 
             return View(bookQueryViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Info(int id, int page = 1)
+        {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            try
+            {
+                int bookComments = await bookService.GetBookCommentsCountAsync(id);
+                Pager commentPager = new Pager(bookComments, page);
+
+                if (!await bookService.BookExistsAsync(id))
+                {
+                    return NotFound();
+                }
+                BookInfoViewModel bookInfo = await bookService.GetBookByIdAsync(id, commentPager);
+                bookInfo.CommentsPager = commentPager;
+                return View(bookInfo);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(Books));
+            }
         }
     }
 }

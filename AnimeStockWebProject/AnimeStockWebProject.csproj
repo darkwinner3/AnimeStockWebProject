@@ -37,6 +37,7 @@
     <Folder Include="wwwroot\img\Games\Little Witch Nobeta\" />
     <Folder Include="wwwroot\img\Games\STEINS GATE\" />
     <Folder Include="wwwroot\img\ProfilePictures\" />
+    <Folder Include="wwwroot\Books\" />
   </ItemGroup>
 
 </Project>

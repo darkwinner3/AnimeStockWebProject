@@ -1,0 +1,56 @@
+﻿@model BookInfoViewModel
+@inject IConfiguration Configuration
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+<link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/BookStyles/Info.css" asp-append-version="true" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section class="book-card">
+    <div class="img-container">
+        <button class="move-button prev-button">Previous</button>
+        @{
+            int count = 1;
+                @foreach (PictureViewModel picture in Model.Pictures)
+            {
+                if (count == 1)
+                {
+                        <img id="active-img" class="active-img" src="@picture.Path" />
+                }
+                else
+                {
+                    <img id="active-img" src="@picture.Path" />
+                }
+                count++;
+            }
+        }
+        <button class="move-button next-button">Next</button>
+
+        <button class="preview-button"> Preview</button>
+    </div>
+
+    <div class="book-information">
+        <div class="container-1">
+            <h1 class="book-title">@Model.Title</h1>
+
+            <p class="book-description">@Model.Description</p>
+        </div>
+    </div>
+</section>
+
+<script src="~/js/Books/Info.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        magnify("active-img", 2);
+    });
+</script>
