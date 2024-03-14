@@ -1,17 +1,15 @@
-﻿using AnimeStockWebProject.Infrastructure.Data.Enums;
-using AnimeStockWebProject.Infrastructure.Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using AnimeStockWebProject.Core.Models.BookTags;
 using AnimeStockWebProject.Core.Models.Comment;
 using AnimeStockWebProject.Core.Models.Picture;
 
 namespace AnimeStockWebProject.Core.Models.Book
 {
+    using Pager;
     public class BookInfoViewModel
     {
         public BookInfoViewModel()
         {
-            BookTags = new List<BooksTags>();
+            BookTags = new List<TagViewModel>();
             Comments = new List<CommentViewModel>();
             Pictures = new List<PictureViewModel>();
         }
@@ -30,7 +28,7 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public string BookType { get; set; } = null!;
 
-        public string ReleaseDate { get; set; } = null!;
+        public DateTime ReleaseDate { get; set; }
 
         public int Pages { get; set; }
 
@@ -40,10 +38,12 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public decimal Price { get; set; }
 
-        public List<BooksTags> BookTags { get; set; }
+        public IEnumerable<TagViewModel> BookTags { get; set; }
 
-        public ICollection<CommentViewModel> Comments { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
 
-        public ICollection<PictureViewModel> Pictures { get; set; }
+        public Pager CommentsPager { get; set; } = null!;
+
+        public IEnumerable<PictureViewModel> Pictures { get; set; }
     }
 }

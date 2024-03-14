@@ -5,6 +5,10 @@ using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
 using static AnimeStockWebProject.Infrastructure.Data.Enums.PrintTypeEnum;
 using Microsoft.EntityFrameworkCore;
+using AnimeStockWebProject.Core.Models.Pager;
+using AnimeStockWebProject.Core.Models.BookTags;
+using AnimeStockWebProject.Core.Models.Picture;
+using AnimeStockWebProject.Core.Models.Comment;
 
 namespace AnimeStockWebProject.Core.Services
 {
@@ -15,6 +19,11 @@ namespace AnimeStockWebProject.Core.Services
         public BookService( AnimeStockDbContext animeStockDbContext)
         {
             this.animeStockDbContext = animeStockDbContext;
+        }
+
+        public async Task<bool> BookExistsAsync(int bookId)
+        {
+            return await animeStockDbContext.Books.AnyAsync(b => b.Id == bookId && !b.IsDeleted);
         }
 
         public async Task<AllBooksSortedDataModel> GetAllBooksSortedDataModelAsync(Guid? userId, BookQueryViewModel bookQueryViewModel)
@@ -46,6 +55,54 @@ namespace AnimeStockWebProject.Core.Services
             {
                 Books = allBooks
             };
+        }
+
+        public async Task<BookInfoViewModel> GetBookByIdAsync(int bookId, Pager pager)
+        {
+            int pagesToSkip = (pager.CurrentPage - 1) * pager.PageSize;
+            BookInfoViewModel book = await animeStockDbContext
+                .Books
+                .Select(b => new BookInfoViewModel()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Author = b.Author,
+                    Illustrator = b.Illustrator,
+                    Description = b.Description,
+                    BookType = b.BookType.Name,
+                    Publisher = b.Publisher,
+                    ReleaseDate = b.ReleaseDate.Date,
+                    PrintType = b.PrintType.ToString(),
+                    Price = b.Price,
+                    Pages = pager.CurrentPage,
+                    BookTags = b.BookTags.Where(bt => bt.BookId == bookId && !bt.IsDeleted && !bt.Tag.IsDeleted).Select(b => new TagViewModel()
+                    {
+                        Name = b.Tag.Name
+                    }).ToArray(),
+                    Pictures = b.Pictures.Where(p => !p.IsDeleted).OrderByDescending(p => p.Path.Contains("cover")).Select(p => new PictureViewModel()
+                    {
+                        Path = p.Path
+                    }).ToArray(),
+                    Comments = b.Comments.Where(c => !c.IsDeleted).Select(c => new CommentViewModel()
+                    {
+                        Id = c.Id,
+                        CreatedOn = c.CreatedDate,
+                        Description = c.Description,
+                        UserName = c.UserName,
+                        UserId = c.UserId,
+                        UserPicturePath = c.User.ProfilePicturePath
+                    }).Skip(pagesToSkip)
+                    .Take(pager.PageSize)
+                })
+                .FirstAsync(b => b.Id == bookId);
+            return book;
+        }
+
+        public async Task<int> GetBookCommentsCountAsync(int bookId)
+        {
+            return await animeStockDbContext.Comments
+                .Where(c => c.BookId == bookId && !c.IsDeleted)
+                .CountAsync();
         }
 
         public Task<int> GetCountAsync(BookQueryViewModel bookQueryViewModel)
