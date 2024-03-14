@@ -1,0 +1,40 @@
+﻿.book-card
+{
+    display:flex;
+}
+
+.img-container {
+    width: 20%;
+    display:flex;
+    position:relative;
+    flex-direction:column;
+}
+
+    .img-container img {
+        width: 100%;
+        transition: all 0.5s ease;
+        display: none;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .img-container .active-img {
+        display: block;
+    }
+
+
+.img-magnifier-glass{
+    position: absolute;
+    border: 1px solid #000;
+    border-radius: 0%;
+    cursor: none;
+    /*Set the size of the magnifier glass:*/
+    width: 200px;
+    height: 200px;
+}
+
+
+.book-information{
+    width:30%;
+}
