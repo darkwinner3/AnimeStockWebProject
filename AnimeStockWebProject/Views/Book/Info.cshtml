@@ -21,11 +21,11 @@
         <button class="move-button prev-button">Previous</button>
         @{
             int count = 1;
-                @foreach (PictureViewModel picture in Model.Pictures)
+            @foreach (PictureViewModel picture in Model.Pictures)
             {
                 if (count == 1)
                 {
-                        <img id="active-img" class="active-img" src="@picture.Path" />
+                    <img id="active-img" class="active-img" src="@picture.Path" />
                 }
                 else
                 {
@@ -49,8 +49,3 @@
 </section>
 
 <script src="~/js/Books/Info.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        magnify("active-img", 2);
-    });
-</script>

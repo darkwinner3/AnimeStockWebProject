@@ -1,13 +1,12 @@
-﻿.book-card
-{
+﻿.book-card{
     display:flex;
 }
 
 .img-container {
     width: 20%;
-    display:flex;
-    position:relative;
-    flex-direction:column;
+    display: flex;
+    position: relative;
+    flex-direction: column;
 }
 
     .img-container img {
@@ -24,7 +23,7 @@
     }
 
 
-.img-magnifier-glass{
+.img-magnifier-glass {
     position: absolute;
     border: 1px solid #000;
     border-radius: 0%;
@@ -35,6 +34,6 @@
 }
 
 
-.book-information{
-    width:30%;
+.book-information {
+    width: 30%;
 }

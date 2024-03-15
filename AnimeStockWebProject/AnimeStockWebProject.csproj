@@ -40,4 +40,9 @@
     <Folder Include="wwwroot\Books\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\Magnifier\Event.js" />
+    <None Include="wwwroot\lib\Magnifier\demo\Gallery.js" />
+  </ItemGroup>
+
 </Project>
