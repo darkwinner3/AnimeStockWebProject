@@ -106,5 +106,19 @@ namespace AnimeStockWebProject.Controllers
                 return RedirectToAction(nameof(Books));
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> BooksByTitle(string title = "", int id = 0)
+        {
+            try
+            {
+                IEnumerable<BookNameViewModel> bookByTitle = await bookService.GetBookByTitleAsync(title, id);
+                return PartialView("_BooksByTitle", bookByTitle);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(Books));
+            }
+        }
     }
 }

@@ -2,8 +2,9 @@
 
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 
-@functions{
-    public string GetAntiXsrfRequestToken(){
+@functions {
+    public string GetAntiXsrfRequestToken()
+    {
         return Xsrf.GetAndStoreTokens(Context).RequestToken;
     }
 }
@@ -21,8 +22,8 @@
                 <input type="text" placeholder="search" name="searchQuery" asp-for="@Model.SearchQuery" />
                 <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
             </div>
-            
-            
+
+
             @if (Model.SelectedTagIds.Any())
             {
                 @foreach (int tagId in Model.SelectedTagIds)
@@ -109,23 +110,23 @@
                 Print Types
             </h2>
 
-           <div class="print-type-container">
+            <div class="print-type-container">
                 <label class="custom-radio">
                     <input type="radio" class="sort-option" name="PrintType" value="0" @(Model.PrintType == PrintTypeEnum.Default ? "checked" : "") onchange="this.form.submit()">
                     <span class="checkmark"></span>
                     All Series
                 </label>
-                <label class ="custom-radio">
+                <label class="custom-radio">
                     <input type="radio" class="sort-option" name="PrintType" value="2" @(Model.PrintType == PrintTypeEnum.Digital ? "checked" : "") onchange="this.form.submit()">
                     <span class="checkmark"></span>
                     Digital
                 </label>
-                <label class ="custom-radio">
+                <label class="custom-radio">
                     <input type="radio" class="sort-option" name="PrintType" value="1" @(Model.PrintType == PrintTypeEnum.Phisycal ? "checked" : "") onchange="this.form.submit()">
                     <span class="checkmark"></span>
                     Phisycal
                 </label>
-           </div>
+            </div>
 
             @if (Model.SelectedBookTypeIds.Any())
             {
@@ -163,12 +164,10 @@
                             <span class="checkmark-symbol"></span>
                             @bookType.Name
                         </label>
-
-
                     </div>
                 }
             </div>
-           
+
 
             @if (Model.SelectedTagIds.Any())
             {
@@ -194,7 +193,7 @@
                     {
                         <li class="page-item">
                             <a class="page-link"
-                            href="@Url.Action("Books", "Book", new
+                               href="@Url.Action("Books", "Book", new
                             {
                                 currentPage = Model.Pager.CurrentPage - 1,
                                 bookSortEnum = (int)Model.BookSortEnum,
@@ -206,11 +205,11 @@
                         </li>
                     }
 
-                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage; page++)
+                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
                     {
                         <li class="page-item">
                             <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
-                            href="@Url.Action("Books", "Book", new{
+                               href="@Url.Action("Books", "Book", new{
                                 currentPage = page,
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
@@ -225,7 +224,7 @@
                     {
                         <li class="page-item">
                             <a class="page-link"
-                            href="@Url.Action("Books", "Book", new{
+                               href="@Url.Action("Books", "Book", new{
                                 currentPage = Model.Pager.CurrentPage + 1,
                                 bookSortEnum = (int)Model.BookSortEnum,
                                 selectedTagIds = Model.SelectedTagIds,
@@ -269,7 +268,7 @@
                         </li>
                     }
 
-                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage; page++)
+                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
                     {
                         <li class="page-item">
                             <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"

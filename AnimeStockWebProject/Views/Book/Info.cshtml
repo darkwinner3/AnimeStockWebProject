@@ -16,34 +16,120 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<section class="book-card">
-    <div class="img-container">
-        <button class="move-button prev-button">Previous</button>
-        @{
-            int count = 1;
-            @foreach (PictureViewModel picture in Model.Pictures)
-            {
-                if (count == 1)
-                {
-                    <img id="active-img" class="active-img" src="@picture.Path" />
-                }
-                else
-                {
-                    <img id="active-img" src="@picture.Path" />
-                }
-                count++;
-            }
-        }
-        <button class="move-button next-button">Next</button>
 
-        <button class="preview-button"> Preview</button>
+
+<section class="book-card">
+    <div class="book-path">
+        <ul role="list">
+            <li class="list-item">
+                <a class="books-path">Books</a>>
+            </li>
+            <li class="list-item">
+                <a class="printType-path">@Model.PrintType</a>>
+            </li>
+            <li class="list-item">
+                <a class="bookType-path">@Model.BookType</a>
+            </li>
+        </ul>
     </div>
 
-    <div class="book-information">
-        <div class="container-1">
-            <h1 class="book-title">@Model.Title</h1>
+    <div class="main-container">
+        <div class="img-container">
+            <button class="move-button prev-button">Previous</button>
+            @{
+                int count = 1;
+                @foreach (PictureViewModel picture in Model.Pictures)
+                {
+                    if (count == 1)
+                    {
+                        <img id="active-img" class="active-img" src="@picture.Path" />
+                    }
+                    else
+                    {
+                        <img id="active-img" src="@picture.Path" />
+                    }
+                    count++;
+                }
+            }
+            <button class="move-button next-button">Next</button>
 
-            <p class="book-description">@Model.Description</p>
+            <button class="preview-button"> Preview</button>
+        </div>
+
+        <div class="book-information">
+            <div class="container-1">
+                <h1 class="book-title">@Model.Title</h1>
+
+                <p class="book-description">@Model.Description</p>
+
+                <div class="more-items">
+                    <div class="right-div">
+                        <a id="book-details" class="item">
+                            Book details..
+                        </a>
+                    </div>
+
+                    <div class="left-div">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (Model.IsFavourite)
+                            {
+                                <button id="favorite-container" class="item">Unfavorite</button>
+                            }
+                            else
+                            {
+                                <button id="favorite-container" class="item">Favorite</button>
+                            }
+                        }
+
+                        @if (Model.ReleaseDate > DateTime.Now)
+                        {
+                            <button id="purchase-button" class="item">Pre-Order!</button>
+                        }
+                        else
+                        {
+                            <button id="purchase-button" class="item">Order Now!</button>
+                        }
+
+                        <h2 id="book-price" class="item">@Model.Price$</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="book-details-recomendations">
+    <div class="book-details">
+        <h2>Book Details</h2>
+
+        <ul role="list">
+            <li><span>Author: </span>@Model.Author</li>
+            <li><span>Illustrator: </span>@Model.Illustrator</li>
+            <li><span>Publisher: </span>@Model.Publisher</li>
+            <li>
+                <ul role="list" class="tags">
+                    <li><span>Tags: </span></li>
+                    @foreach (var tag in Model.BookTags)
+                    {
+                        <li>@tag.Name</li>
+                    }
+                </ul>
+            </li>
+            <li><span>Book Type: </span>@Model.BookType</li>
+            <li><span>Print Type: </span>@Model.PrintType</li>
+            <li><span>Release Date: </span>@Model.ReleaseDate.Date.ToString("MMMM dd, yyyy")</li>
+            <li><span>Pages: </span>@Model.Pages</li>
+        </ul>
+    </div>
+
+    <div class="recomendations">
+        <h2 class="book-suggestion">Book suggestions</h2>
+
+        <div class="sugestion-item-container">
+            <button class="left-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <section id="other-books"></section>
+            <button class="right-arrow"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 </section>
