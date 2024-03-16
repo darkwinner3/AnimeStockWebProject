@@ -38,6 +38,8 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public decimal Price { get; set; }
 
+        public bool IsFavourite { get; set; }
+
         public IEnumerable<TagViewModel> BookTags { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }

@@ -14,5 +14,7 @@ namespace AnimeStockWebProject.Core.Contracts
         Task<int> GetBookCommentsCountAsync(int bookId);
 
         Task<bool> BookExistsAsync(int bookId);
+
+        Task<IEnumerable<BookNameViewModel>> GetBookByTitleAsync(string title, int bookId);
     }
 }

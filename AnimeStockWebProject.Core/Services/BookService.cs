@@ -1,14 +1,17 @@
 ﻿using AnimeStockWebProject.Core.Contracts;
 using AnimeStockWebProject.Core.Models.Book;
 using AnimeStockWebProject.Core.Models.Book.Enum;
+using AnimeStockWebProject.Core.Models.BookTags;
+using AnimeStockWebProject.Core.Models.Comment;
+using AnimeStockWebProject.Core.Models.Pager;
+using AnimeStockWebProject.Core.Models.Picture;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
-using static AnimeStockWebProject.Infrastructure.Data.Enums.PrintTypeEnum;
 using Microsoft.EntityFrameworkCore;
-using AnimeStockWebProject.Core.Models.Pager;
-using AnimeStockWebProject.Core.Models.BookTags;
-using AnimeStockWebProject.Core.Models.Picture;
-using AnimeStockWebProject.Core.Models.Comment;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using static AnimeStockWebProject.Infrastructure.Data.Enums.PrintTypeEnum;
 
 namespace AnimeStockWebProject.Core.Services
 {
@@ -74,7 +77,7 @@ namespace AnimeStockWebProject.Core.Services
                     ReleaseDate = b.ReleaseDate.Date,
                     PrintType = b.PrintType.ToString(),
                     Price = b.Price,
-                    Pages = pager.CurrentPage,
+                    Pages = b.Pages,
                     BookTags = b.BookTags.Where(bt => bt.BookId == bookId && !bt.IsDeleted && !bt.Tag.IsDeleted).Select(b => new TagViewModel()
                     {
                         Name = b.Tag.Name
@@ -98,6 +101,26 @@ namespace AnimeStockWebProject.Core.Services
             return book;
         }
 
+        public async Task<IEnumerable<BookNameViewModel>> GetBookByTitleAsync(string title, int id)
+        {
+
+            // Remove numbers from titles and convert to lowercase
+            var cleanedTitle = RemoveNumbersFromString(title).ToLower();
+
+            var books = await animeStockDbContext.Books
+                .Where(b => !b.IsDeleted && b.Id != id && b.Title.ToLower().Contains(cleanedTitle))
+                .Select(b => new BookNameViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Price = b.Price,
+                    BookImg = b.Pictures.FirstOrDefault(p => !p.IsDeleted && p.Path.Contains("cover")).Path
+                })
+                .ToArrayAsync();
+
+            return books;
+        }
+
         public async Task<int> GetBookCommentsCountAsync(int bookId)
         {
             return await animeStockDbContext.Comments
@@ -110,6 +133,19 @@ namespace AnimeStockWebProject.Core.Services
             IQueryable<Book> books = animeStockDbContext.Books.Where(b => !b.IsDeleted).AsQueryable();
             books = FilterBooks(bookQueryViewModel, books);
             return books.CountAsync();
+        }
+
+        private string RemoveNumbersFromString(string input)
+        {
+            var result = new StringBuilder();
+            foreach (char c in input)
+            {
+                if (!char.IsDigit(c))
+                {
+                    result.Append(c);
+                }
+            }
+            return result.ToString();
         }
 
         private IQueryable<Book> FilterBooks(BookQueryViewModel bookQueryViewModel, IQueryable<Book> books)
