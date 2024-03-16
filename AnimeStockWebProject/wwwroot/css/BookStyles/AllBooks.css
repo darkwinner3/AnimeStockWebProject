@@ -56,12 +56,12 @@
 }
 
 .book-type a:hover {
-    color: lightblue;
+    color: lightblue !important;
     cursor: pointer;
 }
 
 .book-print-type a:hover {
-    color: lightblue;
+    color: lightblue !important;
     cursor: pointer;
 }
 
