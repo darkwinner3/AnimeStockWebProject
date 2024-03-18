@@ -12,10 +12,10 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
         public User User { get; set; } = null!;
        
         public int? BookId { get; set; }
-        public Book Book { get; set; } = null!;
+        public Book? Book { get; set; } 
        
         public int? GameId { get; set; }
-        public Game Game { get; set; } = null!;
+        public Game? Game { get; set; } 
         public string UserName { get; set; } = null!;
         public DateTime CreatedDate { get; set; }
         [Required]
