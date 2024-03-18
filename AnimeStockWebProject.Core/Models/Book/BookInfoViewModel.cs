@@ -4,6 +4,7 @@ using AnimeStockWebProject.Core.Models.Picture;
 
 namespace AnimeStockWebProject.Core.Models.Book
 {
+    using AnimeStockWebProject.Core.Models.BookType;
     using Pager;
     public class BookInfoViewModel
     {

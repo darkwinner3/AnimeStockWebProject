@@ -10,5 +10,7 @@ namespace AnimeStockWebProject.Core.Models.Comment
         [Required]
         public string Description { get; set; } = null!;
         public int BookId { get; set; }
+
+        public int GameId { get; set; }
     }
 }
