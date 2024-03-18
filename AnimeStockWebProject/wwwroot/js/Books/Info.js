@@ -1,4 +1,5 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿
+document.addEventListener("DOMContentLoaded", function () {
     const imgElements = document.querySelectorAll(".img-container img");
     const prevButton = document.querySelector(".prev-button");
     const nextButton = document.querySelector(".next-button");
@@ -98,8 +99,8 @@ function createSlider() {
         }
     }
 
-    const leftArrowBtn = document.querySelector('.sugestion-item-container .left-arrow');
-    const rightArrowBtn = document.querySelector('.sugestion-item-container .right-arrow');
+    const leftArrowBtn = document.querySelector('.sugestion-item-container .left-button');
+    const rightArrowBtn = document.querySelector('.sugestion-item-container .right-button');
 
     rightArrowBtn.addEventListener('click', () => {
         //hiding containers
@@ -146,3 +147,25 @@ function createSlider() {
         currentIndex = initialIndex;
     });
 }
+
+document.getElementById('book-details').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default anchor behavior
+
+    // Get the target element by its href attribute
+    const targetSelector = this.getAttribute('href');
+
+    // Get the first element with the target class
+    const targetElement = document.querySelector(targetSelector);
+
+    if (targetElement) {
+        // Calculate the offset of the target element relative to the viewport
+        const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+
+        // Smooth scroll to the target element
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    }
+});
+
