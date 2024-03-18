@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\canva root.css" />
+    <Content Remove="wwwroot\js\Comment\DeleteComment.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\Comment\DeleteComment.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\Comment\DeleteComment.js" />
     <None Include="wwwroot\lib\Magnifier\Event.js" />
     <None Include="wwwroot\lib\Magnifier\demo\Gallery.js" />
   </ItemGroup>

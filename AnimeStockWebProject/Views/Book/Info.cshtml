@@ -10,6 +10,7 @@
         return Xsrf.GetAndStoreTokens(Context).RequestToken;
     }
 }
+
 <link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/BookStyles/Info.css" asp-append-version="true" />
@@ -22,13 +23,21 @@
     <div class="book-path">
         <ul role="list">
             <li class="list-item">
-                <a class="books-path">Books</a>>
+                <a class="books-path" asp-area="" asp-controller="Book" asp-action="Books">Books</a>>
             </li>
             <li class="list-item">
-                <a class="printType-path">@Model.PrintType</a>>
+                <a class="printType-path" asp-area="" asp-controller="Book" asp-action="Books" asp-route-printType="@Model.PrintType">@Model.PrintType</a>>
             </li>
             <li class="list-item">
-                <a class="bookType-path">@Model.BookType</a>
+                @if (Model.BookType == "Light Novel")
+                {
+                    <a class="bookType-path" asp-area="" asp-controller="Book" asp-action="Books" asp-route-bookTypeId="1">@Model.BookType</a>
+                }
+                else
+                {
+                    <a class="bookType-path" asp-area="" asp-controller="Book" asp-action="Books" asp-route-bookTypeId="2">@Model.BookType</a>
+                }
+
             </li>
         </ul>
     </div>
@@ -64,7 +73,7 @@
 
                 <div class="more-items">
                     <div class="right-div">
-                        <a id="book-details" class="item">
+                        <a id="book-details" class="item" href=".book-details-recommendations">
                             Book details..
                         </a>
                     </div>
@@ -99,7 +108,7 @@
     </div>
 </section>
 
-<section class="book-details-recomendations">
+<section class="book-details-recommendations">
     <div class="book-details">
         <h2>Book Details</h2>
 
@@ -129,9 +138,103 @@
         <div class="sugestion-item-container">
             <button class="left-button"><i class="fa-solid fa-arrow-left"></i></button>
             <section id="other-books"></section>
-            <button class="right-arrow"><i class="fa-solid fa-arrow-right"></i></button>
+            <button class="right-button"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 </section>
 
+<section class="comments-container">
+    <div class="comment-inner-container">
+        <div class="title-sorting">
+            <h2 class="comment-title">
+                Comments
+            </h2>
+        </div>
+        <div class="my-comment-container">
+            <div class="comment-editable" contenteditable="true" placeholder="Write your comment..."></div>
+            <div class="comment-buttons">
+                <button class="decline-button">Decline</button>
+                <button class="post-button">Post</button>
+            </div>
+        </div>
+
+        @foreach (var comment in Model.Comments)
+        {
+
+            
+            <article class="comment-card">
+                <div class="user-info">
+                    <div class="profile-img-container">
+                        @if (string.IsNullOrWhiteSpace(comment.UserPicturePath))
+                        {
+                            <i class="fa-regular fa-user" id="user-icon"></i>
+                        }
+                        else
+                        {
+                            <img src="~/@comment.UserPicturePath" alt="Profile picture" />
+                        }
+                    </div>
+
+                    <div class="profile-info">
+                        <p class="username">@comment.UserName</p>
+                        <p class="post-date">@comment.CreatedOn.Date.ToString("MM/dd/yyyy")</p>
+                    </div>
+                </div>
+                <p class="comment">@comment.Description</p>
+                @if (User.Identity.IsAuthenticated && Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId) && userId == comment.UserId)
+                {
+                    <input type="hidden" value="@comment.Id" />
+                    <div class="button-container">
+                        <button type="submit" asp-action="Edit" asp-controller="Comment" class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                }
+            </article>
+        }
+
+    </div>
+
+    <div class="pagination-container">
+        @if (Model.CommentsPager.TotalPages > 0)
+        {
+            <ul class="page-list">
+                @if (Model.CommentsPager.CurrentPage > Model.CommentsPager.StartPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Info", "Book", new{
+                            pg = Model.CommentsPager.CurrentPage - 1,
+                            id = Model.Id
+                        })">Previous</a>
+                    </li>
+                }
+                @for (int page = Model.CommentsPager.StartPage; page <= Model.CommentsPager.EndPage; page++)
+                {
+                    <li class="page-item">
+                        <a class="page-link" @(page == Model.CommentsPager.CurrentPage ? "active" : "") href="@Url.Action("Info", "Book", new
+                            {
+                                pg = page,
+                                id = Model.Id
+                            })">@(page)</a>
+                    </li>
+                }
+                @if (Model.CommentsPager.CurrentPage < Model.CommentsPager.EndPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Info", "Book", new{
+                            pg = Model.CommentsPager.CurrentPage + 1,
+                            id = Model.Id
+                        })">Next</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</section>
+
+<script>
+    const csrfToken = '@GetAntiXsrfRequestToken()';
+</script>
 <script src="~/js/Books/Info.js"></script>
+<script src="~/js/Comment/PostComment.js"></script>
+<script src="~/js/Comment/EditComment.js"></script>
+<script src="~/js/Comment/DeleteComment.js"></script>

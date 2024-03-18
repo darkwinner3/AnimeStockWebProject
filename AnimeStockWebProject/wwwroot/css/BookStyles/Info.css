@@ -125,8 +125,10 @@
         backdrop-filter: blur(8px);
     }
 
-.book-details-recomendations{
-    margin-top: 265px;
+.book-details-recommendations {
+    display: flex;
+    flex-direction: row;
+    margin-top: 270px;
     margin-left: 60px;
 }
 
@@ -165,4 +167,10 @@
     justify-content:flex-end;
     font-weight:400;
     font-size: 20px;
+}
+
+.profile-img-container img{
+    width: 48px;
+    height: 48px;
+    border-radius: 60px;
 }
