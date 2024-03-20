@@ -43,8 +43,27 @@
     </div>
 
     <div class="main-container">
-        <div class="img-container">
+        <div class="img-button-change">
             <button class="move-button prev-button">Previous</button>
+            @{
+                int previewImgCount = 1;
+                @foreach (var img in Model.Pictures)
+                {
+                    if (previewImgCount < 3)
+                    {
+                        <img id="active-img" class="preview-active-img" src="@img.Path" />
+                    }
+                    else
+                    {
+                        <img id="active-img" src="@img.Path" />
+                    }
+                }
+            }
+           
+            <button class="move-button next-button">Next</button>
+        </div>
+        <div class="img-container">
+            
             @{
                 int count = 1;
                 @foreach (PictureViewModel picture in Model.Pictures)
@@ -60,7 +79,7 @@
                     count++;
                 }
             }
-            <button class="move-button next-button">Next</button>
+            
 
             <button class="preview-button"> Preview</button>
         </div>
@@ -81,7 +100,8 @@
                     <div class="left-div">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            @if (Model.IsFavourite)
+                            <input type="hidden" value="@Model.Id" />
+                            @if (Model.IsFavorite)
                             {
                                 <button id="favorite-container" class="item">Unfavorite</button>
                             }
@@ -137,26 +157,31 @@
 
         <div class="sugestion-item-container">
             <button class="left-button"><i class="fa-solid fa-arrow-left"></i></button>
-            <section id="other-books"></section>
+            <section id="other-books">
+                <p class="no-suggestions">No other books of this series</p>
+            </section>
             <button class="right-button"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 </section>
 
 <section class="comments-container">
+    <div class="title-sorting">
+        <h2 class="comment-title">
+            Comments
+        </h2>
+    </div>
+
+
+    <div class="my-comment-container">
+        <div class="comment-editable" contenteditable="true" placeholder="Write your comment..."></div>
+        <div class="comment-buttons">
+            <button class="decline-button">Decline</button>
+            <button class="post-button">Post</button>
+        </div>
+    </div>
     <div class="comment-inner-container">
-        <div class="title-sorting">
-            <h2 class="comment-title">
-                Comments
-            </h2>
-        </div>
-        <div class="my-comment-container">
-            <div class="comment-editable" contenteditable="true" placeholder="Write your comment..."></div>
-            <div class="comment-buttons">
-                <button class="decline-button">Decline</button>
-                <button class="post-button">Post</button>
-            </div>
-        </div>
+        
 
         @foreach (var comment in Model.Comments)
         {
@@ -202,7 +227,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" href="@Url.Action("Info", "Book", new{
-                            pg = Model.CommentsPager.CurrentPage - 1,
+                            page = Model.CommentsPager.CurrentPage - 1,
                             id = Model.Id
                         })">Previous</a>
                     </li>
@@ -210,9 +235,9 @@
                 @for (int page = Model.CommentsPager.StartPage; page <= Model.CommentsPager.EndPage; page++)
                 {
                     <li class="page-item">
-                        <a class="page-link" @(page == Model.CommentsPager.CurrentPage ? "active" : "") href="@Url.Action("Info", "Book", new
+                        <a class="page-link @(page == Model.CommentsPager.CurrentPage ? "active" : "")" href="@Url.Action("Info", "Book", new
                             {
-                                pg = page,
+                                page = page,
                                 id = Model.Id
                             })">@(page)</a>
                     </li>
@@ -221,7 +246,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" href="@Url.Action("Info", "Book", new{
-                            pg = Model.CommentsPager.CurrentPage + 1,
+                            page = Model.CommentsPager.CurrentPage + 1,
                             id = Model.Id
                         })">Next</a>
                     </li>

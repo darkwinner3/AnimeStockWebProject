@@ -8,7 +8,7 @@
         </div>
 
         <div class="card-content">
-            <p>@book.Title</p>
+            <a asp-area="" asp-controller="Book" asp-action="info" asp-route-id="@book.Id">@book.Title</a>
             <p class="recomended-book-price">@book.Price$</p>
         </div>
     </div>

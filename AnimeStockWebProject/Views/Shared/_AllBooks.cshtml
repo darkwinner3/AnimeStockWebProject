@@ -9,7 +9,6 @@
 @foreach (BookViewModel book in Model)
 {
     <div class="book-card">
-        <input type="hidden" value="@book.Id" />
         <div class="cover-img">
             <a asp-area="" asp-controller="Book" asp-action="Info" asp-route-id="@book.Id">
                 <img src="@book.PicturePath" />
@@ -39,8 +38,10 @@
                 </li>
                 <li class="book-ReleaseDate">@book.ReleaseDate.Date.ToString("MMMM dd, yyyy")</li>
             </ul>
+            
             @if (User.Identity.IsAuthenticated)
             {
+                <input type="hidden" value="@book.Id" />
                 @if (book.IsFavorite)
                 {
                     <button class="favorite-container">Unfavorite</button>
