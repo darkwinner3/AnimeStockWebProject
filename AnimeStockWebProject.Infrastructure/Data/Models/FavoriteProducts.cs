@@ -5,13 +5,13 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
 {
     public class FavoriteProducts
     {
-        [ForeignKey(nameof(Book))]
-        public int BookId { get; set; }
-        public Book Book { get; set; } = null!;
+        [Key]
+        public int Id { get; set; }
 
-        [ForeignKey(nameof(Game))]
-        public int GameId { get; set; }
-        public Game Game { get; set; } = null!;
+        public int? BookId { get; set; }
+        public Book? Book { get; set; }
+        public int? GameId { get; set; }
+        public Game? Game { get; set; }
 
         [ForeignKey(nameof(User))]
         [Required]

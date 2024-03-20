@@ -64,6 +64,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
 
         public bool IsFavorite { get; set;}
 
+
         public List<BooksTags> BookTags { get; set; }
 
         public ICollection<Comment> Comments { get; set; }

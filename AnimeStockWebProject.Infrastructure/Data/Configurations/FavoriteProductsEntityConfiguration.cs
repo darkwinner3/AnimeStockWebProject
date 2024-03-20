@@ -13,16 +13,24 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<FavoriteProducts> builder)
         {
-            builder.HasKey(ck => new { ck.UserId, ck.BookId, ck.GameId });
+            builder.HasKey(ck => new { ck.Id });
+
             builder.HasOne(fp => fp.User)
                 .WithMany(u => u.FavoriteProducts)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(fp => fp.UserId)
+                .IsRequired();
 
+            // Configure BookId and GameId as regular nullable foreign keys
             builder.HasOne(fg => fg.Game)
                 .WithMany(g => g.FavoriteProducts)
+                .HasForeignKey(fp => fp.GameId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasOne(fb => fb.Book)
                 .WithMany(b => b.FavoriteProducts)
+                .HasForeignKey(fp => fp.BookId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }
