@@ -3,29 +3,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const imgElements = document.querySelectorAll(".img-container img");
     const prevButton = document.querySelector(".prev-button");
     const nextButton = document.querySelector(".next-button");
+    const previewImages = document.querySelectorAll(".preview-active-img");
     let currentIndex = 0;
 
     // Show initial active image
     imgElements[currentIndex].classList.add("active-img");
+    previewImages[currentIndex].classList.add("active-preview");
 
     // Function to show next image
     function showNextImage() {
         imgElements[currentIndex].classList.remove("active-img");
+        previewImages[currentIndex].classList.remove("active-preview");
+
         currentIndex++;
         if (currentIndex >= imgElements.length) {
             currentIndex = 0;
         }
         imgElements[currentIndex].classList.add("active-img");
+        previewImages[currentIndex].classList.add("active-preview");
     }
 
     // Function to show previous image
     function showPrevImage() {
         imgElements[currentIndex].classList.remove("active-img");
+        previewImages[currentIndex].classList.remove("active-preview");
         currentIndex--;
         if (currentIndex < 0) {
             currentIndex = imgElements.length - 1;
         }
         imgElements[currentIndex].classList.add("active-img");
+        previewImages[currentIndex].classList.add("active-preview");
     }
 
     // Event listener for next button
@@ -33,9 +40,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Event listener for previous button
     prevButton.addEventListener("click", showPrevImage);
+    previewImages.forEach(function (previewImg, index) {
+        previewImg.addEventListener("click", function () {
+            imgElements[currentIndex].classList.remove("active-img");
+            previewImages[currentIndex].classList.remove("active-preview");
+            currentIndex = index;
+            imgElements[currentIndex].classList.add("active-img");
+            previewImg.classList.add("active-preview");
+        });
+    });
     
 });
-
+//get necessary info for suggested books
 const titleTypeElement = document.querySelector('.book-title');
 const titleType = titleTypeElement ? titleTypeElement.textContent.trim() : ''; // Check if the element exists before accessing its text content
 
@@ -47,7 +63,7 @@ const bookId = currentUrl.pathname.split('/').pop();
 const baseUrl = '/Book/BooksByTitle?';
 
 getBooksByTitle(titleType, baseUrl, bookId);
-
+//ajax function for getting the books
 async function getBooksByTitle(title, baseUrl, id) {
     const data = {
         title: title,
@@ -68,14 +84,10 @@ async function getBooksByTitle(title, baseUrl, id) {
                 otherBooksContainer.innerHTML += responseData;
 
                 const childrenCount = otherBooksContainer.children.length;
-                const bookSuggestion = document.querySelector(".book-suggestion");
-                if (childrenCount === 0 && bookSuggestion) {
-                    bookSuggestion.style.display = 'none';
-                    const [leftArrow, rightArrow] = document.querySelectorAll('.sugestion-item-container button');
-                    leftArrow.style.display = 'none';
-                    rightArrow.style.display = 'none';
-                } else if (bookSuggestion) {
-                    bookSuggestion.style.display = 'block';
+                const noBooks = document.querySelector(".no-suggestions");
+                noBooks.style.display = 'block';
+                if (childrenCount > 1) {
+                    noBooks.style.display = 'none';
                     createSlider();
                 }
             }
@@ -86,7 +98,7 @@ async function getBooksByTitle(title, baseUrl, id) {
         console.error(error);
     }
 }
-
+//create slider for suggested books
 function createSlider() {
     const initialCountCards = 5;
     let currentIndex = 0;
@@ -168,4 +180,34 @@ document.getElementById('book-details').addEventListener('click', function (even
         });
     }
 });
+
+//remove and add from favorites
+document.addEventListener("DOMContentLoaded", function () {
+    const favoriteButtons = Array.from(document.querySelectorAll('#favorite-container'));
+    favoriteButtons.forEach((button) => button.addEventListener("click", toggleFavorite));
+});
+
+async function toggleFavorite(event) {
+    const button = event.target;
+    const bookId = button.parentElement.querySelector('input[type="hidden"]').value;
+    const url = button.textContent === "Favorite" ? `/Book/AddToFavorites/${bookId}` : `/Book/RemoveFromFavorites/${bookId}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'RequestVerificationToken': csrfToken
+            },
+        });
+
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            console.error('Response error:', response.status);
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 

@@ -23,10 +23,43 @@
     display: flex;
 }
 
+.move-button {
+    background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
+    backdrop-filter: blur(4px);
+    border-radius: 30px;
+    border: none;
+}
+
+    .move-button:hover {
+        background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
+        backdrop-filter: blur(8px);
+    }
+
+.img-button-change {
+    display: flex;
+    flex-direction: column;
+}
+
+    .img-button-change{
+        width:6%;
+    }
+
+.preview-active-img {
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    margin: 10px;
+}
+
+.active-preview {
+    border: 1px solid blue;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
 .img-container {
     display: flex;
     position: relative;
     flex-direction: column;
+    margin-left: 10px;
 }
 
     .img-container img {
@@ -43,11 +76,25 @@
         display: block;
     }
 
+.preview-button {
+    background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
+    backdrop-filter: blur(4px);
+    border-radius: 30px;
+    border: none;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+    .preview-button:hover {
+        background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
+        backdrop-filter: blur(8px);
+    }
+
 .book-information {
     max-width: 62%;
-    min-width:42%;
+    min-width: 42%;
     margin-left: 32px;
-    border-bottom:1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .book-title {
@@ -128,49 +175,218 @@
 .book-details-recommendations {
     display: flex;
     flex-direction: row;
-    margin-top: 270px;
-    margin-left: 60px;
+    margin-top: 307px;
+    margin-right: 90px;
+    margin-left: 90px;
+    justify-content: space-between;
 }
 
     .book-details-recomendations h2{
         margin-bottom:25px;
     }
 
+.sugestion-item-container button {
+    background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
+    backdrop-filter: blur(4px);
+    border-radius: 27px;
+    border: none;
+    padding: 13px;
+    width: 5%;
+}
+
+    .sugestion-item-container button:hover {
+        background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
+        backdrop-filter: blur(8px);
+    }
+
+.recomendations {
+    width: 60%;
+}
+
 .tags {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .tags li{
     margin-right: 10px;
 }
 
+.book-details {
+    width: 35%;
+    border-right: 1px solid black;
+}
+
 .book-details span{
     font-weight:700;
 }
 
-.book-details-recomendations{
-    display:flex;
-}
-
-.sugestion-item-container{
-    display:flex;
+.sugestion-item-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .recomended-book-card {
     display: flex;
-    width: 30%;
-    flex-direction:column;
+    flex-direction: column;
+    width: 15%;
 }
 
-.recomended-book-price{
-    display:flex;
-    justify-content:flex-end;
-    font-weight:400;
+#other-books{
+    width:100%;
+    margin:0px 15px;
+}
+
+.recomended-book-price {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: 600;
     font-size: 20px;
 }
 
 .profile-img-container img{
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     border-radius: 60px;
 }
+
+.card-content a{
+    text-decoration:none;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    margin: 100px 100px 0px 100px;
+}
+
+.comment-inner-container {
+    display: flex;
+    flex-direction: column;
+}
+.title-sorting {
+    display: flex;
+    width: 100%;
+}
+
+.comment-editable{
+    border: 1px solid black;
+}
+
+.comment-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+    .comment-buttons button {
+        margin: 10px;
+        background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
+        backdrop-filter: blur(4px);
+        border-radius: 2px;
+        border: none;
+        padding: 5px;
+    }
+        .comment-buttons button:hover {
+            background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
+            backdrop-filter: blur(8px);
+        }
+
+.comment-card {
+    margin-top: 40px;
+    width: 25%;
+    border-bottom: 1px solid black;
+}
+
+.profile-img-container{
+    padding:10px;
+}
+
+.profile-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.username{
+    font-size: 25px;
+}
+
+.comment{
+    padding-top: 30px;
+    font-size:20px;
+}
+
+
+
+.my-comment-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    width: 20%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-img-container {
+    display: inline-block;
+    font-family: "Roboto Mono", monospace;
+    font-size: 55px;
+    color: #304254;
+}
+
+.button-container {
+    display: flex;
+    margin-bottom: 10px;
+    margin:10px 0px 10px 0px;
+}
+
+    .button-container button {
+        margin-right: 10px;
+        background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
+        backdrop-filter: blur(4px);
+        border-radius: 2px;
+        border: none;
+        padding: 5px;
+    }
+
+        .button-container button:hover {
+            background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
+            backdrop-filter: blur(8px);
+        }
+/*paginator*/
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+    .page-link:hover {
+        background-color: #f0f0f0;
+    }
+
+    .page-link.active {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
