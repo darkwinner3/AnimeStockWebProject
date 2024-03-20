@@ -25,7 +25,10 @@ namespace AnimeStockWebProject.Common
         public const int BookTagsCacheDuration = 5;
         public const string BookTypesCacheKey = "BookTypesCacheKey";
         public const int BookTypesCacheDuration = 5;
-
+        public const string UserFavoriteItemsCacheKey = "UserFavoriteCacheKey-{0}";
+        public const int UserFavoriteItemsCacheDuration = 5;
+        public const string UserOrdersCacheKey = "UserOrderCacheKey-{0}";
+        public const int UserOrdersCacheDuration = 5;
 
 
     }

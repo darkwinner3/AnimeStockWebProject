@@ -17,5 +17,9 @@ namespace AnimeStockWebProject.Common
         public const string SuccessRemoveMessage = "Comment deleted";
 
         public const string SuccessEditedComment = "Comment edited successfully";
+
+        public const string SuccessfullyAddedItemToFavorites = "Item successfully added to favorites";
+
+        public const string SuccessfullyRemovedItemFromFavorites = "Item was successfully removed from favorites";
     }
 }
