@@ -29,7 +29,11 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddMemoryCache();
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddMvcOptions(options =>
+    {
+        options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+    });
 
 builder.Services.AddServices();
 

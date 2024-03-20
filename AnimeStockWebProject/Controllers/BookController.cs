@@ -83,6 +83,12 @@ namespace AnimeStockWebProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Info(int id, int page = 1)
         {
+            Guid? userId = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                userId = User.GetId();
+            }
+
             if (page <= 0)
             {
                 page = 1;
@@ -96,7 +102,7 @@ namespace AnimeStockWebProject.Controllers
                 {
                     return NotFound();
                 }
-                BookInfoViewModel bookInfo = await bookService.GetBookByIdAsync(id, commentPager);
+                BookInfoViewModel bookInfo = await bookService.GetBookByIdAsync(id, commentPager, userId);
                 bookInfo.CommentsPager = commentPager;
                 return View(bookInfo);
             }
@@ -113,6 +119,40 @@ namespace AnimeStockWebProject.Controllers
             {
                 IEnumerable<BookNameViewModel> bookByTitle = await bookService.GetBookByTitleAsync(title, id);
                 return PartialView("_BooksByTitle", bookByTitle);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(Books));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorites(int id)
+        {
+            try
+            {
+                await bookService.AddItemToFavorites(id, User.GetId());
+                TempData[SuccessMessage] = SuccessfullyAddedItemToFavorites;
+                this.memoryCache.Remove(string.Format(UserFavoriteItemsCacheKey, this.User.GetId()));
+                return Ok();
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(Books));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromFavorites(int id)
+        {
+            try
+            {
+                await bookService.RemoveItemFromFavorites(id, User.GetId());
+                TempData[SuccessMessage] = SuccessfullyRemovedItemFromFavorites;
+                this.memoryCache.Remove(string.Format(UserFavoriteItemsCacheKey, this.User.GetId()));
+                return NoContent();
             }
             catch (Exception)
             {

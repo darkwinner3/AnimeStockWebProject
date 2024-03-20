@@ -11,6 +11,7 @@
     using AnimeStockWebProject.Extensions;
     using AnimeStockWebProject.Core.Models.User;
     using System.Security.Claims;
+    using AnimeStockWebProject.Core.Models.Book;
 
     public class UserController : Controller
     {
@@ -104,6 +105,37 @@
                 string cacheKey = string.Format(UserInfoCacheKey, userInfoViewModel.Id);
                 this.memoryCache.Remove(cacheKey);
                 return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserFavoriteItems(UserFavoritesViewModel userFavoritesViewModel, Guid id)
+        {
+            if (userFavoritesViewModel.currentPage < 1)
+            {
+                userFavoritesViewModel.currentPage = 1;
+            }
+
+            try
+            {
+                string cacheKey = string.Format(UserFavoriteItemsCacheKey, id);
+                IEnumerable<BookViewModel> userBooks = this.memoryCache.Get<IEnumerable<BookViewModel>>(cacheKey);
+
+                if (userBooks == null)
+                {
+                    userBooks = await userService.GetUserFavoriteBooksAsync(id);
+                    MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserFavoriteItemsCacheDuration));
+                    this.memoryCache.Set(cacheKey, userBooks, cacheOptions);
+                }
+                userFavoritesViewModel.BookViewModels = userBooks;
+
+                return View(userFavoritesViewModel);
             }
             catch (Exception)
             {
