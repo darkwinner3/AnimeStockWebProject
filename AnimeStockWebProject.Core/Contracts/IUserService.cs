@@ -1,4 +1,5 @@
-﻿using AnimeStockWebProject.Core.Models.User;
+﻿using AnimeStockWebProject.Core.Models.Book;
+using AnimeStockWebProject.Core.Models.User;
 
 namespace AnimeStockWebProject.Core.Contracts
 {
@@ -9,5 +10,7 @@ namespace AnimeStockWebProject.Core.Contracts
         Task SaveUserInfoAsync(Guid id, UserInfoViewModel user);
         Task DeleteUserProfilePictureAsync(Guid id, string path);
         Task<string> UploadUserImageAsync(UserInfoViewModel userInfo, Guid userId);
+
+        Task<IEnumerable<BookViewModel>> GetUserFavoriteBooksAsync(Guid userId);
     }
 }

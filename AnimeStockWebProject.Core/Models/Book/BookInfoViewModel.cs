@@ -13,6 +13,7 @@ namespace AnimeStockWebProject.Core.Models.Book
             BookTags = new List<TagViewModel>();
             Comments = new List<CommentViewModel>();
             Pictures = new List<PictureViewModel>();
+            IsFavorite = false;
         }
 
         public int Id { get; set; }
@@ -39,7 +40,7 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public decimal Price { get; set; }
 
-        public bool IsFavourite { get; set; }
+        public bool IsFavorite { get; set; }
 
         public IEnumerable<TagViewModel> BookTags { get; set; }
 

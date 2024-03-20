@@ -1,4 +1,5 @@
 ﻿using AnimeStockWebProject.Core.Contracts;
+using AnimeStockWebProject.Core.Models.Book;
 using AnimeStockWebProject.Core.Models.User;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
@@ -96,6 +97,29 @@ namespace AnimeStockWebProject.Core.Services
                 await userInfo.ProfilePictureFile.CopyToAsync(stream);
             }
             return newFilePath;
+        }
+
+        public async Task<IEnumerable<BookViewModel>> GetUserFavoriteBooksAsync(Guid userId)
+        {
+            IEnumerable<BookViewModel> userBooks = await animeStockDbContext
+                .FavoriteProducts
+                .Where(p => p.UserId == userId && !p.Book.IsDeleted)
+                .Select(fp => new BookViewModel()
+                {
+                    Id = fp.Book.Id,
+                    Title = fp.Book.Title,
+                    Author = fp.Book.Author,
+                    Illustrator = fp.Book.Illustrator,
+                    Description = fp.Book.Description,
+                    BookType = fp.Book.BookType.Name,
+                    ReleaseDate = fp.Book.ReleaseDate.Date,
+                    PrintType = fp.Book.PrintType.ToString(),
+                    Price = fp.Book.Price,
+                    PicturePath = fp.Book.Pictures.FirstOrDefault(p => !p.IsDeleted && p.Path.Contains("cover")).Path,
+                    IsFavorite = true
+                })
+                .ToArrayAsync();
+            return userBooks;
         }
     }
 }

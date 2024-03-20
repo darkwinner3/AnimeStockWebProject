@@ -60,7 +60,7 @@ namespace AnimeStockWebProject.Core.Services
             };
         }
 
-        public async Task<BookInfoViewModel> GetBookByIdAsync(int bookId, Pager pager)
+        public async Task<BookInfoViewModel> GetBookByIdAsync(int bookId, Pager pager, Guid? userId)
         {
             int pagesToSkip = (pager.CurrentPage - 1) * pager.PageSize;
             BookInfoViewModel book = await animeStockDbContext
@@ -78,6 +78,7 @@ namespace AnimeStockWebProject.Core.Services
                     PrintType = b.PrintType.ToString(),
                     Price = b.Price,
                     Pages = b.Pages,
+                    IsFavorite = b.FavoriteProducts.Any(fp => fp.BookId == b.Id && fp.UserId == userId),
                     BookTags = b.BookTags.Where(bt => bt.BookId == bookId && !bt.IsDeleted && !bt.Tag.IsDeleted).Select(b => new TagViewModel()
                     {
                         Name = b.Tag.Name
@@ -148,6 +149,26 @@ namespace AnimeStockWebProject.Core.Services
             return result.ToString();
         }
 
+
+        public async Task AddItemToFavorites(int bookId, Guid userId)
+        {
+            FavoriteProducts favoriteProducts = new FavoriteProducts()
+            {
+                BookId = bookId,
+                UserId = userId
+            };
+            await animeStockDbContext.FavoriteProducts.AddAsync(favoriteProducts);
+            await animeStockDbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveItemFromFavorites(int bookId, Guid userId)
+        {
+            FavoriteProducts favoriteProducts = await animeStockDbContext
+                .FavoriteProducts.FirstAsync(fp => fp.UserId == userId && fp.BookId == bookId);
+            animeStockDbContext.FavoriteProducts.Remove(favoriteProducts);
+
+            await animeStockDbContext.SaveChangesAsync();
+        }
         private IQueryable<Book> FilterBooks(BookQueryViewModel bookQueryViewModel, IQueryable<Book> books)
         {
             switch (bookQueryViewModel.BookSortEnum)
@@ -210,5 +231,6 @@ namespace AnimeStockWebProject.Core.Services
 
             return books;
         }
+
     }
 }
