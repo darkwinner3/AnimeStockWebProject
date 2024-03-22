@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PDFsharp" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AnimeStockWebProject.Common\AnimeStockWebProject.Common.csproj" />
     <ProjectReference Include="..\AnimeStockWebProject.Infrastructure\AnimeStockWebProject.Infrastructure.csproj" />
   </ItemGroup>

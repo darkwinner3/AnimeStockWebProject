@@ -4,7 +4,7 @@ using AnimeStockWebProject.Core.Models.Picture;
 
 namespace AnimeStockWebProject.Core.Models.Book
 {
-    using AnimeStockWebProject.Core.Models.BookType;
+    using Microsoft.AspNetCore.Http;
     using Pager;
     public class BookInfoViewModel
     {
@@ -41,6 +41,10 @@ namespace AnimeStockWebProject.Core.Models.Book
         public decimal Price { get; set; }
 
         public bool IsFavorite { get; set; }
+
+        public byte[] PdfContent { get; set; }
+
+        public string? FilePath { get; set; }
 
         public IEnumerable<TagViewModel> BookTags { get; set; }
 

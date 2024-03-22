@@ -19,5 +19,7 @@ namespace AnimeStockWebProject.Core.Contracts
 
         Task AddItemToFavorites(int bookId, Guid userId);
         Task RemoveItemFromFavorites(int bookId, Guid userId);
+
+        Task<byte[]> GetBookFileAsync(string filePath, int pageCount);
     }
 }

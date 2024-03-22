@@ -8,9 +8,10 @@ using AnimeStockWebProject.Core.Models.Picture;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
+using System.IO;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using static AnimeStockWebProject.Infrastructure.Data.Enums.PrintTypeEnum;
 
 namespace AnimeStockWebProject.Core.Services
@@ -79,6 +80,7 @@ namespace AnimeStockWebProject.Core.Services
                     Price = b.Price,
                     Pages = b.Pages,
                     IsFavorite = b.FavoriteProducts.Any(fp => fp.BookId == b.Id && fp.UserId == userId),
+                    FilePath = b.FilePath,
                     BookTags = b.BookTags.Where(bt => bt.BookId == bookId && !bt.IsDeleted && !bt.Tag.IsDeleted).Select(b => new TagViewModel()
                     {
                         Name = b.Tag.Name
@@ -169,6 +171,33 @@ namespace AnimeStockWebProject.Core.Services
 
             await animeStockDbContext.SaveChangesAsync();
         }
+
+        public async Task<byte[]> GetBookFileAsync(string filePath, int pageCount)
+        {
+            string? path = Path.Combine(@"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot\" + filePath);
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                using (PdfSharp.Pdf.PdfDocument outputDocument = new PdfSharp.Pdf.PdfDocument())
+                {
+                    using (PdfSharp.Pdf.PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import))
+                    {
+                        int totalPages = Math.Min(pageCount, inputDocument.PageCount);
+
+                        for (int i = 0; i < totalPages; i++)
+                        {
+                            PdfPage page = inputDocument.Pages[i];
+                            outputDocument.AddPage(page);
+                        }
+                        // Save the output document to the memory stream
+                        outputDocument.Save(outputStream);
+                    }
+                }
+                // Return the content of the memory stream as a byte array
+                return outputStream.ToArray();
+            }
+
+        }
+
         private IQueryable<Book> FilterBooks(BookQueryViewModel bookQueryViewModel, IQueryable<Book> books)
         {
             switch (bookQueryViewModel.BookSortEnum)
@@ -232,5 +261,6 @@ namespace AnimeStockWebProject.Core.Services
             return books;
         }
 
+        
     }
 }
