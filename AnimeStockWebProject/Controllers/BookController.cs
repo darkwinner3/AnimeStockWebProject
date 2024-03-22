@@ -93,6 +93,8 @@ namespace AnimeStockWebProject.Controllers
             {
                 page = 1;
             }
+
+
             try
             {
                 int bookComments = await bookService.GetBookCommentsCountAsync(id);
@@ -104,6 +106,7 @@ namespace AnimeStockWebProject.Controllers
                 }
                 BookInfoViewModel bookInfo = await bookService.GetBookByIdAsync(id, commentPager, userId);
                 bookInfo.CommentsPager = commentPager;
+
                 return View(bookInfo);
             }
             catch (Exception)
@@ -112,6 +115,28 @@ namespace AnimeStockWebProject.Controllers
                 return RedirectToAction(nameof(Books));
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> BookPartial(string filePath, int id, int pageCount)
+        {
+            try
+            {
+                byte[] pdfContent = await bookService.GetBookFileAsync(filePath, BookPages);
+
+                if (pdfContent != null && pdfContent.Length > 0)
+                {
+                    return new FileContentResult(pdfContent, "application/pdf");
+                }
+
+                return RedirectToAction(nameof(Info));
+            }
+            catch(Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(Info));
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> BooksByTitle(string title = "", int id = 0)
         {
