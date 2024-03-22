@@ -43,6 +43,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Quantity = 7,
                 PrintType = PrintTypeEnum.Phisycal,
                 Price = 12.23m,
+                FilePath = "/Books/Date A Live/Date A Live, Vol. 1_ Dead-End Tohka.pdf"
             };
             Book bookTwo = new Book()
             {
@@ -58,6 +59,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Quantity = 35,
                 PrintType = PrintTypeEnum.Phisycal,
                 Price = 11.34m,
+                FilePath = "/Books/Date A Live/Date A Live, Vol. 2_ Puppet Yoshino.pdf"
             };
             Book bookThree = new Book()
             {
@@ -72,6 +74,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Pages = 223,
                 PrintType = PrintTypeEnum.Digital,
                 Price = 6.54m,
+                FilePath = "/Books/Seirei Gensouki Spirit Chronicles/Seirei Gensouki_ Spirit Chronicles Volume 23.pdf"
             };
             Book bookFour = new Book()
             {
@@ -86,6 +89,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Pages = 266,
                 PrintType = PrintTypeEnum.Digital,
                 Price = 7.12m,
+                FilePath = "/Books/Mushoku Tensei/Mushoku Tensei_ Jobless Reincarnation (Light Novel) Vol. 1.pdf"
             };
             Book bookFive = new Book()
             {

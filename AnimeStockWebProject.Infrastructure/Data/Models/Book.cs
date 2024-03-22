@@ -64,6 +64,8 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
 
         public bool IsFavorite { get; set;}
 
+        public string? FilePath { get; set; }
+
 
         public List<BooksTags> BookTags { get; set; }
 
