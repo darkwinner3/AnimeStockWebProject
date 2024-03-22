@@ -210,4 +210,64 @@ async function toggleFavorite(event) {
         console.error(error);
     }
 }
+//ajax function for book preview
+document.getElementById('preview-button').addEventListener('click', async function () {
+    const bookId = event.target.parentElement.querySelector('input[type="hidden"]').value;
+    const filePath = document.querySelector('input[type="hidden"]').value;
+    const pageCount = 30;
+    //page url
+    const url = `/Book/BookPartial?id=${bookId}&pageCount=${pageCount}&filePath=${filePath}`;
 
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            const pdfContent = await response.blob();
+            renderPdf(pdfContent);
+            document.getElementById('pdf-overlay').style.display = 'block';
+        } else {
+            console.error('Response error:', response.status);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+});
+
+function renderPdf(pdfBlob) {
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    const container = document.getElementById('pdf-container');
+    container.innerHTML = ''; // Clear previous content
+
+    // Initialize PDF.js
+    pdfjsLib.getDocument(pdfUrl).promise.then(function (pdfDoc) {
+        const numPages = pdfDoc.numPages;
+
+        // Render each page
+        for (let i = 1; i <= numPages; i++) {
+            pdfDoc.getPage(i).then(function (page) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                const viewport = page.getViewport({ scale: 1.5 });
+
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                page.render(renderContext).promise.then(function () {
+                    container.appendChild(canvas);
+                });
+            });
+        }
+    });
+}
+
+// Close the overlay when clicking outside the PDF container
+document.getElementById('pdf-overlay').addEventListener('click', function (event) {
+    if (event.target === this) {
+        document.getElementById('pdf-overlay').style.display = 'none'; // Hide the overlay
+    }
+});

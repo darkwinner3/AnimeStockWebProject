@@ -10,6 +10,9 @@ namespace AnimeStockWebProject.Common
     {
         //Pager page size
         public const int DefaultPageSize = 5;
+
+        //book pages
+        public const int BookPages = 30;
         //Roles
         public const string AdminRoleName = "Administrator";
         public const string AdminAreaName = "Admin";

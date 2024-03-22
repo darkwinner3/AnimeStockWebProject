@@ -76,7 +76,7 @@
         display: block;
     }
 
-.preview-button {
+#preview-button {
     background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
     backdrop-filter: blur(4px);
     border-radius: 30px;
@@ -85,7 +85,7 @@
     padding: 5px;
 }
 
-    .preview-button:hover {
+    #preview-button:hover {
         background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
         backdrop-filter: blur(8px);
     }
@@ -389,4 +389,36 @@
         background-color: #007bff;
         color: #fff;
         border-color: #007bff;
+    }
+
+/*pdf styles*/
+
+#pdf-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display:none;
+}
+
+#pdf-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 37%;
+    max-height: 100%;
+    overflow: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+    #pdf-container canvas {
+        max-height: 100%;
+        max-width: 100%;
     }
