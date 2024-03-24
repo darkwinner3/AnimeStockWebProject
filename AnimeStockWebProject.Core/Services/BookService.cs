@@ -77,6 +77,7 @@ namespace AnimeStockWebProject.Core.Services
                     Publisher = b.Publisher,
                     ReleaseDate = b.ReleaseDate.Date,
                     PrintType = b.PrintType.ToString(),
+                    BookQuantity = b.Quantity,
                     Price = b.Price,
                     Pages = b.Pages,
                     IsFavorite = b.FavoriteProducts.Any(fp => fp.BookId == b.Id && fp.UserId == userId),
@@ -197,7 +198,28 @@ namespace AnimeStockWebProject.Core.Services
             }
 
         }
+        public async Task<BookOrderViewModel> GetBookToOrder(BookInfoViewModel bookInfoViewModel)
+        {
+            BookOrderViewModel bookToOrder = new BookOrderViewModel()
+            {
+                Title = bookInfoViewModel.Title,
+                BookId = bookInfoViewModel.Id,
+                UserQuantity = bookInfoViewModel.UserQuantity,
+                ReleaseDate = bookInfoViewModel.ReleaseDate,
+                Price = bookInfoViewModel.Price,
+            };
 
+            bookToOrder.Picture = await animeStockDbContext.Pictures
+                .Where(p => p.BookId == bookInfoViewModel.Id && !p.IsDeleted)
+                .Select(p => new PictureViewModel()
+                {
+                    Path = p.Path
+                })
+                .FirstOrDefaultAsync(p => p.Path.Contains("cover"));
+
+            return bookToOrder;
+
+        }
         private IQueryable<Book> FilterBooks(BookQueryViewModel bookQueryViewModel, IQueryable<Book> books)
         {
             switch (bookQueryViewModel.BookSortEnum)
