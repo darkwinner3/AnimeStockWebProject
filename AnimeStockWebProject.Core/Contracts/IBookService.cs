@@ -21,5 +21,7 @@ namespace AnimeStockWebProject.Core.Contracts
         Task RemoveItemFromFavorites(int bookId, Guid userId);
 
         Task<byte[]> GetBookFileAsync(string filePath, int pageCount);
+
+        Task<BookOrderViewModel> GetBookToOrder(BookInfoViewModel bookInfoViewModel);
     }
 }
