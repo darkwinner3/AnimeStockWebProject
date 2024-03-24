@@ -8,6 +8,7 @@ using static AnimeStockWebProject.Common.NotificationKeys;
 using AnimeStockWebProject.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnimeStockWebProject.Controllers
 {
@@ -16,15 +17,17 @@ namespace AnimeStockWebProject.Controllers
     {
         private readonly ITagService tagService;
         private readonly IBookService bookService;
+        private readonly IOrderService orderService;
         private readonly IMemoryCache memoryCache;
         private readonly ITypeService typeService;
         public BookController(ITagService tagService, IBookService bookService,
-            IMemoryCache memoryCache, ITypeService typeService)
+            IMemoryCache memoryCache, ITypeService typeService, IOrderService orderService)
         {
             this.tagService = tagService;
             this.bookService = bookService;
             this.memoryCache = memoryCache;
             this.typeService = typeService;
+            this.orderService = orderService;
         }
 
         [HttpGet]
@@ -116,6 +119,30 @@ namespace AnimeStockWebProject.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Info(BookInfoViewModel bookInfoViewModel)
+        {
+            Guid? userId = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                userId = User.GetId();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var validationResult = bookInfoViewModel.Validate(new ValidationContext(bookInfoViewModel));
+            if (!ModelState.IsValid || validationResult != null)
+            {
+                var model = await bookService.GetBookByIdAsync(bookInfoViewModel.Id, null, null);
+                model.UserQuantity = bookInfoViewModel.UserQuantity;
+
+                ModelState.AddModelError("", validationResult.ErrorMessage);
+                return View(model);
+            }
+            return RedirectToAction("OrderItem", "Order", bookInfoViewModel);
+        }
+
         [HttpGet]
         public async Task<IActionResult> BookPartial(string filePath, int id, int pageCount)
         {
@@ -185,5 +212,7 @@ namespace AnimeStockWebProject.Controllers
                 return RedirectToAction(nameof(Books));
             }
         }
+
+        
     }
 }
