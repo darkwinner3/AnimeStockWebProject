@@ -119,16 +119,30 @@
                                 <button id="favorite-container" class="item">Favorite</button>
                             }
                         }
-
-                        @if (Model.ReleaseDate > DateTime.Now)
-                        {
-                            <button id="purchase-button" class="item">Pre-Order!</button>
-                        }
-                        else
-                        {
-                            <button id="purchase-button" class="item">Order Now!</button>
-                        }
-
+                        <form class="order-form" method="post">
+                            <div class="order-container">
+                                <input type="number" id="quantity" name="quantity" min="1" asp-for="@Model.UserQuantity">
+                                <input type="hidden" asp-for="@Model.Title" value="@Model.Title" />
+                                <input type="hidden" asp-for="@Model.Price" value="@Model.Price" />
+                                <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
+                                <input type="hidden" asp-for="@Model.UserQuantity" value="@Model.UserQuantity" />
+                                <input type="hidden" asp-for="@Model.ReleaseDate" value="@Model.ReleaseDate" />
+                                <span asp-validation-for="@Model.UserQuantity" class="text-danger"></span>
+                                @if (Model.ReleaseDate > DateTime.Now)
+                                {
+                                    <button id="purchase-button" class="item" type="submit">Pre-Order!</button>
+                                }
+                                else if (Model.BookQuantity == 0 && Model.PrintType == PrintTypeEnum.Phisycal.ToString())
+                                {
+                                    <button id="purchase-button" class="item" type="submit" onclick="return false;">Unavailable</button>
+                                }
+                                else
+                                {
+                                    <button id="purchase-button" class="item" type="submit">Order Now!</button>
+                                }
+                                
+                            </div>
+                        </form>
                         <h2 id="book-price" class="item">@Model.Price$</h2>
                     </div>
                 </div>

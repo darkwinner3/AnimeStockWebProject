@@ -12,6 +12,7 @@ namespace AnimeStockWebProject.Extensions
             serviceDescriptors.AddScoped<IBookService, BookService>();
             serviceDescriptors.AddScoped<ITypeService, TypeService>();
             serviceDescriptors.AddScoped<ICommentService, CommentService>();
+            serviceDescriptors.AddScoped<IOrderService, OrderService>();
         }
     }
 }
