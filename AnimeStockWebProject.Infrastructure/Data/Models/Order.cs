@@ -15,7 +15,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
         public Guid Id { get; set; }
 
         [ForeignKey(nameof(Book))]
-        public int BookId { get; set; }
+        public int? BookId { get; set; }
 
         public Book? Book { get; set; }
 
