@@ -4,8 +4,9 @@ using AnimeStockWebProject.Core.Models.Picture;
 
 namespace AnimeStockWebProject.Core.Models.Book
 {
-    using Microsoft.AspNetCore.Http;
     using Pager;
+    using System.ComponentModel.DataAnnotations;
+
     public class BookInfoViewModel
     {
         public BookInfoViewModel()
@@ -34,7 +35,9 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public int Pages { get; set; }
 
-        public int Quantity { get; set; }
+        public int BookQuantity { get; set; }
+
+        public int UserQuantity { get; set; }
 
         public string PrintType { get; set; } = null!;
 
@@ -53,5 +56,15 @@ namespace AnimeStockWebProject.Core.Models.Book
         public Pager CommentsPager { get; set; } = null!;
 
         public IEnumerable<PictureViewModel> Pictures { get; set; }
+
+        public ValidationResult Validate(ValidationContext validationContext)
+        {
+            if (UserQuantity > BookQuantity)
+            {
+                return new ValidationResult("Order quantity exceeded book quantity");
+            }
+
+            return null;
+        }
     }
 }
