@@ -28,6 +28,8 @@ namespace AnimeStockWebProject.Infrastructure.Data.Models
 
         public DateTime? OrderDate { get; set; }
 
+        public int UserOrders { get; set; }
+
         public decimal TotalPrice { get; set; }
 
         [Required]

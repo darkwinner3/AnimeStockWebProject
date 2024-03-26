@@ -4,6 +4,7 @@ using AnimeStockWebProject.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimeStockWebProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AnimeStockDbContext))]
-    partial class AnimeStockDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240325205707_addedMissingBookPaths")]
+    partial class addedMissingBookPaths
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -552,7 +554,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 1,
                             BookId = 1,
-                            CreatedDate = new DateTime(2024, 3, 26, 22, 38, 35, 353, DateTimeKind.Local).AddTicks(454),
+                            CreatedDate = new DateTime(2024, 3, 25, 22, 57, 7, 229, DateTimeKind.Local).AddTicks(7293),
                             Description = "Test Comment",
                             GameId = 1,
                             IsDeleted = false,
@@ -563,7 +565,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 2,
                             BookId = 2,
-                            CreatedDate = new DateTime(2024, 3, 26, 22, 38, 35, 353, DateTimeKind.Local).AddTicks(465),
+                            CreatedDate = new DateTime(2024, 3, 25, 22, 57, 7, 229, DateTimeKind.Local).AddTicks(7303),
                             Description = "Test Comment",
                             GameId = 2,
                             IsDeleted = false,
@@ -574,7 +576,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 3,
                             BookId = 3,
-                            CreatedDate = new DateTime(2024, 3, 26, 22, 38, 35, 353, DateTimeKind.Local).AddTicks(467),
+                            CreatedDate = new DateTime(2024, 3, 25, 22, 57, 7, 229, DateTimeKind.Local).AddTicks(7304),
                             Description = "Test Comment",
                             GameId = 3,
                             IsDeleted = false,
@@ -585,7 +587,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = 4,
                             BookId = 4,
-                            CreatedDate = new DateTime(2024, 3, 26, 22, 38, 35, 353, DateTimeKind.Local).AddTicks(469),
+                            CreatedDate = new DateTime(2024, 3, 25, 22, 57, 7, 229, DateTimeKind.Local).AddTicks(7306),
                             Description = "Test Comment",
                             GameId = 4,
                             IsDeleted = false,
@@ -1006,9 +1008,6 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("UserOrders")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1461,7 +1460,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                     b.Property<DateTime>("JoinTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 3, 26, 22, 38, 35, 352, DateTimeKind.Local).AddTicks(7275));
+                        .HasDefaultValue(new DateTime(2024, 3, 25, 22, 57, 7, 229, DateTimeKind.Local).AddTicks(4012));
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -1516,16 +1515,16 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("b9a4d407-7518-4aea-a72d-b94c7e389b70"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7caf580f-c1cc-4c95-bee9-a379a2df03be",
+                            ConcurrencyStamp = "32a6160e-c937-45e8-8448-ae9917c9b788",
                             Email = "testuser123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2024, 3, 26, 22, 38, 35, 350, DateTimeKind.Local).AddTicks(9753),
+                            JoinTime = new DateTime(2024, 3, 25, 22, 57, 7, 227, DateTimeKind.Local).AddTicks(6440),
                             LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER123@GMAIL.COM",
                             NormalizedUserName = "TEST USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIuBJMeMD82ukm/RJvBjokCjACgiPFSdbroa4kUnTL/4uvZ5nAPynWIm6Jhoqz/diw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMohYriSZt6EXO3y1sR0FXdpocC8kG4r13ReQ8g9fVd8tXyFdmZY+htP+nrQ5ttxWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "92558122-45a5-4b23-9ec2-4a4100418f45",
+                            SecurityStamp = "567e7bab-5404-4c23-910c-655e058be6c1",
                             TwoFactorEnabled = false,
                             UserName = "Test User"
                         },
@@ -1533,16 +1532,16 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("ee8ddd02-ce94-4f77-8608-819b08dbbb32"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2df858af-dc53-43cf-8c4c-ae504811cf25",
+                            ConcurrencyStamp = "de95078f-5e19-4461-a194-a83e7e507253",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2024, 3, 26, 22, 38, 35, 350, DateTimeKind.Local).AddTicks(9770),
+                            JoinTime = new DateTime(2024, 3, 25, 22, 57, 7, 227, DateTimeKind.Local).AddTicks(6451),
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENbYuywdfypTuonnWYSro65sLHRgVjSk7N8g8qWKtBhZcED3YigepklkUCALBjNxTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGaG+cq6PMZdJtGxMgnf2GEhtohyGvtP+CXHDDicOlZ0fSgl2EIluyrGcWn6JRLfLg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "462476cf-bb7c-4846-bd52-b3fc218fe189",
+                            SecurityStamp = "8c30429d-ee46-4f22-88a6-d9ecb1859009",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

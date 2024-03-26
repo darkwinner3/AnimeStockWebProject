@@ -38,7 +38,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Publisher = "Yen On",
                 Description = "April 10. The first day of school. Shido Itsuka is rudely awoken by his personal alarm clock—his little sister. It’s shaping up to be another typical day…well, as typical as it gets on a planet plagued by massive spatial quakes. Little does Shido know, however, his life is about to take a sudden turn when he encounters the source of this destructive phenomenon—a girl his age, apparently known as a Spirit. Turns out, there are only two ways he can stop her from unleashing hell on the world: Eliminate her by force or placate her…by taking her out on a date and making her fall in love with him!",
                 BookTypeId = 1,
-                ReleaseDate = DateTime.ParseExact("March 23, 2021", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture).Date,
+                ReleaseDate = DateTime.ParseExact("March 23, 2021", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture),
                 Pages = 176,
                 Quantity = 7,
                 PrintType = PrintTypeEnum.Phisycal,
@@ -54,7 +54,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Publisher = "Yen On",
                 Description = "Things have only gotten stranger for Shido ever since Tohka transferred to his school. These days, his life teeters between heaven and hell, and the forecast today points toward the latter. He’s already been caught in the line of fire between Tohka and Origami, and a sudden downpour leaves him sopping wet. Just his luck. Lately, it seems the only place he can catch a break is in the comfort of his own home. That’s all about to change, however, when a new “training” regimen calls for him to live with Tohka—and while Shido is at his most vulnerable, a second Spirit emerges from the storm…",
                 BookTypeId = 1,
-                ReleaseDate = DateTime.ParseExact("May 25, 2021", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture).Date,
+                ReleaseDate = DateTime.ParseExact("May 25, 2021", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture),
                 Pages = 184,
                 Quantity = 35,
                 PrintType = PrintTypeEnum.Phisycal,
@@ -70,7 +70,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Publisher = "J-Novel Club",
                 Description = "Rio and Sora journey to the site of Saint Erica’s summoning to find clues about the transcendent rules. As Rio walks in the Saint’s footsteps, more questions arise about the power that the heroes wield.\r\n\r\nMeanwhile, the four heroes gather at the Galarc Castle, but Sendo Takahisa refuses to train with the others and sets out on his own lonely path to repair his relationship with Miharu. After all, she’s forgiven Aki... So why not him? Will the actions of one pining hero distort the very fabric of the world itself?",
                 BookTypeId = 1,
-                ReleaseDate = DateTime.ParseExact("September 15, 2023", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture).Date,
+                ReleaseDate = DateTime.ParseExact("September 15, 2023", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture),
                 Pages = 223,
                 PrintType = PrintTypeEnum.Digital,
                 Price = 6.54m,
@@ -85,7 +85,7 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Publisher = "Seven Seas Entertainment, Seven Seas Siren",
                 Description = "Kicked out by his family and wandering the streets, an unemployed 34-year-old shut-in thinks he’s hit rock-bottom—just as he’s hit and killed by a speeding truck! Awakening to find himself reborn as an infant in a world of swords and sorcery, but with the memories of his first life intact, Rudeus Greyrat is determined not to repeat his past mistakes. He’s going to make the most of this reincarnation as he sets off on the adventure of a second lifetime!",
                 BookTypeId = 1,
-                ReleaseDate = DateTime.ParseExact("April 04, 2019", "MMMM dd, yyyy", CultureInfo.InvariantCulture).Date,
+                ReleaseDate = DateTime.ParseExact("April 04, 2019", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture),
                 Pages = 266,
                 PrintType = PrintTypeEnum.Digital,
                 Price = 7.12m,
@@ -100,11 +100,12 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Publisher = "Seven Seas",
                 Description = "An unemployed otaku has just reached the lowest point in his life. He wants nothing more than the ability to start over, but just as he thinks it may be possible...he gets hit by a truck and dies! Shockingly, he finds himself reborn into an infant’s body in a strange new world of swords and magic. His identity now is Rudeus Greyrat, yet he still retains the memories of his previous life. Reborn into a new family, Rudeus makes use of his past experiences to forge ahead in this fantasy world as a true prodigy, gifted with maturity beyond his years and a natural born talent for magic. With swords instead of chopsticks, and spell books instead of the internet, can Rudeus redeem himself in this wondrous yet dangerous land?",
                 BookTypeId = 2,
-                ReleaseDate = DateTime.ParseExact("November 24, 2015", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture).Date,
+                ReleaseDate = DateTime.ParseExact("November 24, 2015", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture),
                 Pages = 180,
                 Quantity = 13,
                 PrintType = PrintTypeEnum.Phisycal,
                 Price = 10.23m,
+                FilePath = "/Books/Mushoku Tensei(Manga)/Mushoku Tensei - Jobless Reincarnation v01 (2016) (Digital) (goldenagato).cbz"
             };
             Book bookSix = new Book()
             {
@@ -115,11 +116,12 @@ namespace AnimeStockWebProject.Infrastructure.Data.Configurations
                 Publisher = "VIZ Media LLC",
                 Description = "Denji was a small-time devil hunter just trying to survive in a harsh world. After being killed on a job, he is revived by his pet devil Pochita and becomes something new and dangerous—Chainsaw Man! Denji is desperate to tell the world that he’s Chainsaw Man, but is he competent enough to pull off a proper reveal? Meanwhile, Asa has made a friend! But this new friendship may be hiding a dark secret.",
                 BookTypeId = 2,
-                ReleaseDate = DateTime.ParseExact("December 05, 2023", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture).Date,
+                ReleaseDate = DateTime.ParseExact("December 05, 2023", EntityValidations.BookEntity.ReleaseDate, CultureInfo.InvariantCulture),
                 Pages = 184,
                 Quantity = 53,
                 PrintType = PrintTypeEnum.Phisycal,
                 Price = 9.76m,
+                FilePath = "/Books/Chainsaw Man/Chainsaw Man v13 (2023) (Goldenagato).cbz"
             };
 
             books.Add(bookOne);
