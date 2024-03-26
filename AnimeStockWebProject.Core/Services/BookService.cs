@@ -8,9 +8,12 @@ using AnimeStockWebProject.Core.Models.Picture;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using System.IO.Compression;
 using System.Text;
 using static AnimeStockWebProject.Infrastructure.Data.Enums.PrintTypeEnum;
 
@@ -77,7 +80,7 @@ namespace AnimeStockWebProject.Core.Services
                     Publisher = b.Publisher,
                     ReleaseDate = b.ReleaseDate.Date,
                     PrintType = b.PrintType.ToString(),
-                    BookQuantity = b.Quantity,
+                    Quantity = b.Quantity,
                     Price = b.Price,
                     Pages = b.Pages,
                     IsFavorite = b.FavoriteProducts.Any(fp => fp.BookId == b.Id && fp.UserId == userId),
@@ -178,35 +181,100 @@ namespace AnimeStockWebProject.Core.Services
             string? path = Path.Combine(@"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot\" + filePath);
             using (MemoryStream outputStream = new MemoryStream())
             {
-                using (PdfSharp.Pdf.PdfDocument outputDocument = new PdfSharp.Pdf.PdfDocument())
+                using (PdfDocument outputDocument = new PdfDocument())
                 {
-                    using (PdfSharp.Pdf.PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import))
+                    if (Path.GetExtension(path).Equals(".cbz", StringComparison.OrdinalIgnoreCase))
                     {
-                        int totalPages = Math.Min(pageCount, inputDocument.PageCount);
-
-                        for (int i = 0; i < totalPages; i++)
+                        using (ZipArchive cbzArchive = ZipFile.OpenRead(path))
                         {
-                            PdfPage page = inputDocument.Pages[i];
-                            outputDocument.AddPage(page);
+                            int totalPages = Math.Min(pageCount, cbzArchive.Entries.Count);
+                            //saves all tasks in a list
+                            var tasks = new List<Task>();
+
+                            for (int i = 0; i < totalPages; i++)
+                            {
+                                ZipArchiveEntry entry = cbzArchive.Entries[i];
+                                if (IsImageFile(entry))
+                                {
+                                    tasks.Add(ProcessImageAsync(entry, outputDocument));
+                                }
+                            }
+                            //exetutes the tasks asynchroniously
+                            await Task.WhenAll(tasks);
                         }
-                        // Save the output document to the memory stream
-                        outputDocument.Save(outputStream);
                     }
+                    else if (Path.GetExtension(path).Equals(".Pdf", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using (PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import))
+                        {
+                            int totalPages = Math.Min(pageCount, inputDocument.PageCount);
+
+                            for (int i = 0; i < totalPages; i++)
+                            {
+                                PdfPage page = inputDocument.Pages[i];
+                                outputDocument.AddPage(page);
+                            }
+                        }
+                    }
+                    // Save the output document to the memory stream
+                    outputDocument.Save(outputStream);
                 }
                 // Return the content of the memory stream as a byte array
                 return outputStream.ToArray();
             }
-
         }
+        // processes the images asynchroniously
+        private async Task ProcessImageAsync(ZipArchiveEntry entry, PdfDocument outputDocument)
+        {
+            using (Stream imageStream = entry.Open())
+            {
+                using (SixLabors.ImageSharp.Image image = SixLabors.ImageSharp.Image.Load(imageStream))
+                {
+                    PdfPage pdfPage = new PdfPage();
+
+                    outputDocument.AddPage(pdfPage);
+
+                    int targetWidth = (int)pdfPage.Width;
+                    int targetHeight = (int)pdfPage.Height;
+
+                    image.Mutate(x => x.Resize(targetWidth, targetHeight));
+                    // Convert the ImageSharp image to a MemoryStream with JPEG format
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        image.SaveAsJpeg(ms);
+                        ms.Position = 0;
+                        // Create an XImage from the MemoryStream
+                        using (XImage xImage = XImage.FromStream(ms))
+                        {
+                            using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
+                            {
+                                // Draw the image onto the PDF page
+                                gfx.DrawImage(xImage, 0, 0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private bool IsImageFile(ZipArchiveEntry entry)
+        {
+            string[] imageExtensions = { ".png", ".jpg", ".jpeg", ".gif", ".bmp" };
+            string extenstion = Path.GetExtension(entry.FullName).ToLower();
+            return Array.Exists(imageExtensions, ext => ext == extenstion);
+        }
+
         public async Task<BookOrderViewModel> GetBookToOrder(BookInfoViewModel bookInfoViewModel)
         {
             BookOrderViewModel bookToOrder = new BookOrderViewModel()
             {
                 Title = bookInfoViewModel.Title,
                 BookId = bookInfoViewModel.Id,
-                UserQuantity = bookInfoViewModel.UserQuantity,
                 ReleaseDate = bookInfoViewModel.ReleaseDate,
                 Price = bookInfoViewModel.Price,
+                PrintType = bookInfoViewModel.PrintType,
+                UserQuantity = bookInfoViewModel.UserQuantity,
+                Quantity = bookInfoViewModel.Quantity,
             };
 
             bookToOrder.Picture = await animeStockDbContext.Pictures
@@ -282,7 +350,5 @@ namespace AnimeStockWebProject.Core.Services
 
             return books;
         }
-
-        
     }
 }
