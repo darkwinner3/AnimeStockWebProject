@@ -20,8 +20,12 @@ namespace AnimeStockWebProject.Common
         public const string UserRoleName = "User";
 
         //Cache keys and durations
+        public const string HomePageCacheKey = "HomeCache";
+        public const int HomePageCacheDuration = 5;
         public const string AdminUsersCacheKey = "AllUsers";
         public const int AdminUsersDuration = 2;
+        public const string AdminDashBoardCacheKey = "AdminDashBoardKey";
+        public const int AdminDashBoardCacheDuration = 5;
         public const string UserInfoCacheKey = "UserInfoCacheKey-{0}";
         public const int UserInfoCacheDuration = 5;
         public const string BookTagsCacheKey = "BookTagsCacheKey";
