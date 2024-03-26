@@ -1,0 +1,83 @@
+﻿@model BookOrderDetailsViewModel
+
+<link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/HomeStyles/Home.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/OrderStyles/OrderItemStyles.css" asp-append-version="true" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<h1 class="title">Complete order</h1>
+<section class="order-section">
+    <form class="order-info" method="post">
+        <div class="input">
+            <label asp-for="@Model.User.FirstName">First Name</label>
+            <input type="text" asp-for="@Model.User.FirstName" aria-required="true" placeholder="Enter Name" />
+            <span asp-validation-for="@Model.User.FirstName"></span>
+        </div>
+
+        <div class="input">
+            <label asp-for="@Model.User.PhoneNumber">Phone Number</label>
+            <input type="text" asp-for="@Model.User.PhoneNumber" aria-required="true" placeholder="Enter Phone Number" />
+            <span asp-validation-for="@Model.User.PhoneNumber"></span>
+        </div>
+
+        <div class="input">
+            <label asp-for="@Model.User.Email">Email</label>
+            <input type="text" asp-for="@Model.User.Email" value="@Model.User.Email" readonly />
+        </div>
+        @if (Model.BookInfo.PrintType == PrintTypeEnum.Phisycal.ToString())
+        {
+            <div class="input">
+
+                <label asp-for="@Model.UserQuantity">Quantity</label>
+                <input type="number" id="quantity" name="UserQuantity" min="1" asp-for="@Model.UserQuantity" value="@Model.BookInfo.UserQuantity">
+
+            </div>
+        }
+        <input type="hidden" asp-for="@Model.BookInfo.Title" value="@Model.BookInfo.Title" />
+        <input type="hidden" asp-for="@Model.BookInfo.Price" value="@Model.BookInfo.Price" />
+        <input type="hidden" asp-for="@Model.BookInfo.Picture.Path" value="@Model.BookInfo.Picture.Path" />
+        <input type="hidden" asp-for="@Model.BookInfo.BookId" value="@Model.BookInfo.BookId" />
+        <input type="hidden" asp-for="@Model.BookInfo.ReleaseDate" value="@Model.BookInfo.ReleaseDate" />
+        <input type="hidden" asp-for="@Model.BookInfo.PrintType" value="@Model.BookInfo.PrintType" />
+
+        <button class="order-btn" type="submit">Order Now!</button>
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+    </form>
+
+    <div class="order-card">
+        <div class="order-img-container">
+            <img src="@Model.BookInfo.Picture.Path" />
+        </div>
+        <h2 class="book-title">@Model.BookInfo.Title</h2>
+        @if (Model.BookInfo.PrintType == PrintTypeEnum.Phisycal.ToString())
+        {
+            <p class="price">Total Price: <span class="price-span">@((Model.BookInfo.Price * Model.BookInfo.UserQuantity))$</span></p>
+        }
+        else
+        {
+            <p class="price">Total Price: <span class="price-span">@Model.BookInfo.Price</span></p>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>
+    const quantity = document.getElementById("quantity");
+    let bookQuantity = @Model.BookInfo.Quantity;
+    quantity.addEventListener('change', () => {
+        if (quantity.value > bookQuantity) {
+            document.querySelector(".order-card .price").textContent = 'Book quantity unavailable';
+            return;
+        }
+
+        let price = '@Model.BookInfo.Price';
+        let totalPrice = price * quantity.value;
+
+        document.querySelector(".order-card .price .price-span").textContent = `${totalPrice.toFixed(2)}$`;
+    })
+</script>

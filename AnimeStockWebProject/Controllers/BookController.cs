@@ -120,7 +120,7 @@ namespace AnimeStockWebProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Info(BookInfoViewModel bookInfoViewModel)
+        public async Task<IActionResult> Info(BookInfoViewModel bookInfoViewModel, int page)
         {
             Guid? userId = null;
             if (User.Identity.IsAuthenticated)
@@ -134,7 +134,10 @@ namespace AnimeStockWebProject.Controllers
             var validationResult = bookInfoViewModel.Validate(new ValidationContext(bookInfoViewModel));
             if (!ModelState.IsValid || validationResult != null)
             {
-                var model = await bookService.GetBookByIdAsync(bookInfoViewModel.Id, null, null);
+                int bookComments = await bookService.GetBookCommentsCountAsync(bookInfoViewModel.Id);
+                Pager commentPager = new Pager(bookComments, page);
+                var model = await bookService.GetBookByIdAsync(bookInfoViewModel.Id, commentPager, userId);
+                model.CommentsPager = commentPager;
                 model.UserQuantity = bookInfoViewModel.UserQuantity;
 
                 ModelState.AddModelError("", validationResult.ErrorMessage);

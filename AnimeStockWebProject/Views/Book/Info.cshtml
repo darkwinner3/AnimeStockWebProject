@@ -87,8 +87,8 @@
                 }
             }
             
-            <input type="hidden" value="@Model.FilePath" />
-            <input type="hidden" value="@Model.Id" />
+            <input id="book-path" type="hidden" value="@Model.FilePath" />
+            <input id="bookId" type="hidden" value="@Model.Id" />
             <button id="preview-button">Preview</button>
         </div>
 
@@ -121,18 +121,25 @@
                         }
                         <form class="order-form" method="post">
                             <div class="order-container">
-                                <input type="number" id="quantity" name="quantity" min="1" asp-for="@Model.UserQuantity">
+                                @if (Model.PrintType == PrintTypeEnum.Phisycal.ToString())
+                                {
+                                    <input type="number" id="quantity" name="UserQuantity" min="1" asp-for="@Model.UserQuantity" value="1">
+                                }
                                 <input type="hidden" asp-for="@Model.Title" value="@Model.Title" />
                                 <input type="hidden" asp-for="@Model.Price" value="@Model.Price" />
                                 <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
-                                <input type="hidden" asp-for="@Model.UserQuantity" value="@Model.UserQuantity" />
+                                <input type="hidden" asp-for="@Model.Quantity" value="@Model.Quantity" />
                                 <input type="hidden" asp-for="@Model.ReleaseDate" value="@Model.ReleaseDate" />
+                                <input type="hidden" asp-for="@Model.BookType" value="@Model.BookType" />
+                                <input type="hidden" asp-for="@Model.PrintType" value="@Model.PrintType" />
+                                <input type="hidden" asp-for="@Model.PdfContent" value="@Model.PdfContent" />
+                                <input type="hidden" asp-for="@Model.CommentsPager" value="@Model.CommentsPager" />
                                 <span asp-validation-for="@Model.UserQuantity" class="text-danger"></span>
                                 @if (Model.ReleaseDate > DateTime.Now)
                                 {
                                     <button id="purchase-button" class="item" type="submit">Pre-Order!</button>
                                 }
-                                else if (Model.BookQuantity == 0 && Model.PrintType == PrintTypeEnum.Phisycal.ToString())
+                                else if (Model.Quantity == 0 && Model.PrintType == PrintTypeEnum.Phisycal.ToString())
                                 {
                                     <button id="purchase-button" class="item" type="submit" onclick="return false;">Unavailable</button>
                                 }

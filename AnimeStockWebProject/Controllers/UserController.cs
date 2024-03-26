@@ -12,6 +12,7 @@
     using AnimeStockWebProject.Core.Models.User;
     using System.Security.Claims;
     using AnimeStockWebProject.Core.Models.Book;
+    using AnimeStockWebProject.Core.Models.Order;
 
     public class UserController : Controller
     {
@@ -136,6 +137,32 @@
                 userFavoritesViewModel.BookViewModels = userBooks;
 
                 return View(userFavoritesViewModel);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> UserOrders(Guid id)
+        {
+            if (this.User.GetId() != id)
+            {
+                return Unauthorized();
+            }
+            try
+            {
+                string chacheKey = string.Format(UserOrdersCacheKey, id);
+                IEnumerable<UserOrderViewModel> userOrder = this.memoryCache.Get<IEnumerable<UserOrderViewModel>>(chacheKey);
+                if (userOrder == null)
+                {
+                    userOrder = await userService.GetUserOrdersAsync(id);
+                    MemoryCacheEntryOptions options = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserOrdersCacheDuration));
+                    this.memoryCache.Set(chacheKey, userOrder, options);
+                }
+                return View(userOrder);
             }
             catch (Exception)
             {
