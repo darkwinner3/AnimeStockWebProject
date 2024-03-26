@@ -212,8 +212,8 @@ async function toggleFavorite(event) {
 }
 //ajax function for book preview
 document.getElementById('preview-button').addEventListener('click', async function () {
-    const bookId = event.target.parentElement.querySelector('input[type="hidden"]').value;
-    const filePath = document.querySelector('input[type="hidden"]').value;
+    const bookId = document.getElementById('bookId').value;
+    const filePath = document.getElementById('book-path').value;
     const pageCount = 30;
     //page url
     const url = `/Book/BookPartial?id=${bookId}&pageCount=${pageCount}&filePath=${filePath}`;
