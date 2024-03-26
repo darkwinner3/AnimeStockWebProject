@@ -7,10 +7,11 @@ namespace AnimeStockWebProject.Core.Models.Book
         public string Title { get; set; } = null!;
 
         public decimal Price { get; set; }
-
+        public int Quantity { get; set; }
+        public int UserQuantity { get; set; }
         public int BookId { get; set; }
 
-        public int UserQuantity { get; set; }
+        public string? PrintType { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 

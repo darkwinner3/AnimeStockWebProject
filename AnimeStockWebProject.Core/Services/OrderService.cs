@@ -26,26 +26,28 @@ namespace AnimeStockWebProject.Core.Services
             Random rand = new Random();
             int totalDays = rand.Next((int)minSpan.TotalDays, (int)maxSpan.TotalDays);
             TimeSpan randomSpan = TimeSpan.FromDays(totalDays);
+            DateTime now = DateTime.Now;
 
-            DateTime releaseDate = bookOrderViewModel.BookInfo.ReleaseDate;
-            DateTime orderDate = releaseDate.AddDays(randomSpan.Days);
+            DateTime orderDate = now.AddDays(randomSpan.Days);
 
             var user = await animeStockDbContext.Users.FirstAsync(u => u.Id == userId);
-            var book = await animeStockDbContext.Books.FirstAsync(b => b.Id == bookOrderViewModel.BookInfo.BookId);
-
+            var bookId = bookOrderViewModel.BookInfo.BookId;
+            var book = await animeStockDbContext.Books.FindAsync(bookId);
             Order order = new Order()
             {
                 UserId = userId,
                 OrderDate = orderDate,
                 BookId = bookOrderViewModel.BookInfo.BookId,
                 Status = (bookOrderViewModel.BookInfo.ReleaseDate > DateTime.Now) ? PreOrder :
-                         (bookOrderViewModel.OrderDate < DateTime.Now) ? Ordered : Delivered,
-                TotalPrice = bookOrderViewModel.BookInfo.Price * bookOrderViewModel.BookInfo.UserQuantity,
+                         (orderDate < DateTime.Now) ? Delivered : Ordered,
+                TotalPrice = (bookOrderViewModel.UserQuantity == 0) ? bookOrderViewModel.BookInfo.Price 
+                : bookOrderViewModel.BookInfo.Price * bookOrderViewModel.UserQuantity,
                 FirstName = WebUtility.HtmlEncode(bookOrderViewModel.User.FirstName),
-                EmailAddress = WebUtility.HtmlEncode(bookOrderViewModel.User.Email)
+                EmailAddress = WebUtility.HtmlEncode(bookOrderViewModel.User.Email),
+                UserOrders = bookOrderViewModel.UserQuantity
             };
 
-            book.Quantity = book.Quantity - bookOrderViewModel.BookInfo.UserQuantity;
+            book.Quantity = book.Quantity - bookOrderViewModel.UserQuantity;
             await animeStockDbContext.Orders.AddAsync(order);
             await animeStockDbContext.SaveChangesAsync();
         }

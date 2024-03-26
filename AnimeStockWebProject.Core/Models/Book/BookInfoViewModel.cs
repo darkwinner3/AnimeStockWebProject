@@ -35,7 +35,7 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public int Pages { get; set; }
 
-        public int BookQuantity { get; set; }
+        public int Quantity { get; set; }
 
         public int UserQuantity { get; set; }
 
@@ -45,7 +45,7 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public bool IsFavorite { get; set; }
 
-        public byte[] PdfContent { get; set; }
+        public byte[]? PdfContent { get; set; }
 
         public string? FilePath { get; set; }
 
@@ -53,13 +53,13 @@ namespace AnimeStockWebProject.Core.Models.Book
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
 
-        public Pager CommentsPager { get; set; } = null!;
+        public Pager? CommentsPager { get; set; }
 
         public IEnumerable<PictureViewModel> Pictures { get; set; }
 
         public ValidationResult Validate(ValidationContext validationContext)
         {
-            if (UserQuantity > BookQuantity)
+            if (UserQuantity > Quantity)
             {
                 return new ValidationResult("Order quantity exceeded book quantity");
             }

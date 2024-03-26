@@ -1,5 +1,6 @@
 ﻿using AnimeStockWebProject.Core.Contracts;
 using AnimeStockWebProject.Core.Models.Book;
+using AnimeStockWebProject.Core.Models.Order;
 using AnimeStockWebProject.Core.Models.User;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
@@ -120,6 +121,22 @@ namespace AnimeStockWebProject.Core.Services
                 })
                 .ToArrayAsync();
             return userBooks;
+        }
+
+        public async Task<IEnumerable<UserOrderViewModel>> GetUserOrdersAsync(Guid userId)
+        {
+            return await animeStockDbContext.Orders.Where(o => o.UserId == userId)
+                .Select(o => new UserOrderViewModel()
+                {
+                    Id = o.UserId,
+                    OrderDate = o.OrderDate,
+                    Picture = o.Book.Pictures.FirstOrDefault(p => !p.IsDeleted && p.Path.Contains("cover")).Path,
+                    Price = o.TotalPrice,
+                    Title = o.Book.Title,
+                    Status = o.Status.ToString(),
+                    UserQuantity = o.UserOrders
+                })
+                .ToArrayAsync();
         }
     }
 }
