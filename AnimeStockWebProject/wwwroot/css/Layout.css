@@ -46,8 +46,8 @@ header {
     top: 0px;
     font-family: "Roboto Mono", monospace;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: center;
     background-color: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
     z-index: 100;

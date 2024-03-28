@@ -1,6 +1,4 @@
-﻿
-
-.book-path {
+﻿.book-path {
     margin: 10px;
 }
 
@@ -208,6 +206,12 @@
         background: linear-gradient(90deg, rgb(233 30 30) 0%, rgb(222 128 49) 114%);
         backdrop-filter: blur(8px);
     }
+
+.no-suggestions {
+    justify-content: center;
+    margin-top: 100px;
+    font-size: 25px;
+}
 
 .recomendations {
     width: 60%;

@@ -1,0 +1,84 @@
+﻿.layout-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+}
+
+.img-container {
+    display: flex;
+    flex-direction:column;
+    width: 350px;
+    justify-content: center;
+}
+
+.order-information {
+    background: linear-gradient(90deg, rgba(255, 87, 87, 1.000000) 0%, rgba(140, 82, 255, 1.000000) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 80px 200px;
+    padding: 20px;
+    min-width: 880px;
+    max-width: 100%;
+}
+
+.order-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+    .order-card img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
+    }
+
+.title {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.price {
+    font-size: 20px;
+    color: #fe502d;
+    margin-top: 5px;
+}
+
+.user-info {
+    margin-right: 200px;
+    text-align: center;
+}
+
+.username {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.email {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.download-container {
+    margin-top: 20px;
+}
+
+.download-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .download-button:hover {
+        background-color: #218c56;
+    }

@@ -1,107 +1,118 @@
-﻿.order-section {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 25px;
-    padding: 25px 50px 50px;
-    background-color: #cdc8c8;
-    margin-left: 200px;
-    margin-right: 200px;
+﻿.layout-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+}
+body {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
 }
 
-.order-information{
-    display:flex;
-    flex-direction:column;
+h1.title {
+    text-align: center;
+    padding: 50px 0;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.order-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 50px;
+}
+
+.order-info {
+    margin-right: 100px;
+}
+
+.order-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.book-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .order-img-container {
-    width: 400px;
-    height: 450px;
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
     .order-img-container img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
-
-.order-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.book-title {
-    font-size: 20px;
-    width: 400px;
-}
-
-.order-card {
-    border-bottom: 1px solid black;
-}
-
-.price {
-    font-size: 20px;
-    padding-bottom: 5px;
-}
-
-.price-span {
-    font-size: 20px;
-}
 
 .input {
-    max-width: 350px;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+    margin-bottom: 20px;
 }
 
-    .input input {
-        background-color: rgba(255, 49, 49, 0.0);
-        border: none;
-        border-bottom: 1px solid gray;
-        padding: 10px;
+    .input label {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px;
     }
 
-        .input input:focus::placeholder {
-            color: darkgray;
-        }
+    .input input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 16px;
+    }
 
-        .input input:hover {
-            background-color: rgba(0, 0, 0, 0.2);
+        .input input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
 .order-btn {
-    background: linear-gradient(90deg, rgba(255, 49, 49, 0.1) 0%, rgba(255, 145, 77, 0.1) 100%);
-    backdrop-filter: blur(4px);
-    border-radius: 30px;
+    width: 100%;
+    padding: 15px;
     border: none;
-    width: 50%;
-    padding: 10px;
-    margin-top: 30px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
     .order-btn:hover {
-        background-color: rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
     }
 
-span {
-    font-size: 15px;
-    font-weight: bold;
-    max-width: 200px;
-}
-
-.create-account-msg {
+.price {
+    font-size: 22px;
+    text-align: center;
     margin-top: 30px;
-    color: black;
 }
 
-    .create-account-msg a {
-        text-decoration: none;
+.price-span {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .order-section {
+        flex-direction: column;
     }
 
-.layout-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    .order-information {
+        width: 100%;
+    }
 }
-
