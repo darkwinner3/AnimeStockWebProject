@@ -71,13 +71,15 @@
     let bookQuantity = @Model.BookInfo.Quantity;
     quantity.addEventListener('change', () => {
         if (quantity.value > bookQuantity) {
-            document.querySelector(".order-card .price").textContent = 'Book quantity unavailable';
-            return;
+            document.querySelector(".order-card .price .price-span").textContent = 'Invalid quantity';
+        }
+        else {
+
+            let price = '@Model.BookInfo.Price';
+            let totalPrice = price * quantity.value;
+
+            document.querySelector(".order-card .price .price-span").textContent = `${totalPrice.toFixed(2)}$`;
         }
 
-        let price = '@Model.BookInfo.Price';
-        let totalPrice = price * quantity.value;
-
-        document.querySelector(".order-card .price .price-span").textContent = `${totalPrice.toFixed(2)}$`;
     })
 </script>
