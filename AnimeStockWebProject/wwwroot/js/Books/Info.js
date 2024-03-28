@@ -85,7 +85,7 @@ async function getBooksByTitle(title, baseUrl, id) {
 
                 const childrenCount = otherBooksContainer.children.length;
                 const noBooks = document.querySelector(".no-suggestions");
-                noBooks.style.display = 'block';
+                noBooks.style.display = 'flex';
                 if (childrenCount > 1) {
                     noBooks.style.display = 'none';
                     createSlider();
