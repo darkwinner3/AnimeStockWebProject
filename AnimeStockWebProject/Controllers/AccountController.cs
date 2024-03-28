@@ -99,7 +99,7 @@ namespace AnimeStockWebProject.Controllers
                     var resultByEmail = await signInManager.PasswordSignInAsync(userByEmail, loginViewModel.Password, false, false);
                     if (resultByEmail.Succeeded)
                     {
-                        await signInManager.SignInAsync(userByEmail, isPersistent: false);
+                        await signInManager.SignInAsync(userByEmail, isPersistent: true);
                         if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl) && Url.IsLocalUrl(loginViewModel.ReturnUrl))
                         {
                             return Redirect(loginViewModel.ReturnUrl);
@@ -116,7 +116,7 @@ namespace AnimeStockWebProject.Controllers
                     var resultByName = await signInManager.PasswordSignInAsync(userByName, loginViewModel.Password, false, false);
                     if (resultByName.Succeeded)
                     {
-                        await signInManager.SignInAsync(userByName, isPersistent: false);
+                        await signInManager.SignInAsync(userByName, isPersistent: true);
                         if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl) && Url.IsLocalUrl(loginViewModel.ReturnUrl))
                         {
                             return Redirect(loginViewModel.ReturnUrl);

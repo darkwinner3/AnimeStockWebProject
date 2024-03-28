@@ -10,6 +10,11 @@ using System.ComponentModel.DataAnnotations;
 using static AnimeStockWebProject.Common.NotifiactionMessages;
 using static AnimeStockWebProject.Common.NotificationKeys;
 using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
+using AnimeStockWebProject.Core.Models.User;
+using AnimeStockWebProject.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Hangfire.Server;
 
 namespace AnimeStockWebProject.Controllers
 {
@@ -81,6 +86,48 @@ namespace AnimeStockWebProject.Controllers
             {
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> OrderInfo(Guid id)
+        {
+            try
+            {
+                OrderInfoViewModel orderInfo = await orderService.GetBookOrderInfoAsync(id);
+                return View(orderInfo);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OrderInfo(OrderInfoViewModel orderInfoViewModel)
+        {
+            var orderId = orderInfoViewModel.Id;
+            try
+            {
+                var orderInfo = await orderService.GetBookOrderInfoAsync(orderId);
+                string filePath = orderInfo.FilePath;
+                
+                if (filePath != null)
+                {
+                    
+                    var file = await orderService.DownloadBook(filePath);
+                    return file;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(OrderInfo));
             }
         }
     }

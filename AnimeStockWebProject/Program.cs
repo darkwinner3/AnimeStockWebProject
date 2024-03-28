@@ -2,6 +2,7 @@
 using AnimeStockWebProject.Extensions;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +36,7 @@ builder.Services.AddControllersWithViews()
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
     });
 
-builder.Services.AddServices();
+builder.Services.AddServices(builder.Configuration);
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -45,6 +46,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
+
+//calls out hangfire configuration function
+app.ConfigureHangfire();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
