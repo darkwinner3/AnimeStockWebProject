@@ -128,13 +128,16 @@ namespace AnimeStockWebProject.Core.Services
             return await animeStockDbContext.Orders.Where(o => o.UserId == userId)
                 .Select(o => new UserOrderViewModel()
                 {
-                    Id = o.UserId,
+                    Id = o.Id,
+                    UserId = userId,
                     OrderDate = o.OrderDate,
                     Picture = o.Book.Pictures.FirstOrDefault(p => !p.IsDeleted && p.Path.Contains("cover")).Path,
                     Price = o.TotalPrice,
                     Title = o.Book.Title,
                     Status = o.Status.ToString(),
-                    UserQuantity = o.UserOrders
+                    UserQuantity = o.UserOrders,
+                    printType = o.Book.PrintType.ToString(),
+                    BookId = o.Book.Id
                 })
                 .ToArrayAsync();
         }
