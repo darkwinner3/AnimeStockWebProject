@@ -14,3 +14,9 @@
 .navbar-user-menu li{
     flex-direction: column;
 }
+
+#subMenu {
+    position: absolute;
+    top: 60px;
+    right: 5px;
+}
