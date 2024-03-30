@@ -1,0 +1,45 @@
+﻿@using static AnimeStockWebProject.Common.NotificationKeys;
+
+@if (TempData.ContainsKey(ErrorMessage))
+{
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="error" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title" id="error-title">@TempData[ErrorMessage]</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData.ContainsKey(SuccessMessage))
+{
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="error" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title" id="error-title">@TempData[SuccessMessage]</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData.ContainsKey(WarningMessage))
+{
+    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="error" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title" id="error-title">@TempData[WarningMessage]</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
