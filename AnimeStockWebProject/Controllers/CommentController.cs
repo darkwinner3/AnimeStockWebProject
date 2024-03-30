@@ -75,7 +75,6 @@ namespace AnimeStockWebProject.Controllers
             try
             {
                 await commentService.EditCommentAsync(model);
-                TempData[SuccessMessage] = SuccessEditedComment;
                 return Json(new { success = true});
             }
             catch (Exception)

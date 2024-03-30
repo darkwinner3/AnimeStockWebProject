@@ -85,7 +85,7 @@
                         await userManager.RemoveClaimAsync(user, claim);
                     }
 
-                    //TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
+                    TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
                     await userManager.AddClaimAsync(user, userNameClaim);
                     await signInManager.SignInAsync(user, isPersistent: false);
                     this.memoryCache.Remove(string.Format(UserInfoCacheKey, userInfoViewModel.Id));
