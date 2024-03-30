@@ -232,38 +232,109 @@ document.getElementById('preview-button').addEventListener('click', async functi
     }
 });
 
-function renderPdf(pdfBlob) {
+//UNFINISHED PDF RENDERING! WAS GONNA ALLOW FOR FONT CHANGES THROUGH A MENU
+
+//async function renderPdf(pdfBlob) {
+//    const pdfUrl = URL.createObjectURL(pdfBlob);
+//    const container = document.getElementById('pdf-container');
+//    container.innerHTML = ''; // Clear previous content
+
+//    // Initialize PDF.js
+//    const pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+//    const numPages = pdfDoc.numPages;
+
+//    // Render each page
+//    for (let i = 1; i <= numPages; i++) {
+//        const page = await pdfDoc.getPage(i);
+//        const textContent = await page.getTextContent();
+//        const viewport = page.getViewport({ scale: 1.5 });
+
+//        // Create a container for each page
+//        const pageContainer = document.createElement('div');
+//        pageContainer.className = 'pdf-page-container'; // Apply CSS styles to this class if needed
+
+//        // Append the page container to the main container
+//        container.appendChild(pageContainer);
+
+//        // Render text content into the page container
+//        textContent.items.forEach(function (textItem) {
+//            const textNode = document.createTextNode(textItem.str + ' ');
+//            const span = document.createElement('span');
+//            span.style.fontFamily = 'YourFont'; // Set the desired font
+//            // You can apply other styles here if needed, e.g., font size, color, etc.
+//            span.appendChild(textNode);
+//            pageContainer.appendChild(span);
+//        });
+
+//        // Check for images and render them
+//        const operatorList = await page.getOperatorList();
+//        const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+//        const svg = await svgGfx.getSVG(operatorList, viewport);
+
+//        // Create a div to hold images for this page
+//        const imagesDiv = document.createElement('div');
+//        pageContainer.appendChild(imagesDiv);
+
+//        // Look for SVG images and replace them with img elements
+//        svg.querySelectorAll('image').forEach(async function (image) {
+//            const imageData = image.getAttribute('xlink:href');
+//            const img = document.createElement('img');
+//            img.src = imageData;
+//            imagesDiv.appendChild(img);
+//        });
+//    }
+//}
+
+//SECOND TYPE OF PDF RENDERING! CHANGE TO IT IF FIRST ONE LOOKS BAD
+async function renderPdf(pdfBlob) {
     const pdfUrl = URL.createObjectURL(pdfBlob);
     const container = document.getElementById('pdf-container');
     container.innerHTML = ''; // Clear previous content
 
     // Initialize PDF.js
-    pdfjsLib.getDocument(pdfUrl).promise.then(function (pdfDoc) {
-        const numPages = pdfDoc.numPages;
+    const pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+    const numPages = pdfDoc.numPages;
 
-        // Render each page
-        for (let i = 1; i <= numPages; i++) {
-            pdfDoc.getPage(i).then(function (page) {
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
+    // Render each page
+    for (let i = 1; i <= numPages; i++) {
+        const page = await pdfDoc.getPage(i);
+        const viewport = page.getViewport({ scale: 1.5 });
 
-                const viewport = page.getViewport({ scale: 1.5 });
+        // Check if the page contains images
+        const operatorList = await page.getOperatorList();
+        const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+        const svg = await svgGfx.getSVG(operatorList, viewport);
+        const images = svg.querySelectorAll('image');
 
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
+        // Create a container for the page content
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'pdf-page-container';
+        container.appendChild(pageContainer);
 
-                const renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-
-                page.render(renderContext).promise.then(function () {
-                    container.appendChild(canvas);
-                });
+        // If the page contains images, render them as <img> elements
+        if (images.length > 0) {
+            images.forEach(function (image) {
+                const imageData = image.getAttribute('xlink:href');
+                const img = document.createElement('img');
+                img.src = imageData;
+                pageContainer.appendChild(img);
             });
+        } else {
+            // Otherwise, render the page as canvas
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+            await page.render(renderContext).promise;
+            pageContainer.appendChild(canvas);
         }
-    });
+    }
 }
+
 
 // Close the overlay when clicking outside the PDF container
 document.getElementById('pdf-overlay').addEventListener('click', function (event) {
