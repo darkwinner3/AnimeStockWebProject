@@ -1,4 +1,6 @@
-﻿using AnimeStockWebProject.Core.Contracts;
+﻿using AnimeStockWebProject.Areas.Admin.Contracts;
+using AnimeStockWebProject.Areas.Admin.Services;
+using AnimeStockWebProject.Core.Contracts;
 using AnimeStockWebProject.Core.Services;
 using Hangfire;
 
@@ -17,6 +19,7 @@ namespace AnimeStockWebProject.Extensions
             serviceDescriptors.AddScoped<ITypeService, TypeService>();
             serviceDescriptors.AddScoped<ICommentService, CommentService>();
             serviceDescriptors.AddScoped<IOrderService, OrderService>();
+            serviceDescriptors.AddScoped<IUserAdminService, UserAdminService> ();
 
         }
 

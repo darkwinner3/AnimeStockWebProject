@@ -144,7 +144,7 @@ namespace AnimeStockWebProject.Controllers
             User userToFind = await userManager.FindByIdAsync(id.ToString());
             if (!string.IsNullOrWhiteSpace(role))
             {
-                if (await roleManager.RoleExistsAsync(role))
+                if (!await roleManager.RoleExistsAsync(role))
                 {
                     IdentityRole<Guid> newRole = new IdentityRole<Guid>(role);
                     await roleManager.CreateAsync(newRole);
