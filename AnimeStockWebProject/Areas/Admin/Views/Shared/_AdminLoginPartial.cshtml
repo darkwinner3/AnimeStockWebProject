@@ -1,0 +1,47 @@
+﻿@using AnimeStockWebProject.Extensions
+@using Microsoft.AspNetCore.Identity
+@using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
+
+<li>
+    <div class="user-container">
+        @if (string.IsNullOrWhiteSpace(this.User.GetProfilePicturePath()))
+        {
+            <a id="user-tag" onclick="toggleMenu()">
+                <i class="fa-regular fa-user" id="user-icon">
+                </i>
+            </a>
+        }
+        else
+        {
+            <a id="user-tag-logged" onclick="toggleMenu()">
+                <img src="~/@this.User.GetProfilePicturePath()">
+            </a>
+        }
+    </div>
+    <ul id="subMenu" class="user-menu not-active">
+        @if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
+        {
+            <li>
+                <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Panel</a>
+            </li>
+        }
+        <li>
+            <a asp-area="" asp-controller="User" asp-action="UserProfile" asp-route-id="@User.GetId()">Profile</a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="Book" asp-action="Books" asp-route-id="@User.GetId()">Books Panel</a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="BookTag" asp-action="Tags" asp-route-id="@User.GetId()">Tags Panel</a>
+        </li>
+        <li>
+            <a asp-action="Logout" asp-controller="Account">Logout</a>
+        </li>
+    </ul>
+</li>
+<script>
+    function toggleMenu() {
+        let subMenu = document.getElementById("subMenu");
+        subMenu.classList.toggle("not-active");
+    }
+</script>

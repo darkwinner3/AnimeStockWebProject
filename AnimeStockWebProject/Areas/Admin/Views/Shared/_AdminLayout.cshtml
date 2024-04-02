@@ -1,0 +1,57 @@
+﻿@using AnimeStockWebProject.Extensions
+@using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin AnimeStockWebProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/user-menu.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+
+            <a id="logo" asp-area="Admin" asp-controller="Home" asp-action="Index">AniBooks</a>
+
+            <ul class="navbar-menu">
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Book" asp-action="Books">Books</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Game" asp-action="Games">Games</a>
+                </li>
+                <partial name="_AdminLoginPartial" />
+            </ul>
+
+        </nav>
+    </header>
+    <partial name="_NotificationPartial" />
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    @if (ViewBag.ShowFooter ?? true)
+    {
+        <footer class="layout-footer">
+            <div class="container">
+                &copy; 2024 - AnimeStockWebProject - <a asp-area="" asp-controller="" asp-action="">Placeholder</a>
+            </div>
+        </footer>
+    }
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

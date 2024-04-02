@@ -1,0 +1,56 @@
+﻿@using AnimeStockWebProject.Infrastructure.Data.Models
+@using Microsoft.AspNetCore.Identity
+@using static AnimeStockWebProject.Common.GeneralAplicaitonConstants
+
+@model AdminPageViewModel
+@inject UserManager<User> userManager
+
+<link rel="stylesheet" href="~/css/Admin/Home/HomeStyles.css" asp-append-version="true" />
+
+<div class="container">
+    <h1 class="title">Dashboard</h1>
+
+    @foreach (UsersViewModel usersView in Model.Users)
+    {
+        <div class="user-details">
+            <div><strong>Username:</strong> @usersView.UserName</div>
+            <div><strong>First Name:</strong> @usersView.FirstName</div>
+            <div><strong>Email:</strong> @usersView.Email</div>
+            <div><strong>Joined:</strong> @usersView.Joined.ToString("yyyy-MM-dd")</div>
+
+            @{
+                string value = "";
+                User user = await userManager.FindByIdAsync(usersView.Id.ToString());
+                if (await userManager.IsInRoleAsync(user, AdminRoleName))
+                {
+                    value = "Admin";
+                }
+                else if (await userManager.IsInRoleAsync(user, "Moderator"))
+                {
+                    value = "Moderator";
+                }
+                else
+                {
+                    value = "User";
+                }
+            }
+            <div><strong>Role:</strong> @value</div>
+
+            @if (this.User.IsInRole(AdminRoleName))
+            {
+                @if (value == "User")
+                {
+                    <form method="post" asp-area="" asp-controller="Account" asp-action="ChangeRole" asp-route-id="@user.Id" asp-route-role="Moderator">
+                        <button type="submit" class="role moderator">Make Moderator</button>
+                    </form>
+                }
+                else if (value == "Moderator")
+                {
+                    <form method="post" asp-area="" asp-controller="Account" asp-action="ChangeRole" asp-route-id="@user.Id">
+                        <button type="submit" class="role user">Make User</button>
+                    </form>
+                }
+            }
+        </div>
+    }
+</div>
