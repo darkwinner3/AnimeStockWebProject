@@ -232,7 +232,7 @@ namespace AnimeStockWebProject.Infrastructure.Migrations
                     Publisher = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     BookTypeId = table.Column<int>(type: "int", nullable: false),
-                    ReleaseDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Pages = table.Column<int>(type: "int", maxLength: 10000, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     PrintType = table.Column<int>(type: "int", nullable: false),
