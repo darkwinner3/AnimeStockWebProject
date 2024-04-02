@@ -22,7 +22,7 @@ namespace AnimeStockWebProject.Common
             public const int LastNameMinValue = 4;
             public const int LastNameMaxValue = 15;
 
-            public const int EmailAddressMinValue = 10;
+            public const int EmailAddressMinValue = 3;
             public const int EmailAddressMaxValue = 30;
 
             public const int PhoneNumberMaxLength = 20;

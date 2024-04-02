@@ -1,0 +1,43 @@
+﻿.container {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    color: #ff00ff;
+    font-size: 2em;
+}
+
+.user-details {
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffff00;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+    .user-details div {
+        margin-bottom: 10px;
+    }
+
+    .user-details strong {
+        color: #ff9900; 
+    }
+
+.role {
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #ff00ff; 
+    color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+    .role:hover {
+        background-color: #ff6699;
+    }
