@@ -236,11 +236,14 @@
                     </div>
                 </div>
                 <p class="comment">@comment.Description</p>
-                @if (User.Identity.IsAuthenticated && Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId) && userId == comment.UserId)
+                @if (User.IsInRole(GeneralAplicaitonConstants.AdminRoleName) || User.IsInRole(GeneralAplicaitonConstants.ModeratorRoleName) || User.Identity.IsAuthenticated && Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId) && userId == comment.UserId)
                 {
                     <input type="hidden" value="@comment.Id" />
                     <div class="button-container">
-                        <button type="submit" asp-action="Edit" asp-controller="Comment" class="edit">Edit</button>
+                        @if (!User.IsInRole(GeneralAplicaitonConstants.AdminRoleName) && !User.IsInRole(GeneralAplicaitonConstants.ModeratorRoleName))
+                        {
+                            <button type="submit" asp-action="Edit" asp-controller="Comment" class="edit">Edit</button>
+                        }
                         <button class="delete">Delete</button>
                     </div>
                 }

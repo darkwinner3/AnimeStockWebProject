@@ -23,11 +23,23 @@
             <span asp-validation-for="@Model.Email" class="text-danger"></span>
         </section>
 
-        <section class="input-container">
-            <label asp-for="@Model.Password">Password</label>
-            <input type="password" autocomplete="password" aria-required="true" placeholder="Enter password" asp-for="@Model.Password" />
-            <span asp-validation-for="@Model.Password" class="text-danger"></span>
-        </section>
+
+        <div class="password-container">
+            <div id="passwordRequirements" style="display:none;">
+                <ul>
+                    <li id="requireDigit">Must contain at least one digit</li>
+                    <li id="requireNonAlphanumeric">Must contain special character</li>
+                    <li id="requireUppercase">Must contain uppercase letter</li>
+                </ul>
+            </div>
+
+            <section class="input-container">
+                <label asp-for="@Model.Password">Password</label>
+                <input id="password" type="password" autocomplete="password" aria-required="true" placeholder="Enter password" asp-for="@Model.Password" />
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+            </section>
+        </div>
+        
 
         <section class="input-container">
             <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
@@ -44,4 +56,27 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('#password').keyup(function () {
+                var password = $(this).val();
+
+                var hasDigit = /\d/.test(password);
+                var hasNonAlphanumeric = /[^a-zA-Z0-9]/.test(password);
+                var hasUppercase = /[A-Z]/.test(password);
+
+                if (password.length > 0) {
+                    $('#passwordRequirements').show();
+                }
+                else {
+                    $('#passwordRequirements').hide();
+                }
+
+                $('#requireDigit').toggle(!hasDigit);
+                $('#requireNonAlphanumeric').toggle(!hasNonAlphanumeric);
+                $('#requireUppercase').toggle(!hasUppercase);
+            });
+        });
+    </script>
 }
