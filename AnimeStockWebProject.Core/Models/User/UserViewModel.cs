@@ -6,12 +6,12 @@
     {
         public Guid Id { get; set; }
         public string Email { get; set; } = null!;
-        [Required]
+        [Required(ErrorMessage = "Please enter first name.")]
         [StringLength(FirstNameMaxValue, MinimumLength = FirstNameMinValue)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter phone number.")]
         [Display(Name = "Phone Number")]
         [Phone]
         public string? PhoneNumber { get; set; }

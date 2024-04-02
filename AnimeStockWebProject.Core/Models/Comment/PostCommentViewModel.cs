@@ -7,7 +7,7 @@ namespace AnimeStockWebProject.Core.Models.Comment
     public class PostCommentViewModel
     {
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
-        [Required]
+        [Required(ErrorMessage = "Cannot post empty comment")]
         public string Description { get; set; } = null!;
         public int BookId { get; set; }
 

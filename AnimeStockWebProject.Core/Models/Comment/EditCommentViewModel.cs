@@ -10,7 +10,7 @@ namespace AnimeStockWebProject.Core.Models.Comment
 
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         [Display(Name = "Comment")]
-        [Required]
+        [Required(ErrorMessage = "Cannot post empty comment.")]
         public string Description { get; set; } = null!;
     }
 }
