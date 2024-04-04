@@ -1,0 +1,66 @@
+﻿@model BookDataModel
+@using AnimeStockWebProject.Infrastructure.Data.Models
+
+<link rel="stylesheet" href="~/css/Admin/Book/IndexStyles.css" asp-append-version="true" />
+
+<div class="container">
+    <h1 class="title">Books</h1>
+    <div class="row">
+        @foreach (var book in Model.BookViewModels)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@book.PictureUrl" class="card-img-top" alt="Book Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+                        <div class="buttons">
+                            <a href="@Url.Action("Edit", "Book", new { area = "Admin", id = book.Id })" class="btn btn-primary">Edit Book</a>
+                            @if (!book.IsDeleted)
+                            {
+                                <form method="post" action="@Url.Action("Delete", "Book", new { area = "Admin" })">
+                                    <input type="hidden" name="bookId" value="@book.Id" />
+                                    <button class="btn btn-danger" type="submit">Delete Book</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" action="@Url.Action("Recover", "Book", new { area = "Admin" })">
+                                    <input type="hidden" name="bookId" value="@book.Id" />
+                                    <button class="btn btn-success" type="submit">Recover Book</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="pagination mt-4">
+        @if (Model.Pager.TotalPages > 0)
+        {
+            <ul class="pagination justify-content-center">
+                @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Book", new { area = "Admin", page = Model.Pager.CurrentPage - 1 })">Previous</a>
+                    </li>
+                }
+
+                @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Book", new { area = "Admin", page = page })">@(page)</a>
+                    </li>
+                }
+
+                @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Book", new { area = "Admin", page = Model.Pager.CurrentPage + 1 })">Next</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>

@@ -22,20 +22,26 @@
         @if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
         {
             <li>
-                <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Panel</a>
+                <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Dashboard">Admin Panel</a>
             </li>
         }
         <li>
             <a asp-area="" asp-controller="User" asp-action="UserProfile" asp-route-id="@User.GetId()">Profile</a>
         </li>
         <li>
-            <a asp-area="Admin" asp-controller="Book" asp-action="Books" asp-route-id="@User.GetId()">Books Panel</a>
+            <a asp-area="Admin" asp-controller="Book" asp-action="Index" asp-route-id="@User.GetId()">Books Panel</a>
         </li>
         <li>
-            <a asp-area="Admin" asp-controller="BookTag" asp-action="Tags" asp-route-id="@User.GetId()">Tags Panel</a>
+            <a asp-area="Admin" asp-controller="Book" asp-action="Create" asp-route-id="@User.GetId()">Create Book</a>
         </li>
         <li>
-            <a asp-action="Logout" asp-controller="Account">Logout</a>
+            <a asp-area="Admin" asp-controller="BookTag" asp-action="Index" asp-route-id="@User.GetId()">Tags Panel</a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="BookTag" asp-action="Create" asp-route-id="@User.GetId()">Create Tags</a>
+        </li>
+        <li>
+            <a asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
         </li>
     </ul>
 </li>
