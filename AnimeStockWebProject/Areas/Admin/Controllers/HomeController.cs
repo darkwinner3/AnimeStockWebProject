@@ -20,7 +20,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             this.userService = userService;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Dashboard()
         {
             try
             {
@@ -47,7 +47,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             catch (Exception)
             {
                 TempData[ErrorMessage] = DefaultErrorMessage;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Dashboard", "Home");
             }
         }
     }

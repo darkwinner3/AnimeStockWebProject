@@ -1,6 +1,7 @@
 ﻿using AnimeStockWebProject.Areas.Admin.Models.BookType;
 using AnimeStockWebProject.Core.Models.BookTags;
 using AnimeStockWebProject.Core.Models.Picture;
+using AnimeStockWebProject.Infrastructure.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using static AnimeStockWebProject.Common.EntityValidations.BookEntity;
 
@@ -41,11 +42,11 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
         [Required]
         public int Quantity { get; set; }
         [Required]
-        public string PrintType { get; set; } = null!;
+        public PrintTypeEnum PrintType { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public byte[]? PdfContent { get; set; }
+        public IFormFile BookFile { get; set; }
         [Required]
         public string? FilePath { get; set; }
 
