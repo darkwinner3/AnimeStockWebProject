@@ -178,7 +178,7 @@ namespace AnimeStockWebProject.Controllers
                     return NotFound();
                 }
             }
-            return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            return RedirectToAction("Dashboard", "Home", new { Area = AdminAreaName });
         }
         private bool IsValidEmail(string email)
         {

@@ -22,13 +22,17 @@ namespace AnimeStockWebProject.Controllers
             this.animeStockDbContext = animeStockDbContext;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool? linkClicked)
         {
             if (this.User?.Identity.IsAuthenticated ?? false)
             {
                 if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
                 {
-                    return this.RedirectToAction("Index", "Home", new {Area = AdminAreaName});
+                    if (linkClicked.HasValue)
+                    {
+                        return View();
+                    }
+                    return this.RedirectToAction("Dashboard", "Home", new {Area = AdminAreaName});
                 }
                 else
                 {

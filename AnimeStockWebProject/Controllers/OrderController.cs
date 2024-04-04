@@ -4,17 +4,11 @@ using AnimeStockWebProject.Core.Models.Order;
 using AnimeStockWebProject.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Caching.Memory;
 using System.ComponentModel.DataAnnotations;
+using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
 using static AnimeStockWebProject.Common.NotifiactionMessages;
 using static AnimeStockWebProject.Common.NotificationKeys;
-using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
-using AnimeStockWebProject.Core.Models.User;
-using AnimeStockWebProject.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using Hangfire.Server;
 
 namespace AnimeStockWebProject.Controllers
 {

@@ -75,7 +75,7 @@ namespace AnimeStockWebProject.Controllers
                 bookQueryViewModel.SelectedBookTypeIds = new List<int> { selectedBookTypeId.Id };
             }
 
-            Pager pager = new Pager(await bookService.GetCountAsync(bookQueryViewModel), bookQueryViewModel.currentPage);
+            Pager pager = new Pager(await bookService.GetCountAsync(bookQueryViewModel), bookQueryViewModel.currentPage, BooksPageSize);
             bookQueryViewModel.Pager = pager;
             AllBooksSortedDataModel sortedBooks = await bookService.GetAllBooksSortedDataModelAsync(userId, bookQueryViewModel);
             bookQueryViewModel.BookViewModels = sortedBooks.Books;
@@ -101,7 +101,7 @@ namespace AnimeStockWebProject.Controllers
             try
             {
                 int bookComments = await bookService.GetBookCommentsCountAsync(id);
-                Pager commentPager = new Pager(bookComments, page);
+                Pager commentPager = new Pager(bookComments, page, CommentsPageSize);
 
                 if (!await bookService.BookExistsAsync(id))
                 {
@@ -135,7 +135,7 @@ namespace AnimeStockWebProject.Controllers
             if (!ModelState.IsValid || validationResult != null)
             {
                 int bookComments = await bookService.GetBookCommentsCountAsync(bookInfoViewModel.Id);
-                Pager commentPager = new Pager(bookComments, page);
+                Pager commentPager = new Pager(bookComments, page, CommentsPageSize);
                 var model = await bookService.GetBookByIdAsync(bookInfoViewModel.Id, commentPager, userId);
                 model.CommentsPager = commentPager;
                 model.UserQuantity = bookInfoViewModel.UserQuantity;

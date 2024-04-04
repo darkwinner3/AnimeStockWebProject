@@ -20,6 +20,9 @@ namespace AnimeStockWebProject.Extensions
             serviceDescriptors.AddScoped<ICommentService, CommentService>();
             serviceDescriptors.AddScoped<IOrderService, OrderService>();
             serviceDescriptors.AddScoped<IUserAdminService, UserAdminService> ();
+            serviceDescriptors.AddScoped<IBookAdminService, BookAdminService>();
+            serviceDescriptors.AddScoped<IBookTagService, BookTagService>();
+            serviceDescriptors.AddScoped<IBookTypeService, BookTypeService>();
 
         }
 
