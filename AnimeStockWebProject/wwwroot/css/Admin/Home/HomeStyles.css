@@ -1,5 +1,4 @@
 ﻿.container {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -11,11 +10,11 @@
 }
 
 .user-details {
-    border: 2px solid #00ffff;
+    border: 2px solid #cc00ff;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #ffff00;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 

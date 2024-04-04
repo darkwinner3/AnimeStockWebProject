@@ -1,0 +1,46 @@
+﻿
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.book-tags {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-label {
+    padding-left: 20px;
+}
+
+.form-check-input[type=radio],
+.form-check-input[type=checkbox] {
+    margin-top: 5px;
+}
+
+.form-control-file {
+    width: 100%;
+}
+
+/* Custom file input styling */
+input[type="file"] {
+    display: none;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+</style >
