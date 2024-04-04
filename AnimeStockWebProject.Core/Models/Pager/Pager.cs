@@ -3,14 +3,14 @@
     using static Common.GeneralAplicaitonConstants;
     public class Pager
     {
-        public Pager(int totalItems, int currentPage)
+        public Pager(int totalItems, int currentPage, int pageSize)
         {
-            Configure(totalItems, currentPage);
+            Configure(totalItems, currentPage, pageSize);
         }
 
-        private void Configure(int totalItems, int currentPage)
+        private void Configure(int totalItems, int currentPage, int pageSize)
         {
-            int totalPages = (int)Math.Ceiling((decimal)totalItems / DefaultPageSize);
+            int totalPages = (int)Math.Ceiling((decimal)totalItems / pageSize);
             int startPage = Math.Max(1, currentPage - 2);
             int endPage = Math.Min(startPage + 3, totalPages);
 
@@ -23,7 +23,7 @@
 
             TotalPages = totalPages;
             CurrentPage = currentPage;
-            PageSize = DefaultPageSize;
+            PageSize = pageSize;
             StartPage = startPage;
             EndPage = endPage;
             TotalItems = totalItems;
