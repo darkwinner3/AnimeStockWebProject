@@ -9,7 +9,9 @@ namespace AnimeStockWebProject.Common
     public static class GeneralAplicaitonConstants
     {
         //Pager page size
-        public const int DefaultPageSize = 5;
+        public const int AdminBooksPageSize = 6;
+        public const int CommentsPageSize = 10;
+        public const int BooksPageSize = 5;
 
         //book pages
         public const int BookPages = 30;
