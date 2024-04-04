@@ -20,12 +20,22 @@
     <header>
         <nav class="navbar">
 
-            <a id="logo" asp-area="" asp-controller="Home" asp-action="Index">AniBooks</a>
+            <a id="logo" asp-area="" asp-controller="Home" asp-action="Index" asp-route-linkClicked="true">AniBooks</a>
 
             <ul class="navbar-menu">
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
+                @if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
+                {
+                    <li>
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                }
+                
                 <li>
                     <a asp-area="" asp-controller="Book" asp-action="Books">Books</a>
                 </li>

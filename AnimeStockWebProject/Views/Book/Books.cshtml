@@ -205,7 +205,7 @@
                         </li>
                     }
 
-                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
+                    @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                     {
                         <li class="page-item">
                             <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
@@ -268,7 +268,7 @@
                         </li>
                     }
 
-                    @for (int page = Model.Pager.StartPage; page < Model.Pager.EndPage + 1; page++)
+                    @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                     {
                         <li class="page-item">
                             <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
