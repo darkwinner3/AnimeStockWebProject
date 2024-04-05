@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 });
+
 //get necessary info for suggested books
 const titleTypeElement = document.querySelector('.book-title');
 const titleType = titleTypeElement ? titleTypeElement.textContent.trim() : ''; // Check if the element exists before accessing its text content
