@@ -29,6 +29,12 @@
             <input id="Publisher" class="form-control" asp-for="@Model.Publisher" />
             <span asp-validation-for="@Model.Publisher" class="text-danger"></span>
         </div>
+       
+        <div class="form-group">
+            <label for="ReleaseDate">Book Release Date</label>
+            <input id="ReleaseDate" class="form-control" asp-for="@Model.ReleaseDate" />
+            <span asp-validation-for="@Model.ReleaseDate" class="text-danger"></span>
+        </div>
 
         <div class="form-group">
             <label for="Description">Book Description</label>
@@ -81,21 +87,30 @@
             @foreach (var tag in Model.BookTags)
             {
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="SelectedTagIds" value="@tag.Id">
-                    <label class="form-check-label">@tag.Name</label>
+                    <input class="form-check-input" type="checkbox" name="selectedBookTagIds" value="@tag.Id">
+                    <label for="SelectedBookTagIds" class="form-check-label">@tag.Name</label>
                 </div>
             }
+        </div>
+        
+        <div class="form-group">
+            <label for="CoverImg">Choose cover picture to upload</label>
+            <input type="file" id="CoverImg" name="coverImg" accept=".jpg, .jpeg, .png, .webp" class="form-control-file">
+            <span id="coverImgIndicator"></span>
         </div>
 
         <div class="form-group">
             <label for="Pictures">Choose pictures to upload</label>
             <input type="file" id="Pictures" name="pictures" accept=".jpg, .jpeg, .png, .webp" multiple class="form-control-file">
+            <span id="picturesIndicator"></span>
         </div>
 
         <div class="form-group">
             <label for="BookFile">Choose Book File</label>
             <input type="file" id="BookFile" name="bookFile" accept=".pdf, .cbz" class="form-control-file">
+            <span id="bookFileIndicator"></span>
         </div>
+
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -103,4 +118,34 @@
 
 <script>
     document.querySelectorAll("input[type=file]").forEach(input => input.style.opacity = 0);
+
+    document.getElementById('CoverImg').addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('coverImgIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files[0].name;
+        } else {
+            indicator.textContent = '';
+        }
+    });
+
+    document.getElementById('Pictures').addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('picturesIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files.length + ' file(s) selected';
+        } else {
+            indicator.textContent = '';
+        }
+    });
+
+    document.getElementById('BookFile').addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('bookFileIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files[0].name;
+        } else {
+            indicator.textContent = '';
+        }
+    });
 </script>
