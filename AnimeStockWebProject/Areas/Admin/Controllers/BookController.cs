@@ -64,5 +64,37 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
 
             return View(bookAddViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(BookAddViewModel bookAddViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(bookAddViewModel);
+            }
+            try
+            {
+                int bookId = await bookAdminService.BookAddAsync(bookAddViewModel);
+                TempData[SuccessMessage] = SuccessfullyAddedBook;
+                if (bookAddViewModel.CoverImg != null)
+                {
+                    await bookAdminService.CreateCoverImgAsync(bookId, bookAddViewModel);
+                }
+                if (bookAddViewModel.Pictures != null && bookAddViewModel.Pictures.Count > 0)
+                {
+                    await bookAdminService.CreateBookPicturesAsync(bookId, bookAddViewModel);
+                }
+                if (bookAddViewModel.BookFile != null)
+                {
+                    await bookAdminService.CreateBookFileAsync(bookId, bookAddViewModel);
+                }
+                return RedirectToAction("Index", "Book", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Create", "Book", new { Area = AdminAreaName });
+            }
+        }
     }
 }

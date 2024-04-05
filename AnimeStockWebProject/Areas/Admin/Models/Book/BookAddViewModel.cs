@@ -39,7 +39,6 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
         public DateTime ReleaseDate { get; set; }
         [Required]
         public int Pages { get; set; }
-        [Required]
         public int Quantity { get; set; }
         [Required]
         public PrintTypeEnum PrintType { get; set; }
@@ -47,7 +46,6 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
         public decimal Price { get; set; }
         [Required]
         public IFormFile BookFile { get; set; }
-        [Required]
         public string? FilePath { get; set; }
 
         public IEnumerable<TagViewModel> BookTags { get; set; }
@@ -56,6 +54,8 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
         public List<int> SelectedBookTagIds { get; set; }
 
         public IFormFileCollection Pictures { get; set; }
+        [Required]
+        public IFormFile CoverImg { get; set; }
 
         public List<string> PicturesPaths { get; set; }
     }
