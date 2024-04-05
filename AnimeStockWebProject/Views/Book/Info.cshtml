@@ -50,20 +50,13 @@
     </div>
 
     <div class="main-container">
+       
         <div class="img-button-change">
             <button class="move-button prev-button">Previous</button>
             @{
-                int previewImgCount = 1;
-                @foreach (var img in Model.Pictures)
+                foreach (var img in Model.Pictures)
                 {
-                    if (previewImgCount < 3)
-                    {
-                        <img id="active-img" class="preview-active-img" src="@img.Path" />
-                    }
-                    else
-                    {
-                        <img id="active-img" src="@img.Path" />
-                    }
+                     <img class="preview-active-img" src="@img.Path" />
                 }
             }
            
