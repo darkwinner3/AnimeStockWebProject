@@ -21,5 +21,7 @@ namespace AnimeStockWebProject.Common
         public const string SuccessfullyRemovedItemFromFavorites = "Item was successfully removed from favorites";
 
         public const string SuccessfullyBoughtBook = "Book has been purchased";
+
+        public const string SuccessfullyAddedBook = "Book has been added to database";
     }
 }
