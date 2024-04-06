@@ -30,6 +30,7 @@ namespace AnimeStockWebProject.Controllers
                 {
                     if (linkClicked.HasValue)
                     {
+                        ViewBag.ShowFooter = false;
                         return View();
                     }
                     return this.RedirectToAction("Dashboard", "Home", new {Area = AdminAreaName});
