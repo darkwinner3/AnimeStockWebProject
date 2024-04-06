@@ -1,5 +1,8 @@
 ﻿using AnimeStockWebProject.Areas.Admin.Contracts;
 using AnimeStockWebProject.Areas.Admin.Models.Book;
+using AnimeStockWebProject.Areas.Admin.Models.BookTag;
+using AnimeStockWebProject.Areas.Admin.Models.Pictures;
+using AnimeStockWebProject.Core.Models.BookTags;
 using AnimeStockWebProject.Core.Models.Pager;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
@@ -221,6 +224,7 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                 Title = x.Title,
                 PictureUrl = x.Pictures.FirstOrDefault(p => !p.IsDeleted && p.Path.Contains("cover")).Path,
                 IsDeleted = x.IsDeleted,
+                BookTypeId = x.BookTypeId,
                 Id = x.Id,
             })
                 .Skip((pager.CurrentPage - 1) * pager.PageSize)
@@ -234,6 +238,48 @@ namespace AnimeStockWebProject.Areas.Admin.Services
         {
             var bookCount = await animeStockDbContext.Books.CountAsync();
             return bookCount;
+        }
+
+        public async Task<BookEditViewModel> GetBookToEditAsync(int bookId)
+        {
+            var bookToEdit = await animeStockDbContext.Books
+                .Where(b => b.Id == bookId)
+                .Select(b => new BookEditViewModel()
+                {
+                    Author = b.Author,
+                    Description = b.Description,
+                    FilePath = b.FilePath,
+                    ReleaseDate = b.ReleaseDate,
+                    Id = b.Id,
+                    Illustrator = b.Illustrator,
+                    Pages = b.Pages,
+                    Price = b.Price,
+                    PrintType = b.PrintType,
+                    Publisher = b.Publisher,
+                    Title = b.Title,
+                    Quantity = b.Quantity,
+                    CoverImg = b.Pictures.Where(p => p.Path.Contains("cover")).Select(p => new PictureAdminViewModel()
+                    {
+                        Id = p.Id,
+                        IsDeleted = p.IsDeleted,
+                        Path = p.Path,
+                    }).First(),
+                    Pictures = b.Pictures.Where(p => !p.Path.Contains("cover")).Select(p => new PictureAdminViewModel()
+                    {
+                        Id = p.Id,
+                        IsDeleted = p.IsDeleted,
+                        Path = p.Path
+                    }).ToArray(),
+                    currentTags = b.BookTags.Where(bt => !bt.IsDeleted && !bt.Tag.IsDeleted).Select(bt => new TagViewModel()
+                    {
+                        Id = bt.TagId,
+                        IsDeleted= bt.Tag.IsDeleted,
+                        Name = bt.Tag.Name,
+                    })
+                })
+                .FirstAsync();
+
+            return bookToEdit;
         }
     }
 }

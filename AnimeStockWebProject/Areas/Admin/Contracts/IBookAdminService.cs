@@ -15,5 +15,7 @@ namespace AnimeStockWebProject.Areas.Admin.Contracts
         Task CreateCoverImgAsync(int bookId, BookAddViewModel bookAddViewModel);
 
         Task CreateBookFileAsync(int bookId, BookAddViewModel bookAddViewModel);
+
+        Task<BookEditViewModel> GetBookToEditAsync(int bookId);
     }
 }
