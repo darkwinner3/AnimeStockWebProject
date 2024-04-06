@@ -23,5 +23,9 @@ namespace AnimeStockWebProject.Common
         public const string SuccessfullyBoughtBook = "Book has been purchased";
 
         public const string SuccessfullyAddedBook = "Book has been added to database";
+
+        public const string SuccessfullyDeletedImage = "Image has been deleted";
+
+        public const string SuccessfullyRecoveredImage = "Image has been recovered";
     }
 }
