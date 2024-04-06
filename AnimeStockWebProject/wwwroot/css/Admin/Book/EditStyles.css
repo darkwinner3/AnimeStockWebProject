@@ -1,0 +1,98 @@
+﻿
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.book-tags {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-label {
+    padding-left: 20px;
+}
+
+.form-check-input[type=radio],
+.form-check-input[type=checkbox] {
+    margin-top: 5px;
+}
+
+.form-control-file {
+    width: 100%;
+}
+
+.choose-file:hover {
+    cursor: pointer;
+}
+/* Custom file input styling */
+input[type="file"] {
+    display: none;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.images-items {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.img-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .delete:hover {
+        background-color: #c82333;
+    }
+
+.cover-img-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

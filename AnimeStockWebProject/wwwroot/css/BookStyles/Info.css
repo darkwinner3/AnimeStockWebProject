@@ -52,24 +52,37 @@
 
 .img-container {
     display: flex;
-    position: relative;
     flex-direction: column;
     margin-left: 10px;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 620px;
+    max-height: 620px;
+    justify-content:space-between;
 }
 
     .img-container img {
-        min-width: 400px;
-        max-width: 400px;
-        transition: all 0.5s ease;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
         display: none;
-        object-position: center;
-        max-height: 535px;
-        min-height: 535px;
     }
 
     .img-container .active-img {
         display: block;
     }
+
+.img {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 620px;
+    max-height: 620px;
+    justify-content: center;
+}
 
 #preview-button {
     background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
