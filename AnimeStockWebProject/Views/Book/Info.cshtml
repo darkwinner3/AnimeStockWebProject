@@ -63,22 +63,24 @@
             <button class="move-button next-button">Next</button>
         </div>
         <div class="img-container">
-            
-            @{
-                int count = 1;
-                @foreach (PictureViewModel picture in Model.Pictures)
-                {
-                    if (count == 1)
+            <div class="img">
+                @{
+                    int count = 1;
+                    @foreach (PictureViewModel picture in Model.Pictures)
                     {
-                        <img id="active-img" class="active-img" src="@picture.Path" />
+                        if (count == 1)
+                        {
+                            <img id="active-img" class="active-img" src="@picture.Path" />
+                        }
+                        else
+                        {
+                            <img id="active-img" src="@picture.Path" />
+                        }
+                        count++;
                     }
-                    else
-                    {
-                        <img id="active-img" src="@picture.Path" />
-                    }
-                    count++;
                 }
-            }
+            </div>
+           
             
             <input id="book-path" type="hidden" value="@Model.FilePath" />
             <input id="bookId" type="hidden" value="@Model.Id" />

@@ -1,5 +1,162 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using AnimeStockWebProject.Infrastructure.Data.Enums
+@model BookEditViewModel
+
+<link rel="stylesheet" href="~/css/Admin/Book/EditStyles.css" asp-append-version="true" />
+
+<div class="container">
+    <h1 class="title">Edit Book</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="Title">Book Title</label>
+            <input id="Title" class="form-control" asp-for="@Model.Title" />
+            <span asp-validation-for="@Model.Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Author">Book Author</label>
+            <input id="Author" class="form-control" asp-for="@Model.Author" />
+            <span asp-validation-for="@Model.Author" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Illustrator">Book Illustrator</label>
+            <input id="Illustrator" class="form-control" asp-for="@Model.Illustrator" />
+            <span asp-validation-for="@Model.Illustrator" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Publisher">Book Publisher</label>
+            <input id="Publisher" class="form-control" asp-for="@Model.Publisher" />
+            <span asp-validation-for="@Model.Publisher" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="ReleaseDate">Book Release Date</label>
+            <input id="ReleaseDate" class="form-control" asp-for="@Model.ReleaseDate" type="date" />
+            <span asp-validation-for="@Model.ReleaseDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Description">Book Description</label>
+            <textarea id="Description" class="form-control" asp-for="@Model.Description"></textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="Price">Book Price</label>
+            <input id="Price" class="form-control" asp-for="@Model.Price" />
+            <span asp-validation-for="@Model.Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="BookTypeId">Book Type</label>
+            <select id="BookTypeId" class="form-control" asp-for="@Model.BookTypeId">
+                @foreach (var bookType in Model.BookTypes)
+                {
+                    <option value="@bookType.Id">@bookType.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Pages">Book Pages</label>
+            <input id="Pages" class="form-control" asp-for="@Model.Pages" />
+            <span asp-validation-for="@Model.Pages" class="text-danger"></span>
+        </div>
+
+        <div class="form-group" id="quantity-form">
+            <label for="Quantity">Book Quantity</label>
+            <input id="Quantity" class="form-control" asp-for="@Model.Quantity" />
+            <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Print Type</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrintType" id="DigitalPrintType" value="2" @(Model.PrintType == PrintTypeEnum.Digital ? "checked" : "")>
+                <label class="form-check-label" for="DigitalPrintType">Digital</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="PrintType" id="PhysicalPrintType" value="1" @(Model.PrintType == PrintTypeEnum.Phisycal ? "checked" : "")>
+                <label class="form-check-label" for="PhysicalPrintType">Physical</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h2 class="book-tags">Add book tags</h2>
+            @foreach (var tag in Model.BookTags)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="SelectedBookTagIds" value="@tag.Id"
+                    @(Model.SelectedBookTagIds.Contains(tag.Id) ? "checked" : "")>
+                    <label class="form-check-label">@tag.Name</label>
+                </div>
+
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="cover-img-container">
+                <img class="cover" src="@Model.CoverImg.Path" />
+            </div>
+            @if (!Model.CoverImg.IsDeleted)
+            {
+                <button class="delete" onclick="deletePicture('@Model.CoverImg.Id)">Delete</button>
+            }
+            else
+            {
+                <ng-form class="img-form" asp-arae="Admin" asp-controller="Picture" asp-action="Delete">
+                    <input type="hidden" value="@Model.CoverImg.Id" name="pictureId" />
+                    <button class="delete" type="submit">Recover</button>
+                </ng-form>
+            }
+        </div>
+
+        <div class="form-group">
+            <label class="choose-file" for="CoverImg">Choose cover picture to upload</label>
+            <input type="file" id="CoverImg" name="coverImg" accept=".jpg, .jpeg, .png, .webp" class="form-control-file">
+            <span id="coverImgIndicator"></span>
+        </div>
+
+        <div class="form-group">
+            @foreach (var img in Model.Pictures)
+            {
+                <div class="images-items">
+                    <div class="img-container">
+                        <img src="@img.Path" />
+                    </div>
+                </div>
+                @if (!img.IsDeleted)
+                {
+                    <button class="delete" onclick="deletePicture(@img.Id)">Delete</button>
+                }
+                else
+                {
+                   <button class="delete" onclick="deletePicture(@img.Id)">Recover</button>
+                   
+                }
+            }
+        </div>
+
+        <div class="form-group">
+            <label class="choose-file" for="Pictures">Choose pictures to upload</label>
+            <input type="file" id="Pictures" name="pictures" accept=".jpg, .jpeg, .png, .webp" multiple class="form-control-file">
+            <span id="picturesIndicator"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="choose-file" for="BookFile">Choose Book File</label>
+            <input type="file" id="BookFile" name="bookFile" accept=".pdf, .cbz" class="form-control-file">
+            <span id="bookFileIndicator"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.querySelectorAll("input[type=file]").forEach(input => input.style.opacity = 0);
+</script>
+
+<script src="~/js/Admin/Books/Book.js"></script>

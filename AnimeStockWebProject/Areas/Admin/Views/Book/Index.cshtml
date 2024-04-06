@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@book.Title</h5>
                         <div class="buttons">
-                            <a href="@Url.Action("Edit", "Book", new { area = "Admin", id = book.Id })" class="btn btn-primary">Edit Book</a>
+                            <a href="@Url.Action("Edit", "Book", new { area = "Admin", bookId = book.Id, bookTypeId = book.BookTypeId })" class="btn btn-primary">Edit Book</a>
                             @if (!book.IsDeleted)
                             {
                                 <form method="post" action="@Url.Action("Delete", "Book", new { area = "Admin" })">

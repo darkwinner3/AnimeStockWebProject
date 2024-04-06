@@ -32,7 +32,7 @@
        
         <div class="form-group">
             <label for="ReleaseDate">Book Release Date</label>
-            <input id="ReleaseDate" class="form-control" asp-for="@Model.ReleaseDate" />
+            <input id="ReleaseDate" class="form-control" asp-for="@Model.ReleaseDate" type="date" />
             <span asp-validation-for="@Model.ReleaseDate" class="text-danger"></span>
         </div>
 
@@ -94,19 +94,19 @@
         </div>
         
         <div class="form-group">
-            <label for="CoverImg">Choose cover picture to upload</label>
+            <label class="choose-file" for="CoverImg">Choose cover picture to upload</label>
             <input type="file" id="CoverImg" name="coverImg" accept=".jpg, .jpeg, .png, .webp" class="form-control-file">
             <span id="coverImgIndicator"></span>
         </div>
 
         <div class="form-group">
-            <label for="Pictures">Choose pictures to upload</label>
+            <label class="choose-file" for="Pictures">Choose pictures to upload</label>
             <input type="file" id="Pictures" name="pictures" accept=".jpg, .jpeg, .png, .webp" multiple class="form-control-file">
             <span id="picturesIndicator"></span>
         </div>
 
         <div class="form-group">
-            <label for="BookFile">Choose Book File</label>
+            <label class="choose-file" for="BookFile">Choose Book File</label>
             <input type="file" id="BookFile" name="bookFile" accept=".pdf, .cbz" class="form-control-file">
             <span id="bookFileIndicator"></span>
         </div>
@@ -119,33 +119,6 @@
 <script>
     document.querySelectorAll("input[type=file]").forEach(input => input.style.opacity = 0);
 
-    document.getElementById('CoverImg').addEventListener('change', function () {
-        var files = this.files;
-        var indicator = document.getElementById('coverImgIndicator');
-        if (files.length > 0) {
-            indicator.textContent = files[0].name;
-        } else {
-            indicator.textContent = '';
-        }
-    });
-
-    document.getElementById('Pictures').addEventListener('change', function () {
-        var files = this.files;
-        var indicator = document.getElementById('picturesIndicator');
-        if (files.length > 0) {
-            indicator.textContent = files.length + ' file(s) selected';
-        } else {
-            indicator.textContent = '';
-        }
-    });
-
-    document.getElementById('BookFile').addEventListener('change', function () {
-        var files = this.files;
-        var indicator = document.getElementById('bookFileIndicator');
-        if (files.length > 0) {
-            indicator.textContent = files[0].name;
-        } else {
-            indicator.textContent = '';
-        }
-    });
 </script>
+
+<script src="~/js/Admin/Books/Book.js"></script>
