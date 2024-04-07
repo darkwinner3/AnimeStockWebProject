@@ -52,6 +52,7 @@ input[type="file"] {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    flex-direction:column;
 }
 
 .img-container {
@@ -60,6 +61,7 @@ input[type="file"] {
     overflow: hidden;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
     .img-container img {
