@@ -115,5 +115,24 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             }
            
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int bookId, BookEditViewModel bookEditViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(bookEditViewModel);
+            }
+            try
+            {
+                await bookAdminService.EditBookByIdAsync(bookId, bookEditViewModel);
+                TempData[SuccessMessage] = SuccessfullyEditedBook;
+                return RedirectToAction("Index", "Book", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Edit", "Book", new { Area = AdminAreaName });
+            }
+        }
     }
 }

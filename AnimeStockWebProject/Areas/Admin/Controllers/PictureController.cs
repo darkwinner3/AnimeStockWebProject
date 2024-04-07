@@ -15,19 +15,19 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] int pictureId)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!await pictureAdminService.PictureExistsByIdAsync(pictureId))
+            if (!await pictureAdminService.PictureExistsByIdAsync(id))
             {
                 return NotFound();
             }
-            if (await pictureAdminService.PictureIsAlreadyDeletedAsync(pictureId))
+            if (await pictureAdminService.PictureIsAlreadyDeletedAsync(id))
             {
                 return Json(new { success = false });
             }
             try
             {
-                await pictureAdminService.DeletePictureAsync(pictureId);
+                await pictureAdminService.DeletePictureAsync(id);
                 TempData[SuccessMessage] = SuccessfullyDeletedImage;
                 return Json(new { success = true });
             }
@@ -39,19 +39,19 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Recover([FromBody] int pictureId)
+        public async Task<IActionResult> Recover(int id)
         {
-            if (!await pictureAdminService.PictureExistsByIdAsync(pictureId))
+            if (!await pictureAdminService.PictureExistsByIdAsync(id))
             {
                 return NotFound();
             }
-            if (await pictureAdminService.PictureIsRecoveredAsync(pictureId))
+            if (await pictureAdminService.PictureIsRecoveredAsync(id))
             {
                 return Json(new { success = false });
             }
             try
             {
-                await pictureAdminService.RecoverPictureAsync(pictureId);
+                await pictureAdminService.RecoverPictureAsync(id);
                 TempData[SuccessMessage] = SuccessfullyRecoveredImage;
                 return Json(new { success = true });
             }
