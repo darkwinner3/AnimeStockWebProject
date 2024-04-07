@@ -30,7 +30,6 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
 builder.Services.AddMemoryCache();
 
-
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
@@ -85,6 +84,8 @@ app.UseEndpoints(config =>
         name: "default",
      pattern: "{controller=Home}/{action=Index}/{id?}");
 
+    // Map Hangfire dashboard route
+    config.MapHangfireDashboard("/hangfire");
 
     config.MapDefaultControllerRoute();
 
