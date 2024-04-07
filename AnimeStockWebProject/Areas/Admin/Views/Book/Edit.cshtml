@@ -1,6 +1,16 @@
 ﻿@using AnimeStockWebProject.Infrastructure.Data.Enums
 @model BookEditViewModel
 
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
 <link rel="stylesheet" href="~/css/Admin/Book/EditStyles.css" asp-append-version="true" />
 
 <div class="container">
@@ -94,28 +104,29 @@
 
             }
         </div>
-
+        
         <div class="form-group">
-            <div class="cover-img-container">
-                <img class="cover" src="@Model.CoverImg.Path" />
+            <div class="images-items">
+                <div class="cover-img-container">
+                    <img class="cover" src="@Model.CoverImg.Path" />
+                </div>
+                @if (!Model.CoverImg.IsDeleted)
+                {
+
+                    <button class="delete" onclick="deletePicture(@Model.CoverImg.Id, event)">Delete</button>
+                }
+                else
+                {
+                    <button class="delete" onclick="recoverPicture(@Model.CoverImg.Id, event)">Recover</button>
+                }
             </div>
-            @if (!Model.CoverImg.IsDeleted)
-            {
-                <button class="delete" onclick="deletePicture('@Model.CoverImg.Id)">Delete</button>
-            }
-            else
-            {
-                <ng-form class="img-form" asp-arae="Admin" asp-controller="Picture" asp-action="Delete">
-                    <input type="hidden" value="@Model.CoverImg.Id" name="pictureId" />
-                    <button class="delete" type="submit">Recover</button>
-                </ng-form>
-            }
+            
         </div>
 
         <div class="form-group">
-            <label class="choose-file" for="CoverImg">Choose cover picture to upload</label>
-            <input type="file" id="CoverImg" name="coverImg" accept=".jpg, .jpeg, .png, .webp" class="form-control-file">
-            <span id="coverImgIndicator"></span>
+            <label class="choose-file" for="NewCoverImg">Choose cover picture to upload</label>
+            <input type="file" id="NewCoverImg" name="newCoverImg" accept=".jpg, .jpeg, .png, .webp" class="form-control-file">
+            <span id="newCoverImgIndicator"></span>
         </div>
 
         <div class="form-group">
@@ -125,23 +136,24 @@
                     <div class="img-container">
                         <img src="@img.Path" />
                     </div>
+                    <input type="hidden" value="@Model.CoverImg.Id" />
+                    @if (!img.IsDeleted)
+                    {
+                        <button class="delete" onclick="deletePicture(@img.Id, event)">Delete</button>
+                    }
+                    else
+                    {
+                        <button class="delete" onclick="recoverPicture(@img.Id, event)">Recover</button>
+
+                    }
                 </div>
-                @if (!img.IsDeleted)
-                {
-                    <button class="delete" onclick="deletePicture(@img.Id)">Delete</button>
-                }
-                else
-                {
-                   <button class="delete" onclick="deletePicture(@img.Id)">Recover</button>
-                   
-                }
             }
         </div>
 
         <div class="form-group">
-            <label class="choose-file" for="Pictures">Choose pictures to upload</label>
-            <input type="file" id="Pictures" name="pictures" accept=".jpg, .jpeg, .png, .webp" multiple class="form-control-file">
-            <span id="picturesIndicator"></span>
+            <label class="choose-file" for="NewPictures">Choose pictures to upload</label>
+            <input type="file" id="NewPictures" name="newPictures" accept=".jpg, .jpeg, .png, .webp" multiple class="form-control-file">
+            <span id="newPicturesIndicator"></span>
         </div>
 
         <div class="form-group">
@@ -150,12 +162,13 @@
             <span id="bookFileIndicator"></span>
         </div>
 
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 <script>
+    const csrfToken = '@GetAntiXsrfRequestToken()';
+
     document.querySelectorAll("input[type=file]").forEach(input => input.style.opacity = 0);
 </script>
 
