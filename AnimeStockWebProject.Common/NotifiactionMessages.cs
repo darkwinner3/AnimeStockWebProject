@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnimeStockWebProject.Common
+﻿namespace AnimeStockWebProject.Common
 {
     public static class NotifiactionMessages
     {
@@ -27,5 +21,7 @@ namespace AnimeStockWebProject.Common
         public const string SuccessfullyDeletedImage = "Image has been deleted";
 
         public const string SuccessfullyRecoveredImage = "Image has been recovered";
+
+        public const string SuccessfullyEditedBook = "Book has been edited successfully";
     }
 }
