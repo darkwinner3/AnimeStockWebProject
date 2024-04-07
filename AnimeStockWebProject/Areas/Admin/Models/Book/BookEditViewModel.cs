@@ -17,7 +17,7 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
             SelectedBookTagIds = new List<int>();
             BookTypes = new List<BookTypeViewModel>();
         }
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [Required]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
@@ -46,18 +46,20 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
         public PrintTypeEnum PrintType { get; set; }
         [Required]
         public decimal Price { get; set; }
-        [Required]
-        public byte[]? PdfContent { get; set; }
-        [Required]
+        public IFormFile? BookFile { get; set; }
         public string? FilePath { get; set; }
 
         public IEnumerable<TagViewModel> BookTags { get; set; }
 
         public List<int> SelectedBookTagIds { get; set; }
-        public PictureAdminViewModel CoverImg { get; set; }
+
+        public IFormFile? NewCoverImg { get; set; }
+
+        public IFormFileCollection? NewPictures { get; set; }
+        public PictureAdminViewModel? CoverImg { get; set; }
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
 
-        public IEnumerable<TagViewModel> currentTags { get; set; }
+        public IEnumerable<TagViewModel>? currentTags { get; set; }
 
         public List<string> PicturesPaths { get; set; }
     }

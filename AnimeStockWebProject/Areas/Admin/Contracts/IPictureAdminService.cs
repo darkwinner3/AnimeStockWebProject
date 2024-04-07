@@ -11,5 +11,7 @@
         Task<bool> PictureIsAlreadyDeletedAsync(int pictureId);
 
         Task<bool> PictureIsRecoveredAsync(int pictureId);
+
+        Task DeletePicturesAsync();
     }
 }
