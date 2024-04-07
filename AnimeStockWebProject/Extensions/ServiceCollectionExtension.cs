@@ -30,8 +30,9 @@ namespace AnimeStockWebProject.Extensions
         public static void ConfigureHangfire(this IApplicationBuilder app)
         {
             app.UseHangfireDashboard();
-
+            app.UseHangfireServer();
             RecurringJob.AddOrUpdate<IOrderService>("UpdateOrderStatus", orderService => orderService.UpdateOrderStatusAsunc(), Cron.Hourly);
+            RecurringJob.AddOrUpdate<IPictureAdminService>("DeletePictures", pictureAdminService => pictureAdminService.DeletePicturesAsync(), Cron.DayInterval(3));
         }
     }
 }
