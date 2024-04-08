@@ -1,42 +1,54 @@
-﻿document.getElementById('CoverImg').addEventListener('change', function () {
-    var files = this.files;
-    var indicator = document.getElementById('coverImgIndicator');
-    if (files.length > 0) {
-        indicator.textContent = files[0].name;
-    } else {
-        indicator.textContent = '';
-    }
-});
+﻿var coverImgElement = document.getElementById('CoverImg');
+if (coverImgElement) {
+    coverImgElement.addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('coverImgIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files[0].name;
+        } else {
+            indicator.textContent = '';
+        }
+    });
+}
 
-document.getElementById('NewCoverImg').addEventListener('change', function () {
-    var files = this.files;
-    var indicator = document.getElementById('newCoverImgIndicator');
-    if (files.length > 0) {
-        indicator.textContent = files[0].name;
-    } else {
-        indicator.textContent = '';
-    }
-});
+var NewCoverImgElement = document.getElementById('NewCoverImg');
+if (NewCoverImgElement) {
+    NewCoverImgElement.addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('newCoverImgIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files[0].name;
+        } else {
+            indicator.textContent = '';
+        }
+    });
+}
 
-document.getElementById('NewPictures').addEventListener('change', function () {
-    var files = this.files;
-    var indicator = document.getElementById('newPicturesIndicator');
-    if (files.length > 0) {
-        indicator.textContent = files.length + ' file(s) selected';
-    } else {
-        indicator.textContent = '';
-    }
-});
+var NewPicturesElement = document.getElementById('NewPictures');
+if (NewPicturesElement) {
+    NewPicturesElement.addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('newPicturesIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files.length + ' file(s) selected';
+        } else {
+            indicator.textContent = '';
+        }
+    });
+}
 
-document.getElementById('Pictures').addEventListener('change', function () {
-    var files = this.files;
-    var indicator = document.getElementById('picturesIndicator');
-    if (files.length > 0) {
-        indicator.textContent = files.length + ' file(s) selected';
-    } else {
-        indicator.textContent = '';
-    }
-});
+var picturesElement = document.getElementById('Pictures');
+if (picturesElement) {
+    picturesElement.addEventListener('change', function () {
+        var files = this.files;
+        var indicator = document.getElementById('picturesIndicator');
+        if (files.length > 0) {
+            indicator.textContent = files.length + ' file(s) selected';
+        } else {
+            indicator.textContent = '';
+        }
+    });
+}
 
 document.getElementById('BookFile').addEventListener('change', function () {
     var files = this.files;
