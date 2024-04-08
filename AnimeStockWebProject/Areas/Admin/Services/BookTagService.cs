@@ -27,5 +27,10 @@ namespace AnimeStockWebProject.Areas.Admin.Services
 
             return bookTags;
         }
+
+        public Task<EditBookTagViewModel> GetBookTagToEditAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

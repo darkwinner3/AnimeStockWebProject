@@ -148,7 +148,7 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                         Id = p.Id,
                         IsDeleted = p.IsDeleted,
                         Path = p.Path,
-                    }).First(),
+                    }).ToArray(),
                     Pictures = b.Pictures.Where(p => !p.Path.Contains("cover")).Select(p => new PictureAdminViewModel()
                     {
                         Id = p.Id,
@@ -203,20 +203,29 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                 await CreateCoverImageAsync(bookId, bookToEdit.Title, bookEditViewModel.NewCoverImg.FileName, bookEditViewModel.NewCoverImg);
                 await animeStockDbContext.SaveChangesAsync();
             }
-            if (bookEditViewModel.NewPictures?.Count() < 5
-                && bookToEdit.Pictures.Where(p => !p.IsDeleted && !p.Path.Contains("cover")).Count() < 5)
+            int newPicturesCount = 0;
+            if (bookEditViewModel.NewPictures != null)
+            {
+                newPicturesCount = bookEditViewModel.NewPictures.Count();
+            }
+            int bookImageCount = newPicturesCount + bookToEdit.Pictures.Where(p => !p.IsDeleted && !p.Path.Contains("cover")).Count();
+            if (bookImageCount <= 5 && bookEditViewModel.NewPictures != null)
             {
                 await CreateBookPicturesAsync(bookId, bookToEdit.Title, bookEditViewModel.NewPictures);
                 await animeStockDbContext.SaveChangesAsync();
             }
-            if (!string.IsNullOrWhiteSpace(bookEditViewModel.FilePath))
+            if (bookEditViewModel.BookFile != null)
             {
                 string? oldFileFolderName = bookToEdit.FilePath;
-                string currentFileFolderName = bookEditViewModel.FilePath;
-                string deletePath = Path.Join(env.WebRootPath, oldFileFolderName);
-
-                File.Delete(deletePath);
-
+                if (oldFileFolderName != null)
+                {
+                    if (File.Exists(oldFileFolderName))
+                    {
+                        File.Delete(oldFileFolderName);
+                    }
+                    bookToEdit.FilePath = null;
+                }
+                
                 var fileName = bookEditViewModel.BookFile?.FileName;
                 var bookFile = bookEditViewModel.BookFile;
 
@@ -225,6 +234,22 @@ namespace AnimeStockWebProject.Areas.Admin.Services
             }
             await animeStockDbContext.SaveChangesAsync();
         }
+
+        public async Task DeleteBookByIdAsync(int bookId)
+        {
+            var bookToDelete = await animeStockDbContext.Books.FirstAsync(b => b.Id == bookId);
+            bookToDelete.IsDeleted = true;
+            await animeStockDbContext.SaveChangesAsync();
+        }
+
+
+        public async Task RecoverBookByIdAsync(int bookId)
+        {
+            var bookToRecover = await animeStockDbContext.Books.FirstAsync(b => b.Id == bookId);
+            bookToRecover.IsDeleted = false;
+            await animeStockDbContext.SaveChangesAsync();
+        }
+
         private string ExtractCoreTitle(string fullTitle)
         {
             string[] separators = { ",", "(" }; // Splitting by comma or (
@@ -370,6 +395,85 @@ namespace AnimeStockWebProject.Areas.Admin.Services
             }
 
             return input;
+        }
+
+        private async Task DeletePictures(Picture[] pictures)
+        {
+            string? pictureFolderName = Path.GetDirectoryName(pictures[0].Path);
+            string? directory = Path.GetDirectoryName(pictureFolderName);
+            string deletePath;
+            if (directory != "img")
+            {
+                deletePath = Path.Join(env.WebRootPath, directory);
+            }
+            else
+            {
+                deletePath = Path.Join(env.WebRootPath, pictureFolderName);
+            }
+
+            if (Directory.Exists(deletePath))
+            {
+                Directory.Delete(deletePath, true);
+            }
+            foreach (var picture in pictures)
+            {
+                animeStockDbContext.Remove(picture);
+            }
+
+            await animeStockDbContext.SaveChangesAsync();
+        }
+
+
+        //Deleting all book information every 3 days
+        public async Task DeleteBooksJobAsync()
+        {
+            var booksToDelete = await animeStockDbContext.Books
+                .Include(b => b.Pictures)
+                .Include(b => b.BookTags)
+                .Include(b => b.FavoriteProducts)
+                .Include(b => b.Comments)
+                .Where(b => b.IsDeleted)
+                .ToArrayAsync();
+            
+            if (booksToDelete.Length > 0)
+            {
+                foreach (var book in booksToDelete)
+                {
+                    var tagsToRemove = await animeStockDbContext.BookTags.Where(b => b.BookId == book.Id).ToArrayAsync();
+                    if (tagsToRemove.Any())
+                    {
+                        animeStockDbContext.RemoveRange(tagsToRemove);
+                        await animeStockDbContext.SaveChangesAsync();
+                    }
+                    var picturesToRemove = await animeStockDbContext.Pictures.Where(p => p.BookId == book.Id).ToArrayAsync();
+                    if (picturesToRemove.Any())
+                    {
+                        await DeletePictures(picturesToRemove);
+                    }
+                    var favoritesToRemove = await animeStockDbContext.FavoriteProducts.Where(b => b.BookId == book.Id).ToArrayAsync();
+                    if (favoritesToRemove.Any())
+                    {
+                        animeStockDbContext.RemoveRange(favoritesToRemove);
+                        await animeStockDbContext.SaveChangesAsync();
+                    }
+                    var commentsToRemove = await animeStockDbContext.Comments.Where(c => c.BookId == book.Id).ToArrayAsync();
+                    if (commentsToRemove.Any())
+                    {
+                        animeStockDbContext.RemoveRange(commentsToRemove);
+                        await animeStockDbContext.SaveChangesAsync();
+                    }
+                    
+                    if (!string.IsNullOrWhiteSpace(book.FilePath))
+                    {
+                        string? FilePath = Path.Join(env.WebRootPath, book.FilePath);
+                        File.Delete(FilePath);
+                    }
+                    await animeStockDbContext.SaveChangesAsync();
+                    animeStockDbContext.Remove(book);
+                }
+            }
+            
+            await animeStockDbContext.SaveChangesAsync();
         }
     }
 
