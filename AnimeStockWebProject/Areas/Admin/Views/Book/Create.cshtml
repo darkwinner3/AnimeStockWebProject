@@ -64,7 +64,7 @@
             <span asp-validation-for="@Model.Pages" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="quantity-form">
             <label for="Quantity">Book Quantity</label>
             <input id="Quantity" class="form-control" asp-for="@Model.Quantity" />
             <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
@@ -87,8 +87,8 @@
             @foreach (var tag in Model.BookTags)
             {
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="selectedBookTagIds" value="@tag.Id">
-                    <label for="SelectedBookTagIds" class="form-check-label">@tag.Name</label>
+                    <input id="@("SelectedBookTagIds_" + tag.Id)" class="form-check-input" type="checkbox" name="selectedBookTagIds" value="@tag.Id">
+                    <label for="@("SelectedBookTagIds_" + tag.Id)" class="form-check-label">@tag.Name</label>
                 </div>
             }
         </div>
@@ -122,3 +122,5 @@
 </script>
 
 <script src="~/js/Admin/Books/Book.js"></script>
+
+<script src="~/js/Modal.js"></script>

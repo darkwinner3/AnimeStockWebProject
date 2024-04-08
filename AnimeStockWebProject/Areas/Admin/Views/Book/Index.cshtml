@@ -1,6 +1,17 @@
 ﻿@model BookDataModel
 @using AnimeStockWebProject.Infrastructure.Data.Models
 
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+
 <link rel="stylesheet" href="~/css/Admin/Book/IndexStyles.css" asp-append-version="true" />
 
 <div class="container">
@@ -17,17 +28,17 @@
                             <a href="@Url.Action("Edit", "Book", new { area = "Admin", bookId = book.Id, bookTypeId = book.BookTypeId })" class="btn btn-primary">Edit Book</a>
                             @if (!book.IsDeleted)
                             {
-                                <form method="post" action="@Url.Action("Delete", "Book", new { area = "Admin" })">
+                                <div>
                                     <input type="hidden" name="bookId" value="@book.Id" />
-                                    <button class="btn btn-danger" type="submit">Delete Book</button>
-                                </form>
+                                    <button class="btn btn-danger" onclick="deleteBook(@book.Id, event)">Delete Book</button>
+                                </div>
                             }
                             else
                             {
-                                <form method="post" action="@Url.Action("Recover", "Book", new { area = "Admin" })">
+                                <div>
                                     <input type="hidden" name="bookId" value="@book.Id" />
-                                    <button class="btn btn-success" type="submit">Recover Book</button>
-                                </form>
+                                    <button class="btn btn-success" onclick="recoverBook(@book.Id, event)">Recover Book</button>
+                                </div>
                             }
                         </div>
                     </div>
@@ -64,3 +75,11 @@
         }
     </div>
 </div>
+
+<script>
+    const csrfToken = '@GetAntiXsrfRequestToken()';
+</script>
+
+<script src="~/js/Admin/Books/Index.js"></script>
+
+<script src="~/js/Modal.js"></script>

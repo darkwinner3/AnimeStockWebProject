@@ -107,18 +107,22 @@
         
         <div class="form-group">
             <div class="images-items">
-                <div class="cover-img-container">
-                    <img class="cover" src="@Model.CoverImg.Path" />
-                </div>
-                @if (!Model.CoverImg.IsDeleted)
+                @foreach (var coverImg in Model.CoverImg)
                 {
+                    <div class="cover-img-container">
+                        <img class="cover" src="@coverImg.Path" />
+                    </div>
+                    @if (!coverImg.IsDeleted)
+                    {
 
-                    <button class="delete" onclick="deletePicture(@Model.CoverImg.Id, event)">Delete</button>
+                        <button class="delete" onclick="deletePicture(@coverImg.Id, event)">Delete</button>
+                    }
+                    else
+                    {
+                        <button class="delete" onclick="recoverPicture(@coverImg.Id, event)">Recover</button>
+                    }
                 }
-                else
-                {
-                    <button class="delete" onclick="recoverPicture(@Model.CoverImg.Id, event)">Recover</button>
-                }
+                
             </div>
             
         </div>
@@ -136,7 +140,6 @@
                     <div class="img-container">
                         <img src="@img.Path" />
                     </div>
-                    <input type="hidden" value="@Model.CoverImg.Id" />
                     @if (!img.IsDeleted)
                     {
                         <button class="delete" onclick="deletePicture(@img.Id, event)">Delete</button>

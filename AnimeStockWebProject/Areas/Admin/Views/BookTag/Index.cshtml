@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TagViewModel>
+@using AnimeStockWebProject.Infrastructure.Data.Models
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<link rel="stylesheet" href="~/css/Admin/BookTag/BookTagStyles.css" asp-append-version="true" />
+
+<div class="container">
+    <h1 class="title">Manage Tags</h1>
+    <div class="row">
+        @foreach (var tag in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="tag">
+                    <h3 class="tag-name">@tag.Name</h3>
+                    <div class="tag-actions">
+                        <a href="@Url.Action("Edit", "Tag", new { area = "Admin", bookId = tag.Id})" class="btn-edit">Edit</a>
+                        @if (!tag.IsDeleted)
+                        {
+                            <form id="deleteForm-@tag.Id" asp-action="Delete" asp-controller="Tag" asp-route-id="@tag.Id" method="post">
+                                <input type="hidden" name="tagId" value="@tag.Id" />
+                                <button type="submit" class="btn-delete">Delete</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form id="recoverForm-@tag.Id" asp-action="Recover" asp-controller="Tag" asp-route-id="@tag.Id" method="post">
+                                <input type="hidden" name="tagId" value="@tag.Id" />
+                                <button type="submit" class="btn-recover">Recover</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    const csrfToken = '@GetAntiXsrfRequestToken()';
+</script>
+
+<script src="~/js/Admin/Books/Index.js"></script>
+
+<script src="~/js/Modal.js"></script>
