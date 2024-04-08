@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnimeStockWebProject.Common
+﻿namespace AnimeStockWebProject.Common
 {
     public static class GeneralAplicaitonConstants
     {
@@ -38,6 +32,8 @@ namespace AnimeStockWebProject.Common
         public const int UserFavoriteItemsCacheDuration = 5;
         public const string UserOrdersCacheKey = "UserOrderCacheKey-{0}";
         public const int UserOrdersCacheDuration = 5;
+        public const string BookTagAdminCacheKey = "BookAdminCacheKey";
+        public const int BookTagAdminCacheDuration = 5;
 
 
     }

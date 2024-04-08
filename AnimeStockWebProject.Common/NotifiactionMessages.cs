@@ -23,5 +23,9 @@
         public const string SuccessfullyRecoveredImage = "Image has been recovered";
 
         public const string SuccessfullyEditedBook = "Book has been edited successfully";
+
+        public const string SuccessfullyDeletedBook = "Book has been deleted successfully";
+
+        public const string SuccessfullyRecoveredBook = "Book has been recovered successfully";
     }
 }

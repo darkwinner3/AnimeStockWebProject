@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnimeStockWebProject.Core.Models.BookType
+﻿namespace AnimeStockWebProject.Core.Models.BookType
 {
     public class BookTypeViewModel
     {
