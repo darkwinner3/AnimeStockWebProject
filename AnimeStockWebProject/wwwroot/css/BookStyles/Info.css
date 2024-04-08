@@ -181,7 +181,7 @@
 }
 
 #purchase-button {
-    width: 150px;
+    padding: 5px 10px;
     background: linear-gradient(90deg, rgb(255 49 49 / 87%) 0%, rgb(255 134 59) 100%);
     backdrop-filter: blur(4px);
     border-radius: 30px;

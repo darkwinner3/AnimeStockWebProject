@@ -1,0 +1,59 @@
+﻿
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Tag style */
+.tag {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tag-name {
+    margin: 0 0 10px;
+    font-size: 28px;
+}
+
+.tag-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .tag-actions a, .tag-actions button {
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+.btn-edit {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.btn-recover {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+}
+
+.tag-actions a, .tag-actions button:hover {
+    opacity: 0.8;
+}
