@@ -42,6 +42,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
                     this.memoryCache.Set(AdminUsersCacheKey, users, cacheEntryOptions);
                 }
                 adminPageViewModel.Users = users;
+                ViewBag.ShowFooter = true;
                 return View(adminPageViewModel);
             }
             catch (Exception)

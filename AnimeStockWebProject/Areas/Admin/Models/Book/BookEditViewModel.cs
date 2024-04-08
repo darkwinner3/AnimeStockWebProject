@@ -56,8 +56,8 @@ namespace AnimeStockWebProject.Areas.Admin.Models.Book
         public IFormFile? NewCoverImg { get; set; }
 
         public IFormFileCollection? NewPictures { get; set; }
-        public PictureAdminViewModel? CoverImg { get; set; }
-        public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
+        public IEnumerable<PictureAdminViewModel>? CoverImg { get; set; }
+        public IEnumerable<PictureAdminViewModel>? Pictures { get; set; }
 
         public IEnumerable<TagViewModel>? currentTags { get; set; }
 

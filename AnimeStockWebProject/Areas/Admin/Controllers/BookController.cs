@@ -45,6 +45,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
                     BookViewModels = await bookAdminService.GetAllBooksAsync(pager),
                     Pager = pager
                 };
+                ViewBag.ShowFooter = true;
                 return View(bookDataModel);
             }
             catch (Exception)
@@ -61,7 +62,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             BookAddViewModel bookAddViewModel = new BookAddViewModel();
             bookAddViewModel.BookTags = await bookTagService.GetBookTagsAsync();
             bookAddViewModel.BookTypes = await bookTypeService.GetAllBookTypesAsync();
-
+            ViewBag.ShowFooter = true;
             return View(bookAddViewModel);
         }
 
@@ -88,6 +89,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
                 {
                     await bookAdminService.CreateBookFileAsync(bookId, bookAddViewModel);
                 }
+                ViewBag.ShowFooter = true;
                 return RedirectToAction("Index", "Book", new { Area = AdminAreaName });
             }
             catch (Exception)
@@ -106,6 +108,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
                 bookEditViewModel.BookTypeId = bookTypeId;
                 bookEditViewModel.BookTypes = await bookTypeService.GetAllBookTypesAsync();
                 bookEditViewModel.SelectedBookTagIds = bookEditViewModel.currentTags.Select(t => t.Id).ToList();
+                ViewBag.ShowFooter = true;
                 return View(bookEditViewModel);
             }
             catch (Exception)
@@ -126,12 +129,47 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             {
                 await bookAdminService.EditBookByIdAsync(bookId, bookEditViewModel);
                 TempData[SuccessMessage] = SuccessfullyEditedBook;
+                ViewBag.ShowFooter = true;
                 return RedirectToAction("Index", "Book", new { Area = AdminAreaName });
             }
             catch (Exception)
             {
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Edit", "Book", new { Area = AdminAreaName });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await bookAdminService.DeleteBookByIdAsync(id);
+                TempData[SuccessMessage] = SuccessfullyDeletedBook;
+                ViewBag.ShowFooter = true;
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return Json(new { success = false });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Recover(int id)
+        {
+            try
+            {
+                await bookAdminService.RecoverBookByIdAsync(id);
+                TempData[SuccessMessage] = SuccessfullyRecoveredBook;
+                ViewBag.ShowFooter = true;
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return Json(new { success = false });
             }
         }
     }

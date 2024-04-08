@@ -116,7 +116,7 @@
                         }
                         <form class="order-form" method="post">
                             <div class="order-container">
-                                @if (Model.PrintType == PrintTypeEnum.Phisycal.ToString())
+                                @if (Model.PrintType == PrintTypeEnum.Phisycal.ToString() && Model.Quantity != 0)
                                 {
                                     <input type="number" id="quantity" name="UserQuantity" min="1" asp-for="@Model.UserQuantity" value="1">
                                 }
