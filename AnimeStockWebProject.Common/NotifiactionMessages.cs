@@ -27,5 +27,13 @@
         public const string SuccessfullyDeletedBook = "Book has been deleted successfully";
 
         public const string SuccessfullyRecoveredBook = "Book has been recovered successfully";
+
+        public const string SuccessfullyDeletedTag = "Tag has been deleted successfully";
+
+        public const string SuccessfullyRecoveredTag = "Tag has been recovered successfully";
+
+        public const string SuccessfullyEditedTag = "Tag has been edited successfully";
+
+        public const string SuccessfullyCreatedBookTag = "Tag has been created successfully";
     }
 }

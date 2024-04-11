@@ -32,7 +32,7 @@
         public const int UserFavoriteItemsCacheDuration = 5;
         public const string UserOrdersCacheKey = "UserOrderCacheKey-{0}";
         public const int UserOrdersCacheDuration = 5;
-        public const string BookTagAdminCacheKey = "BookAdminCacheKey";
+        public const string BookTagAdminCacheKey = "BookTagAdminCacheKey";
         public const int BookTagAdminCacheDuration = 5;
 
 
