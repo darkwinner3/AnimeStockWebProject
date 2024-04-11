@@ -7,6 +7,7 @@ using static AnimeStockWebProject.Common.NotifiactionMessages;
 using static AnimeStockWebProject.Common.NotificationKeys;
 using static AnimeStockWebProject.Common.GeneralAplicaitonConstants;
 using AnimeStockWebProject.Areas.Admin.Models.Book;
+using AnimeStockWebProject.Areas.Admin.Models.User;
 
 namespace AnimeStockWebProject.Areas.Admin.Controllers
 {
@@ -94,6 +95,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             }
             catch (Exception)
             {
+                ViewBag.ShowFooter = true;
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Create", "Book", new { Area = AdminAreaName });
             }
@@ -113,6 +115,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             }
             catch (Exception)
             {
+                ViewBag.ShowFooter = true;
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Edit", "Book", new { Area = AdminAreaName });
             }
@@ -134,6 +137,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             }
             catch (Exception)
             {
+                ViewBag.ShowFooter = true;
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Edit", "Book", new { Area = AdminAreaName });
             }
@@ -170,6 +174,22 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             {
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return Json(new { success = false });
+            }
+        }
+
+        private async Task ClearCache()
+        {
+            IEnumerable<UsersViewModel> users = this.memoryCache.Get<IEnumerable<UsersViewModel>>(AdminUsersCacheKey);
+            if (users == null)
+            {
+                users = await userService.GetAllUsersAsync();
+                MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(AdminUsersDuration));
+                this.memoryCache.Set(AdminUsersCacheKey, users, memoryCacheEntryOptions);
+            }
+            foreach (var user in users)
+            {
+                this.memoryCache.Remove(string.Format(UserFavoriteItemsCacheKey, user.Id));
             }
         }
     }

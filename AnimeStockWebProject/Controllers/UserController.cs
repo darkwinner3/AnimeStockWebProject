@@ -32,7 +32,6 @@
         [HttpGet]
         public async Task<IActionResult> UserProfile(Guid id)
         {
-            ViewBag.ShowFooter = false;
             if (id != this.User.GetId())
             {
                 return Unauthorized();
@@ -48,6 +47,7 @@
                         .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserInfoCacheDuration));
                     this.memoryCache.Set(cacheKey, userInfoViewModel, options);
                 }
+                ViewBag.ShowFooter = false;
                 return View(userInfoViewModel);
             }
             catch (Exception)
@@ -89,6 +89,7 @@
                     await userManager.AddClaimAsync(user, userNameClaim);
                     await signInManager.SignInAsync(user, isPersistent: false);
                     this.memoryCache.Remove(string.Format(UserInfoCacheKey, userInfoViewModel.Id));
+                    ViewBag.ShowFooter = false;
                     return RedirectToAction("UserProfile", "User");
                 }
 
@@ -105,6 +106,7 @@
                 TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
                 string cacheKey = string.Format(UserInfoCacheKey, userInfoViewModel.Id);
                 this.memoryCache.Remove(cacheKey);
+                ViewBag.ShowFooter = false;
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception)
@@ -135,7 +137,7 @@
                     this.memoryCache.Set(cacheKey, userBooks, cacheOptions);
                 }
                 userFavoritesViewModel.BookViewModels = userBooks;
-
+                ViewBag.ShowFooter = true;
                 return View(userFavoritesViewModel);
             }
             catch (Exception)
@@ -162,6 +164,7 @@
                         .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserOrdersCacheDuration));
                     this.memoryCache.Set(chacheKey, userOrder, options);
                 }
+                ViewBag.ShowFooter = true;
                 return View(userOrder);
             }
             catch (Exception)

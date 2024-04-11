@@ -33,6 +33,7 @@ namespace AnimeStockWebProject.Controllers
                         ViewBag.ShowFooter = false;
                         return View();
                     }
+                    ViewBag.ShowFooter = true;
                     return this.RedirectToAction("Dashboard", "Home", new {Area = AdminAreaName});
                 }
                 else
@@ -60,13 +61,15 @@ namespace AnimeStockWebProject.Controllers
         {
             if (statusCode == 404 || statusCode == 400)
             {
+                ViewBag.ShowFooter = true;
                 return this.View("Error404");
             }
             else if (statusCode == 401)
             {
+                ViewBag.ShowFooter = true;
                 return View("Unauthorized");
             }
-
+            ViewBag.ShowFooter = true;
             return View("Error");
         }
     }

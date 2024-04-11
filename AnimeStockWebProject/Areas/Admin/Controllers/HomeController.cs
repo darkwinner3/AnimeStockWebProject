@@ -47,6 +47,7 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             }
             catch (Exception)
             {
+                ViewBag.ShowFooter = true;
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Dashboard", "Home");
             }
