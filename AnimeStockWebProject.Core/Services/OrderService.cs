@@ -24,7 +24,11 @@ namespace AnimeStockWebProject.Core.Services
         {
             string path = Path.GetDirectoryName(filePath);
             string bookFileName = Path.GetFileName(filePath);
-            string bookFolderPath = Path.GetFullPath(@"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot");
+            //Local application location CHANGE ON DIFFERENT PC
+            //string bookFolderPath = Path.GetFullPath(@"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot");
+
+            //Web application location
+            string bookFolderPath = Path.GetFullPath(@"C:\home\site\wwwroot\wwwroot\");
             string fullPath = Path.Join(bookFolderPath, path, bookFileName);
             string contentType = "application/octet-stream";
 

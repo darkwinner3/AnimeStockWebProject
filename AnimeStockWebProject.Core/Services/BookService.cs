@@ -178,7 +178,12 @@ namespace AnimeStockWebProject.Core.Services
 
         public async Task<byte[]> GetBookFileAsync(string filePath, int pageCount)
         {
-            string? path = Path.Combine(@"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot\" + filePath);
+            //local application location CHANGE ON DIFFERENT PC!
+            //string fullPath = @"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot" + filePath.Replace("/", @"\");
+            
+            //web application location
+            string fullPath = @"C:\home\site\wwwroot\wwwroot\" + filePath;
+            string? path = Path.Combine(fullPath);
             using (MemoryStream outputStream = new MemoryStream())
             {
                 using (PdfDocument outputDocument = new PdfDocument())
@@ -203,18 +208,18 @@ namespace AnimeStockWebProject.Core.Services
                             await Task.WhenAll(tasks);
                         }
                     }
-                    else if (Path.GetExtension(path).Equals(".Pdf", StringComparison.OrdinalIgnoreCase))
+                    else if (Path.GetExtension(path).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
                     {
-                        using (PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import))
-                        {
-                            int totalPages = Math.Min(pageCount, inputDocument.PageCount);
-
-                            for (int i = 0; i < totalPages; i++)
+                            using (PdfDocument inputDocument = PdfReader.Open(path, PdfDocumentOpenMode.Import))
                             {
-                                PdfPage page = inputDocument.Pages[i];
-                                outputDocument.AddPage(page);
+                                int totalPages = Math.Min(pageCount, inputDocument.PageCount);
+
+                                for (int i = 0; i < totalPages; i++)
+                                {
+                                    PdfPage page = inputDocument.Pages[i];
+                                    outputDocument.AddPage(page);
+                                }
                             }
-                        }
                     }
                     // Save the output document to the memory stream
                     outputDocument.Save(outputStream);
