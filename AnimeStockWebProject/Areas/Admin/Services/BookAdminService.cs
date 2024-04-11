@@ -32,12 +32,12 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                 Description = WebUtility.HtmlEncode(bookAddViewModel.Description),
                 IsDeleted = false,
                 ReleaseDate = bookAddViewModel.ReleaseDate,
-                Illustrator = bookAddViewModel.Illustrator,
+                Illustrator = WebUtility.HtmlEncode(bookAddViewModel.Illustrator),
                 Pages = bookAddViewModel.Pages,
                 Price = bookAddViewModel.Price,
-                Publisher = bookAddViewModel.Publisher,
+                Publisher = WebUtility.HtmlEncode(bookAddViewModel.Publisher),
                 Quantity = bookAddViewModel.Quantity,
-                Title = bookAddViewModel.Title,
+                Title = WebUtility.HtmlEncode(bookAddViewModel.Title),
                 PrintType = bookAddViewModel.PrintType,
                 BookTypeId = bookAddViewModel.BookTypeId
             };
@@ -173,15 +173,15 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                 .Include(b => b.BookTags)
                 .Include(b => b.Pictures)
                 .FirstAsync(b => b.Id == bookId);
-            bookToEdit.Title = bookEditViewModel.Title;
+            bookToEdit.Title = WebUtility.HtmlEncode(bookEditViewModel.Title);
             bookToEdit.Quantity = bookEditViewModel.Quantity;
             bookToEdit.Price = bookEditViewModel.Price;
-            bookToEdit.Author = bookEditViewModel.Author;
-            bookToEdit.Description = bookEditViewModel.Description;
-            bookToEdit.Illustrator = bookEditViewModel.Illustrator;
+            bookToEdit.Author = WebUtility.HtmlEncode(bookEditViewModel.Author);
+            bookToEdit.Description = WebUtility.HtmlEncode(bookEditViewModel.Description);
+            bookToEdit.Illustrator = WebUtility.HtmlEncode(bookEditViewModel.Illustrator);
             bookToEdit.Pages = bookEditViewModel.Pages;
             bookToEdit.ReleaseDate = bookEditViewModel.ReleaseDate;
-            bookToEdit.Publisher = bookEditViewModel.Publisher;
+            bookToEdit.Publisher = WebUtility.HtmlEncode(bookEditViewModel.Publisher);
             bookToEdit.PrintType = bookEditViewModel.PrintType;
             bookToEdit.BookTypeId = bookEditViewModel.BookTypeId;
 

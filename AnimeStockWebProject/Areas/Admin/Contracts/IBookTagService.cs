@@ -7,6 +7,14 @@ namespace AnimeStockWebProject.Areas.Admin.Contracts
     {
         Task<IEnumerable<TagViewModel>> GetBookTagsAsync();
 
-        Task<EditBookTagViewModel> GetBookTagToEditAsync();
+        Task<EditBookTagViewModel> GetBookTagToEditAsync(int id);
+
+        Task DeleteBookTagByIdAsync(int id);
+
+        Task RecoverBookTagByIdAsync(int id);
+
+        Task EditBookTagByIdAsync(int id, EditBookTagViewModel editBookTagViewModel);
+
+        Task CreateBookTagAsync(EditBookTagViewModel editBookTagViewModel);
     }
 }
