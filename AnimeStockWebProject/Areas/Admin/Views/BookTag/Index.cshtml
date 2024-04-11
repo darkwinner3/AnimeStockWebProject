@@ -22,20 +22,14 @@
                 <div class="tag">
                     <h3 class="tag-name">@tag.Name</h3>
                     <div class="tag-actions">
-                        <a href="@Url.Action("Edit", "Tag", new { area = "Admin", bookId = tag.Id})" class="btn-edit">Edit</a>
+                        <a href="@Url.Action("Edit", "BookTag", new { area = "Admin", id = tag.Id})" class="btn-edit">Edit</a>
                         @if (!tag.IsDeleted)
                         {
-                            <form id="deleteForm-@tag.Id" asp-action="Delete" asp-controller="Tag" asp-route-id="@tag.Id" method="post">
-                                <input type="hidden" name="tagId" value="@tag.Id" />
-                                <button type="submit" class="btn-delete">Delete</button>
-                            </form>
+                            <button type="submit" class="btn-delete" onclick="deleteTag(@tag.Id, event)">Delete</button>
                         }
                         else
                         {
-                            <form id="recoverForm-@tag.Id" asp-action="Recover" asp-controller="Tag" asp-route-id="@tag.Id" method="post">
-                                <input type="hidden" name="tagId" value="@tag.Id" />
-                                <button type="submit" class="btn-recover">Recover</button>
-                            </form>
+                            <button type="submit" class="btn-recover" onclick="recoverTag(@tag.Id, event)">Recover</button>
                         }
                     </div>
                 </div>
@@ -48,6 +42,6 @@
     const csrfToken = '@GetAntiXsrfRequestToken()';
 </script>
 
-<script src="~/js/Admin/Books/Index.js"></script>
+<script src="~/js/Admin/Tags/Tag.js"></script>
 
 <script src="~/js/Modal.js"></script>

@@ -235,9 +235,9 @@
                 {
                     <input type="hidden" value="@comment.Id" />
                     <div class="button-container">
-                        @if (!User.IsInRole(GeneralAplicaitonConstants.AdminRoleName) && !User.IsInRole(GeneralAplicaitonConstants.ModeratorRoleName))
+                        @if (!User.IsInRole(GeneralAplicaitonConstants.AdminRoleName) && !User.IsInRole(GeneralAplicaitonConstants.ModeratorRoleName) || Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var UserId) && UserId == comment.UserId)
                         {
-                            <button type="submit" asp-action="Edit" asp-controller="Comment" class="edit">Edit</button>
+                            <button type="submit" asp-action="Edit" asp-controller="Comment" data="@comment.Id" class="edit">Edit</button>
                         }
                         <button class="delete">Delete</button>
                     </div>
