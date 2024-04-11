@@ -16,11 +16,13 @@ function editComment(event) {
     if (!commentTextElement.isContentEditable) {
         // If the comment is not currently editable, make it editable
         commentTextElement.contentEditable = true;
+        // Retrieve the ID of the edited comment
+        id = commentElement.childNodes[5].value;
         commentTextElement.focus();
+        
         event.target.textContent = "Save"; // Change button text to "Save" during editing
 
-        // Retrieve the ID of the edited comment
-        id = parseInt(commentElement.dataset.commentId); // Assuming you have a data attribute for comment ID
+        
     } else {
         // If the comment is currently editable, save the edited comment
 
@@ -34,7 +36,7 @@ function editComment(event) {
         };
 
         fetch(url, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'RequestVerificationToken': csrfToken
