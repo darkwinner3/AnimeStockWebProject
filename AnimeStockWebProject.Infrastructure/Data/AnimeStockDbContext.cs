@@ -32,34 +32,34 @@ namespace AnimeStockWebProject.Infrastructure.Data
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserEntityConfiguration());
             builder.ApplyConfiguration(new FavoriteProductsEntityConfiguration());
-            builder.ApplyConfiguration(new BookEntityConfiguration());
-            builder.ApplyConfiguration(new BooksTagsConfiguration());
-            builder.ApplyConfiguration(new BookTypeEntityConfiguration());
-            builder.ApplyConfiguration(new CommentEntityConfiguration());
-            builder.ApplyConfiguration(new FavoriteProductsEntityConfiguration());
-            builder.ApplyConfiguration(new GameEntityConfiguration());
-            builder.ApplyConfiguration(new GamesGenresConfiguration());
-            builder.ApplyConfiguration(new GenreEntityConfiguration());
-            builder.ApplyConfiguration(new PictureEntityConfiguration());
-            builder.ApplyConfiguration(new TagEntityConfiguration());
-            //if (this.seedDb)
-            //{
-            //    builder.ApplyConfiguration(new BookEntityConfiguration());
-            //    builder.ApplyConfiguration(new BooksTagsConfiguration());
-            //    builder.ApplyConfiguration(new BookTypeEntityConfiguration());
-            //    builder.ApplyConfiguration(new CommentEntityConfiguration());
-            //    builder.ApplyConfiguration(new FavoriteProductsEntityConfiguration());
-            //    builder.ApplyConfiguration(new GameEntityConfiguration());
-            //    builder.ApplyConfiguration(new GamesGenresConfiguration());
-            //    builder.ApplyConfiguration(new GenreEntityConfiguration());
-            //    builder.ApplyConfiguration(new PictureEntityConfiguration());
-            //    builder.ApplyConfiguration(new TagEntityConfiguration());
-            //}
-            //else
-            //{
-            //    builder.Entity<BooksTags>().HasKey(ck => new { ck.TagId, ck.BookId });
-            //    builder.Entity<GamesGenres>().HasKey(ck => new { ck.GenreId, ck.GameId });
-            //}
+            //builder.ApplyConfiguration(new BookEntityConfiguration());
+            //builder.ApplyConfiguration(new BooksTagsConfiguration());
+            //builder.ApplyConfiguration(new BookTypeEntityConfiguration());
+            //builder.ApplyConfiguration(new CommentEntityConfiguration());
+            //builder.ApplyConfiguration(new FavoriteProductsEntityConfiguration());
+            //builder.ApplyConfiguration(new GameEntityConfiguration());
+            //builder.ApplyConfiguration(new GamesGenresConfiguration());
+            //builder.ApplyConfiguration(new GenreEntityConfiguration());
+            //builder.ApplyConfiguration(new PictureEntityConfiguration());
+            //builder.ApplyConfiguration(new TagEntityConfiguration());
+            if (this.seedDb)
+            {
+                builder.ApplyConfiguration(new BookEntityConfiguration());
+                builder.ApplyConfiguration(new BooksTagsConfiguration());
+                builder.ApplyConfiguration(new BookTypeEntityConfiguration());
+                builder.ApplyConfiguration(new CommentEntityConfiguration());
+                builder.ApplyConfiguration(new FavoriteProductsEntityConfiguration());
+                builder.ApplyConfiguration(new GameEntityConfiguration());
+                builder.ApplyConfiguration(new GamesGenresConfiguration());
+                builder.ApplyConfiguration(new GenreEntityConfiguration());
+                builder.ApplyConfiguration(new PictureEntityConfiguration());
+                builder.ApplyConfiguration(new TagEntityConfiguration());
+            }
+            else
+            {
+                builder.Entity<BooksTags>().HasKey(ck => new { ck.TagId, ck.BookId });
+                builder.Entity<GamesGenres>().HasKey(ck => new { ck.GenreId, ck.GameId });
+            }
         }
     }
 }

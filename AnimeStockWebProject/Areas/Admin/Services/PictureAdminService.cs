@@ -37,9 +37,11 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                     string pictureFolderName = picture.Path;
                     string deletePath = Path.Join(env.WebRootPath, pictureFolderName);
 
-                    File.Delete(deletePath);
-
-                    animeStockDbContext.Remove(picture);
+                    if (Directory.Exists(deletePath))
+                    {
+                        File.Delete(deletePath);
+                    }
+                     animeStockDbContext.Remove(picture);
                 }
             }
 
