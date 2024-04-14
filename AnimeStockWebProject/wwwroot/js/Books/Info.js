@@ -52,6 +52,44 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
+var touchStartX = 0;
+var touchEndX = 0;
+var imgIndex = 0;
+var images = document.querySelectorAll('.img img');
+var numImages = images.length;
+
+// Add event listeners to each image
+images.forEach(function (image, index) {
+    image.addEventListener('touchstart', function (event) {
+        touchStartX = event.touches[0].clientX;
+    });
+
+    image.addEventListener('touchmove', function (event) {
+        touchEndX = event.touches[0].clientX;
+    });
+
+    image.addEventListener('touchend', function () {
+        if (touchStartX - touchEndX > 50) {
+            // Swipe left
+            imgIndex = (index + 1) % numImages;
+        } else if (touchEndX - touchStartX > 50) {
+            // Swipe right
+            imgIndex = (index - 1 + numImages) % numImages;
+        }
+        showImage(imgIndex);
+    });
+});
+
+function showImage(index) {
+    images.forEach(function (image, i) {
+        if (i !== index) {
+            image.style.display = 'none';
+        } else {
+            image.style.display = 'block';
+        }
+    });
+}
+
 //get necessary info for suggested books
 const titleTypeElement = document.querySelector('.book-title');
 const titleType = titleTypeElement ? titleTypeElement.textContent.trim() : ''; // Check if the element exists before accessing its text content
