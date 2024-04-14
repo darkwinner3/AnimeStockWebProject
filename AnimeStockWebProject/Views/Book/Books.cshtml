@@ -12,17 +12,24 @@
 <link rel="stylesheet" href="~/AnimeStockWebProject.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/BookStyles/Books.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/BookStyles/Responsive/BooksResponsive.css" asp-append-version="true" />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="items-container">
+    
     <section class="sidebar">
+        
         <form method="get" class="search-form" autocomplete="off">
             <div class="search-input-container">
                 <input type="text" placeholder="search" name="searchQuery" asp-for="@Model.SearchQuery" />
                 <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
             </div>
-
+            <div id="searchSidebarToggle" class="sidebar-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
 
             @if (Model.SelectedTagIds.Any())
             {
@@ -184,8 +191,15 @@
         </form>
     </section>
 
+   
+
     <section class="main-page-content">
         <div class="pagination-container top">
+            <div id="sidebarToggle" class="sidebar-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
             @if (Model.Pager.TotalPages > 0)
             {
                 <ul class="page-list">
@@ -305,6 +319,32 @@
 
 <script>
     const csrfToken = '@GetAntiXsrfRequestToken()';
+
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.querySelector('body');
+    sidebarToggle.addEventListener('click', function () {
+        sidebar.classList.toggle('visible');
+        sidebarToggle.classList.toggle('active');
+        if (sidebar.classList.contains('visible')) {
+            body.style.overflow = 'hidden'; // Disable scrolling
+        } else {
+            body.style.overflow = ''; // Enable scrolling
+        }
+    });
+
+    const searchSidebarToggle = document.getElementById('searchSidebarToggle');
+
+    searchSidebarToggle.addEventListener('click', function () {
+        sidebar.classList.toggle('visible');
+        sidebarToggle.classList.toggle('active');
+        if (sidebar.classList.contains('visible')) {
+            body.style.overflow = 'hidden'; // Disable scrolling
+        } else {
+            body.style.overflow = ''; // Enable scrolling
+        }
+    });
+
 </script>
 
 <script src="~/js/Books/Book.js"></script>
