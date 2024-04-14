@@ -237,154 +237,91 @@
         color: black;
     }
 /*footer*/
+/* Main footer container */
 .main-footer {
     position: relative;
     overflow: hidden;
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    grid-template-columns: auto 100rem auto;
-    z-index: 0;
-    margin-top: -1px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Adjust as needed */
 }
 
+/* Footer container */
 .footer-container {
-    display: grid;
-    position: relative;
-    grid-area: 1 / 2 / 2 / 3;
-    grid-template-columns: 0 5.62225476rem 5.82575352rem 7.75739679rem 2.59085374rem 3.91314027rem 14.5705918rem 2.55514509rem 18.44802343rem 38.7168406rem;
-    grid-template-rows: minmax(0.01372685rem, max-content) minmax(28.09754694rem, max-content) minmax(4.81278311rem, max-content) minmax(4.14701067rem, max-content) minmax(5.95180658rem, max-content) 0 0 minmax(5.32797173rem, max-content) 0 minmax(0.14714152rem, max-content) minmax(7.72456018rem, max-content);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
-
 .main-picture-container {
-    z-index: 1;
-    grid-area: 2 / 2 / 3 / 11;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: calc(min(1366px - 100vw, 0px) / 2);
-    right: calc(min(1366px - 100vw, 0px) / 2);
-    box-sizing: border-box;
-}
-
-.picture-container {
+    height: 296px; 
     position: relative;
     width: 100%;
-    height: 100%;
-    opacity: 1.0;
-    transform: scale(1, 1);
-    overflow: hidden;
 }
 
 .picture-placeholder {
-    width: calc(100% * max(1, var(--scale-fill, 1)));
-    height: calc(200.19541247% / min(1, var(--scale-fill, 1)));
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    opacity: 1;
-    animation: auto ease 0s 1 normal none running none;
+    width: 100%;
+    height: 100%;
 }
 
     .picture-placeholder img {
         width: 100%;
-        height: 100%;
+        height: 296px;
         display: block;
         object-fit: cover;
-        object-position: 50% 50%;
-        transform: translate(-50%, -50%) rotate(0deg);
     }
 
-
 .main-footer-title-container {
-    z-index: 2;
-    grid-area: 4 / 4 / 5 / 7;
-    position: relative;
+    margin-left: 20px;
     width: 100%;
-    height: 100%;
-    min-width: 14.29799402rem;
-}
-
-.footer-title-container {
-    opacity: 1.0;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
 }
 
 .footer-title {
     font-family: "Roboto Mono", monospace;
-    line-height: 1.08317816em;
-    text-align: center;
-    letter-spacing: -0.015em;
-    font-size: 45px;
+    font-size: 44px;
+    color: #333;
+    display: flex;
+    justify-content: flex-end;
+    margin-right:55px;
 }
 
     .footer-title span {
         color: #fe502d;
-        font-weight: 700;
     }
 
 .main-links-container {
-    display: grid;
-    position: relative;
-    grid-area: 6 / 3 / 9 / 5;
-}
-
-.linksTitle-container {
-    z-index: 5;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px; 
 }
 
 .links-title {
-    opacity: 1.0;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
+    font-family: "Roboto Mono", monospace;
+    font-size: 28px;
+    color: #333;
 }
 
-    .links-title p {
-        color: #000000;
-        font-family: "Roboto Mono", monospace;
-        line-height: 1.26562698em;
-        text-transform: none;
-        letter-spacing: 0em;
+    .links-title span {
+        color: #fe502d;
     }
-
-        .links-title p span {
-            color: #000000;
-            font-weight: 700;
-            font-size: 1.60em;
-        }
-
-.links-collection {
-    z-index: 4;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-}
 
 .links {
-    opacity: 1.0;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
+    margin-top: 10px; 
 }
 
-    .links p a {
-        color: #000000;
-        font-family: "Roboto Mono", monospace;
-        line-height: 1.25em;
-        text-decoration: none;
-        font-size: 1.20em;
+    .links p {
+        margin: 0;
     }
+
+        .links p a {
+            font-family: "Roboto Mono", monospace;
+            font-size: 16px;
+            color: #555;
+            text-decoration: none;
+        }
+
+            .links p a:hover {
+                color: #fe502d;
+            }

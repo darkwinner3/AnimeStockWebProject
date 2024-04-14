@@ -1,0 +1,37 @@
+﻿/* Responsive CSS */
+
+@media only screen and (max-width: 768px) {
+
+    .navbar {
+        align-items: center;
+    }
+    #logo {
+        margin-left: 20px;
+        margin-right: 0;
+        font-size: 24px;
+    }
+
+    .navbar-menu {
+        justify-content: center;
+        align-items: center;
+    }
+
+    #user-tag-logged img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #logo {
+        margin-left: 20px;
+        margin-right: 0;
+        font-size: 20px;
+    }
+
+    .navbar-menu li a {
+        padding: 8px 12px;
+        font-size: 10px;
+    }
+}

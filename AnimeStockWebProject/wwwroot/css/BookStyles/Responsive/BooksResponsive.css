@@ -1,0 +1,88 @@
+﻿@media only screen and (max-width: 768px) {
+    .not-found {
+        font-size: 47px;
+    }
+    .sidebar {
+        width: 0;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        height: 100%;
+        background-color: #f0f0f0;
+        z-index: 999;
+        overflow-x: hidden;
+        transition: width 0.5s;
+    }
+
+        .sidebar.visible {
+            width: 60%;
+        }
+
+    .items-container {
+        position: relative;
+    }
+
+    .main-page-content {
+        position: relative;
+    }
+    .search-input-container {
+        width: 80%;
+        padding: 3px 0px 3px 0px;
+        position: relative;
+    }
+
+    #searchSidebarToggle{
+        display: initial;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .sidebar {
+        width: 0;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        height: 100%;
+        background-color: #f0f0f0;
+        z-index: 999;
+        overflow-x: hidden;
+        transition: width 0.5s;
+    }
+
+        .sidebar.visible {
+            width: 100%;
+        }
+
+    .sidebar-toggle {
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .bar {
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+    .sidebar-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .sidebar-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .sidebar-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    #searchSidebarToggle {
+        display: initial;
+    }
+
+    .not-found {
+        font-size: 27px;
+    }
+}

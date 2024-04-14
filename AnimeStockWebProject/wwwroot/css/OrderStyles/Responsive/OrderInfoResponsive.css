@@ -1,0 +1,29 @@
+﻿/* Responsive CSS */
+
+@media only screen and (max-width: 768px) {
+    
+}
+
+@media only screen and (max-width: 480px) {
+    .layout-footer{
+        display:none;
+    }
+    .order-information {
+        margin: 0;
+        min-width: 0;
+        max-width: none;
+        flex-direction: column-reverse;
+    }
+    
+    .user-info{
+        margin-right:0;
+    }
+
+    .order-card{
+        padding:8px;
+    }
+
+    .img-container {
+        width: 285px;
+    }
+}

@@ -1,0 +1,78 @@
+﻿@media (max-width: 767px) {
+    .book-card {
+        flex-direction: column;
+        min-height: auto;
+        max-height: auto;
+    }
+
+    .cover-img img {
+        width: 100%;
+        height: auto;
+        max-width: none;
+        max-height: none;
+    }
+
+    .book-card-content {
+        margin-left: 17px;
+    }
+
+    .more-details li{
+        padding: 2px;
+    }
+
+
+    .book-card-content a {
+        font-size: 24px;
+    }
+
+    .book-type a{
+        font-size: 15px;
+    }
+
+    .book-print-type a{
+        font-size: 15px;
+    }
+
+    .more-details {
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    .favorite-container {
+        width: 115px;
+        margin-right: auto;
+        margin-bottom: 10px;
+    }
+
+    .book-price {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .book-card {
+        min-height: auto;
+        max-height: auto;
+    }
+
+    .cover-img img {
+        max-width: 200px;
+        min-width: 200px;
+    }
+
+    .favorite-container {
+        width: 90px;
+        margin-right: 10px;
+    }
+
+    .book-price {
+        font-size: 26px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .favorite-container {
+        width: 100px;
+        margin-right: 20px;
+    }
+}

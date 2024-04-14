@@ -1,0 +1,33 @@
+﻿@media only screen and (max-width: 768px) {
+    .content-container {
+        margin: 0 20px;
+    }
+
+    .login-form {
+        padding: 20px;
+        margin: 50px 20px 0 20px;
+    }
+
+    .input-container {
+        max-width: 100%;
+    }
+
+    .submit {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .input-container {
+        padding: 10px;
+    }
+
+    .login-form h1 {
+        font-size: 24px;
+    }
+
+    span {
+        font-size: 12px;
+        max-width: none;
+    }
+}

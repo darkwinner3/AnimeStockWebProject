@@ -1,0 +1,33 @@
+﻿@media (max-width: 768px) {
+    .order-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .order-info {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .order-card {
+        width: 100%;
+    }
+
+    .book-title {
+        font-size: 20px;
+    }
+
+    .order-img-container {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .input input {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+}

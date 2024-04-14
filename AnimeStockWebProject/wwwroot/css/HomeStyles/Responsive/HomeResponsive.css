@@ -1,0 +1,225 @@
+﻿/* Responsive CSS */
+
+@media only screen and (max-width: 768px) {
+    .section1-picture-container {
+        padding: 20px;
+    }
+
+    .left-div p {
+        font-size: 40px;
+        padding: 0 10px 40px 10px;
+    }
+
+    .left-div a {
+        font-size: 25px;
+        padding: 7px 22px;
+    }
+
+    .right-div {
+        margin-right: 30px;
+    }
+    .section2-collection {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        width: 100%;
+        margin: 8% 25% 13%;
+    }
+
+        .section2-collection h2 {
+            font-size: 18px;
+            padding-bottom: 18px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .section2-collection a {
+            font-size: 9px;
+            padding: 5px 6px;
+        }
+
+    .sections-title-container{
+        width: auto;
+        margin: 0;
+    }
+
+        .sections-title-container h1 {
+            font-size: 14px;
+        }
+
+    .card-container{
+        display: initial;
+    }
+
+    .card {
+        width: 60%;
+        margin: 7% 20%;
+    }
+
+        .card img {
+            height: auto;
+        }
+
+    .details {
+        padding-top: 17px;
+        padding-bottom: 10px;
+    }
+
+        .details h2 {
+            font-size: 16px;
+        }
+
+        .details p {
+            width: 99%;
+            padding-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .details a {
+            padding: 5px 25px;
+            font-size: 12px;
+        }
+
+    .news-container {
+        padding: 27px 30px 27px 30px;
+        margin-bottom: 15px;
+    }
+
+        .news-container h1 {
+            font-size: 20px;
+            padding: 10px 19px;
+        }
+
+        .news-container p {
+            font-size: 15px;
+            padding: 23px 12px;
+        }
+
+    .footer-title {
+        font-size: 35px;
+    }
+
+    .links-title p {
+        font-size: 20px;
+    }
+
+    .links-collection p a {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .section1-picture-container {
+        padding: 20px;
+    }
+
+    .left-div p {
+        font-size: 30px;
+        padding: 0 10px 40px 10px;
+    }
+
+    .left-div a {
+        font-size: 10px;
+        padding: 7px 22px;
+    }
+
+    .right-div {
+        margin-right: 15px;
+    }
+
+    .section2-collection {
+        padding-top: 5%;
+        padding-bottom: 5%;
+        width: 100%;
+        margin: 8% 20% 13%;
+    }
+
+    .section2-collection h2 {
+        font-size: 18px;
+        padding-bottom: 18px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+        .section2-collection a {
+            font-size: 9px;
+            padding: 5px 6px;
+        }
+
+    .sections-title-container {
+        width: auto;
+        margin: 0;
+    }
+
+        .sections-title-container h1 {
+            font-size: 14px;
+        }
+
+    .card {
+        margin: 7% 20%;
+    }
+    .card img {
+        height: auto;
+    }
+
+    .details {
+        padding-top: 17px;
+        padding-bottom: 10px;
+    }
+
+    .details h2 {
+        font-size: 16px;
+    }
+
+        .details p {
+            width: 99%;
+            padding-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .details a {
+            padding: 5px 25px;
+            font-size: 12px;
+        }
+
+    .news-container {
+        padding: 27px 30px 27px 30px;
+        margin-bottom: 27px;
+        width: 83%;
+    }
+
+        .news-container h1 {
+            font-size: 20px;
+            padding: 5px 13px;
+        }
+
+        .news-container p {
+            font-size: 15px;
+            padding: 13px 0px;
+        }
+
+    .main-picture-container{
+        height:auto;
+    }
+
+    .picture-placeholder img{
+        height:auto;
+    }
+
+    .footer-title {
+        font-size: 30px;
+    }
+
+    .links-title p {
+        font-size: 18px;
+    }
+
+    .links-collection p a {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1440px) {
+    .card {
+        margin: 4% 9%;
+    }
+}

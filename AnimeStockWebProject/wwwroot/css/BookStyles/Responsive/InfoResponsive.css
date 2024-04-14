@@ -1,0 +1,330 @@
+﻿@media only screen and (max-width: 768px) {
+    .book-card {
+        margin-left: 10px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-button-change {
+        display: none;
+    }
+
+    .move-button {
+        display: none;
+    }
+
+    .active-preview {
+        display: none;
+    }
+
+    .img-container {
+        margin-left: 0;
+        min-width: 250px;
+        min-height: 400px;
+        width: 90%;
+    }
+
+    .img{
+        min-width: none;
+        max-width: none;
+    }
+
+    .book-information {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .more-items {
+        display: flex;
+        margin-top: 47px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .tags li {
+        margin-right: 3px;
+    }
+
+    .book-title {
+        margin-top: 30px;
+        font-size: 30px;
+    }
+
+    .book-description {
+        font-size: 18px;
+        max-height: 220px;
+    }
+
+    .item {
+        margin: 13px;
+    }
+
+    .book-details {
+        font-size: 14px;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid black;
+    }
+
+    .recomendations {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .sugestion-item-container {
+        margin-top: 10px;
+    }
+
+        .sugestion-item-container button {
+            width: 15%;
+            padding: 5px;
+            border-radius: 29px;
+        }
+
+    #other-books {
+        width: 100%;
+        margin: 0px 15px;
+    }
+
+    .no-suggestions {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .recomended-book-card {
+        display: flex;
+        align-items: center;
+        width: 40%;
+    }
+
+    .card-content {
+        height: 100px;
+        overflow-y: auto;
+    }
+
+        .card-content a {
+            display: inline-block;
+            font-size: 8px;
+        }
+
+    #favorite-container {
+        font-size: 25px;
+        padding: 4px;
+    }
+
+    #quantity {
+        margin-top: 30px;
+    }
+
+    .book-details-recommendations {
+        flex-direction: column;
+        margin-top: 82px;
+        margin-right: 40px;
+        margin-left: 40px;
+    }
+
+    .comments-container {
+        margin: 66px 24px 0px 24px;
+    }
+
+    .profile-img-container {
+        font-size: 40px;
+    }
+
+    .username {
+        font-size: 20px;
+    }
+
+    .comment-card {
+        width: 80%;
+    }
+
+    .my-comment-container {
+        width: 60%;
+    }
+
+    #pdf-container {
+        max-width: none;
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+    }
+
+        #pdf-container canvas {
+            max-width: none;
+            width: 100%;
+        }
+}
+
+/* For screens up to 480px width */
+@media only screen and (max-width: 480px) {
+    .book-card {
+        margin-left: 10px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-button-change {
+        display:none;
+    }
+
+    .move-button {
+        display: none;
+    }
+
+    .active-preview{
+        display:none;
+    }
+
+    .img-container{
+        margin-left:0;
+    }
+
+    .img-container,
+    .img {
+        min-width: 250px;
+        min-height: 400px;
+    }
+
+    .book-information {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .more-items {
+        display: flex;
+        margin-top: 47px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .tags li {
+        margin-right: 3px;
+    }
+
+    .book-title {
+        margin-top: 30px;
+        font-size: 30px;
+    }
+
+    .book-description {
+        font-size: 18px;
+        max-height: 220px;
+    }
+
+    .item{
+        margin: 13px;
+    }
+
+    .book-details {
+        font-size: 14px;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid black;
+    }
+
+    .recomendations {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .sugestion-item-container {
+        margin-top: 10px;
+    }
+
+        .sugestion-item-container button {
+            width: 15%;
+            padding: 5px;
+            border-radius: 29px;
+        }
+
+    #other-books {
+        width: 100%;
+        margin: 0px 15px;
+    }
+
+    .no-suggestions {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .recomended-book-card {
+        display: flex;
+        align-items: center;
+        width: 40%;
+    }
+    .card-content {
+        height: 100px;
+        overflow-y: auto;
+    }
+        .card-content a {
+            display: inline-block;
+            font-size: 8px;
+        }
+
+    #favorite-container {
+        font-size: 25px;
+        padding: 4px;
+    }
+
+    #quantity {
+        margin-top: 30px;
+    }
+
+    .book-details-recommendations {
+        flex-direction: column;
+        margin-top: 82px;
+        margin-right: 40px;
+        margin-left: 40px;
+    }
+
+    .comments-container {
+        margin: 66px 24px 0px 24px;
+    }
+
+    .profile-img-container {
+        font-size: 40px;
+    }
+
+    .username {
+        font-size: 20px;
+    }
+
+    .comment-card {
+        width: 80%;
+    }
+
+    .my-comment-container {
+        width: 60%;
+    }
+
+    #pdf-container {
+        max-width:none;
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+    }
+
+        #pdf-container canvas {
+            max-width: none;
+            width: 100%;
+        }
+}

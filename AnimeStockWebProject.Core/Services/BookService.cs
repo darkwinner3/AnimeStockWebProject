@@ -180,7 +180,7 @@ namespace AnimeStockWebProject.Core.Services
         {
             //local application location CHANGE ON DIFFERENT PC!
             //string fullPath = @"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot" + filePath.Replace("/", @"\");
-            
+
             //web application location
             string fullPath = @"C:\home\site\wwwroot\wwwroot\" + filePath;
             string? path = Path.Combine(fullPath);

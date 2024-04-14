@@ -427,7 +427,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
+    z-index: 9998;
     display:none;
 }
 
@@ -448,4 +448,18 @@
     #pdf-container canvas {
         max-height: 100%;
         max-width: 100%;
+    }
+
+.close-button {
+    position: absolute;
+    top: 9px;
+    right: 26px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    z-index: 9998;
+}
+
+    .close-button:hover {
+        color: #000;
     }

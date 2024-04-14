@@ -1,9 +1,4 @@
-﻿.layout-footer{
-    position:absolute;
-    bottom:0;
-    width: 100%;
-}
-body {
+﻿body {
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: #fff;
 }
