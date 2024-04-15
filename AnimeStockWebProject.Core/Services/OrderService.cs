@@ -24,7 +24,7 @@ namespace AnimeStockWebProject.Core.Services
         {
             string path = Path.GetDirectoryName(filePath);
             string bookFileName = Path.GetFileName(filePath);
-            //Local application location CHANGE ON DIFFERENT PC
+            //Local application location CHANGE ON DIFFERENT PC. MUST BE USED FOR LOCAL UNIT TESTS
             //string bookFolderPath = Path.GetFullPath(@"D:\Important Learning\Programming\web projects\AnimeStockWebProject\AnimeStockWebProject\wwwroot");
 
             //Web application location
@@ -113,17 +113,17 @@ namespace AnimeStockWebProject.Core.Services
         }
 
         //update order periodically
-        public async Task UpdateOrderStatusAsunc()
+        public async Task UpdateOrderStatusAsync()
         {
             var orders = await animeStockDbContext.Orders.ToArrayAsync();
 
             foreach (var order in orders)
             {
-                if (order.Status == PreOrder && order.Book.ReleaseDate < DateTime.Now)
+                if (order.Status == PreOrder && order.Book.ReleaseDate <= DateTime.Now)
                 {
                     order.Status = Ordered;
                 }
-                else if (order.Status == Ordered && order.OrderDate < DateTime.Now)
+                if (order.Status == Ordered && order.OrderDate <= DateTime.Now)
                 {
                     order.Status = Delivered;
                 }

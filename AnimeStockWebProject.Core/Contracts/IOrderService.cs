@@ -11,6 +11,6 @@ namespace AnimeStockWebProject.Core.Contracts
 
         Task<FileStreamResult> DownloadBook(string filePath);
 
-        Task UpdateOrderStatusAsunc();
+        Task UpdateOrderStatusAsync();
     }
 }
