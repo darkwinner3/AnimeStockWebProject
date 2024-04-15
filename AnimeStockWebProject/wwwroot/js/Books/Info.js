@@ -139,65 +139,44 @@ async function getBooksByTitle(title, baseUrl, id) {
 }
 //create slider for suggested books
 function createSlider() {
-    const initialCountCards = 5;
-    let currentIndex = 0;
     const cards = [...document.querySelectorAll('#other-books .recomended-book-card')];
+    const cardCount = cards.length;
+    const cardsPerSlide = 3;
+    let currentSlideIndex = 0;
 
-    //showing amount of containers
-    for (var i = 0; i < initialCountCards; i++) {
-        if (cards[i]) {
-            cards[i].style.display = 'flex';
-        }
-    }
+    const updateDisplay = () => {
+        const startIndex = currentSlideIndex * cardsPerSlide;
+        const endIndex = Math.min(startIndex + cardsPerSlide, cardCount);
+
+        cards.forEach((card, index) => {
+            if (index >= startIndex && index < endIndex) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    };
+
+    const showNextSlide = () => {
+        currentSlideIndex = (currentSlideIndex + 1) % Math.ceil(cardCount / cardsPerSlide);
+        updateDisplay();
+    };
+
+    const showPreviousSlide = () => {
+        currentSlideIndex = (currentSlideIndex - 1 + Math.ceil(cardCount / cardsPerSlide)) % Math.ceil(cardCount / cardsPerSlide);
+        updateDisplay();
+    };
 
     const leftArrowBtn = document.querySelector('.sugestion-item-container .left-button');
     const rightArrowBtn = document.querySelector('.sugestion-item-container .right-button');
 
-    rightArrowBtn.addEventListener('click', () => {
-        //hiding containers
-        for (var i = currentIndex; i < initialCountCards + currentIndex; i++) {
-            if (cards[i]) {
-                cards[i].style.display = 'none';
-            }
-        }
+    rightArrowBtn.addEventListener('click', showNextSlide);
+    leftArrowBtn.addEventListener('click', showPreviousSlide);
 
-        if (currentIndex >= cards.length) {
-            currentIndex = 0;
-        }
-        //showing current containers
-        for (var i = currentIndex; i < initialCountCards + currentIndex; i++) {
-            if (cards[i]) {
-                cards[i].style.display = 'flex';
-            }
-        }
-    });
-
-    leftArrowBtn.addEventListener('click', () => {
-        let initialIndex = currentIndex;
-
-        if (initialIndex - initialCountCards >= 0) {
-            initialIndex -= initialCountCards;
-        }
-        else {
-            initialIndex = cards.length - initialCountCards;
-        }
-
-        //hiding current containers
-        for (var i = currentIndex; i < currentIndex + initialCountCards; i++) {
-            if (cards[i]) {
-                cards[i].style.display = 'none';
-            }
-        }
-
-        //showing last containers
-        for (var i = initialIndex; i < initialIndex + initialCountCards; i++) {
-            if (cards[i]) {
-                cards[i].style.display = 'flex';
-            }
-        }
-        currentIndex = initialIndex;
-    });
+    // Initial display setup
+    updateDisplay();
 }
+
 
 document.getElementById('book-details').addEventListener('click', function (event) {
     event.preventDefault(); // Prevent default anchor behavior
