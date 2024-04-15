@@ -75,9 +75,39 @@ namespace AnimeStockWebProject.Services.Tests.Unit_Tests
                 FilePath = "/Books/Date A Live/Date A Live, Vol. 2_ Puppet Yoshino.pdf",
             };
 
-            var actualOrderInfo = await this.orderService.GetBookOrderInfoAsync(expectedOrderInfo.Id);
+            OrderInfoViewModel actualOrderInfo = await this.orderService.GetBookOrderInfoAsync(expectedOrderInfo.Id);
 
-            Assert.AreEqual(expectedOrderInfo, actualOrderInfo);
+            var comparator = new OrderInfoViewModelComperator();
+
+            int comparisonResult = comparator.Compare(expectedOrderInfo, actualOrderInfo);
+
+            Assert.AreEqual(0, comparisonResult);
+        }
+
+        [Test]
+        public async Task TestUpdateOrderStatus()
+        {
+            var order = await animeStockDbContext.Orders.FirstAsync();
+            order.Status = Infrastructure.Data.Enums.StatusEnum.PreOrder;
+            order.OrderDate = DateTime.Now;
+            await animeStockDbContext.SaveChangesAsync();
+
+            await orderService.UpdateOrderStatusAsync();
+
+            Assert.IsTrue(order.Status == Infrastructure.Data.Enums.StatusEnum.Delivered);
+        }
+
+        [Test]
+        public async Task TestDownloadBook()
+        {
+            var order = await animeStockDbContext.Orders.FirstAsync(o => o.Book.PrintType == Infrastructure.Data.Enums.PrintTypeEnum.Digital);
+
+            string filePath = order.Book.FilePath;
+
+            var result = await orderService.DownloadBook(filePath);
+
+            Assert.IsNotNull(result);
+
         }
 
 
