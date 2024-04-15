@@ -1,0 +1,32 @@
+﻿@media screen and (max-width: 480px) {
+    .file-container lable {
+        font-size: 10px;
+    }
+    .select-file-button {
+        background: linear-gradient(90deg, rgba(255, 49, 49, 0.1) 0%, rgba(255, 145, 77, 0.1) 100%);
+        backdrop-filter: blur(4px);
+        border-radius: 30px;
+        border: none;
+        margin-left: 0px;
+        padding: 10px 20px;
+    }
+
+   /* input[type=file] {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        overflow: hidden;
+    }*/
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        position: unset;
+        padding: 31px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+   
+}

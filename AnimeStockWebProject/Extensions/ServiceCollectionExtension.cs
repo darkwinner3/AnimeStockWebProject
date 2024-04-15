@@ -31,7 +31,7 @@ namespace AnimeStockWebProject.Extensions
         {
             app.UseHangfireDashboard();
             app.UseHangfireServer();
-            RecurringJob.AddOrUpdate<IOrderService>("UpdateOrderStatus", orderService => orderService.UpdateOrderStatusAsunc(), Cron.Hourly);
+            RecurringJob.AddOrUpdate<IOrderService>("UpdateOrderStatus", orderService => orderService.UpdateOrderStatusAsync(), Cron.Hourly);
             RecurringJob.AddOrUpdate<IPictureAdminService>("DeletePictures", pictureAdminService => pictureAdminService.DeletePicturesAsync(), Cron.DayInterval(3));
             RecurringJob.AddOrUpdate<IBookAdminService>("DeleteBooks", bookAdminService => bookAdminService.DeleteBooksJobAsync(), Cron.Daily);
         }

@@ -3,6 +3,10 @@
     color: #fff;
 }
 
+.layout-footer{
+    display:none;
+}
+
 h1.title {
     text-align: center;
     padding: 50px 0;
@@ -81,7 +85,7 @@ h1.title {
     padding: 15px;
     border: none;
     border-radius: 30px;
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    background: linear-gradient(90deg, #ad032a, #ff2600);
     color: #fff;
     font-size: 18px;
     cursor: pointer;

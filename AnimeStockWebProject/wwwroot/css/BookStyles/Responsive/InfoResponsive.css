@@ -25,11 +25,14 @@
         min-width: 250px;
         min-height: 400px;
         width: 90%;
+        max-height:none;
     }
 
     .img{
         min-width: none;
         max-width: none;
+        min-height:none;
+        max-height:none;
     }
 
     .book-information {
@@ -103,7 +106,7 @@
     .recomended-book-card {
         display: flex;
         align-items: center;
-        width: 40%;
+        width: 20%;
     }
 
     .card-content {
@@ -269,7 +272,7 @@
     .recomended-book-card {
         display: flex;
         align-items: center;
-        width: 40%;
+        width: 25%;
     }
     .card-content {
         height: 100px;

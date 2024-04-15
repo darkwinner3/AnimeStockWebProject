@@ -15,10 +15,13 @@
     display: flex;
     flex-direction: column;
     margin-left: 50px;
+    width: 95%;
 }
 
 .main-container {
+    width: 100%;
     display: flex;
+    margin-top: 35px;
 }
 
 .move-button {
@@ -54,11 +57,11 @@
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-    min-width: 400px;
-    max-width: 400px;
-    min-height: 620px;
-    max-height: 620px;
-    justify-content:space-between;
+    min-width: 308px;
+    max-width: 308px;
+    min-height: 515px;
+    max-height: 515px;
+    justify-content: space-between;
 }
 
     .img-container img {
@@ -77,10 +80,10 @@
 .img {
     display: flex;
     flex-direction: column;
-    min-width: 400px;
-    max-width: 400px;
-    min-height: 620px;
-    max-height: 620px;
+    /* min-width: 400px; */
+    /* max-width: 400px; */
+    min-height: 80%;
+    max-height: 100%;
     justify-content: center;
 }
 
@@ -99,32 +102,36 @@
     }
 
 .book-information {
-    width: 1100px;
+    width: 100%;
     margin-left: 32px;
     border-bottom: 1px solid black;
 }
 
 .container-1 {
+    display: flex;
+    height: 100%;
     margin-right: 10px;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .book-title {
-    font-size: 77px;
-    border-bottom:1px solid black;
+    font-size: 40px;
+    border-bottom: 1px solid black;
 }
 
 .book-description {
-    max-height: 300px;
+    max-height: 200px;
     margin-top: 30px;
     font-weight: 500;
-    font-size: 26px;
-    overflow-y:auto;
+    font-size: 20px;
+    overflow-y: auto;
 }
 
 .more-items {
     display: flex;
     justify-content: space-between;
-    margin-top: 47px;
+    margin-top: 43px;
     align-items: center;
 }
 
@@ -138,8 +145,8 @@
 }
 
 .item {
-    font-size: 30px;
-    margin: 30px;
+    font-size: 19px;
+    margin: 9px;
 }
 
 #book-details{
@@ -152,7 +159,7 @@
     }
 
 #book-price {
-    font-size: 60px;
+    font-size: 42px;
     border-bottom: 2px solid black;
     padding: 5px;
 }
@@ -194,6 +201,7 @@
     }
 
 .book-details-recommendations {
+    width: 92%;
     display: flex;
     flex-direction: row;
     margin-top: 307px;
@@ -227,7 +235,9 @@
 }
 
 .recomendations {
-    width: 60%;
+    width: 100%;
+    margin-right: 25px;
+    margin-left: 10px;
 }
 
 .tags {
@@ -240,7 +250,7 @@
 }
 
 .book-details {
-    width: 35%;
+    width: 60%;
     border-right: 1px solid black;
 }
 
@@ -249,6 +259,7 @@
 }
 
 .sugestion-item-container {
+    /* width: 100%; */
     display: flex;
     align-items: center;
     margin-top: 10px;
@@ -260,9 +271,11 @@
     width: 15%;
 }
 
-#other-books{
-    width:100%;
-    margin:0px 15px;
+#other-books {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0px 15px;
 }
 
 .recomended-book-price {
