@@ -141,18 +141,6 @@ namespace AnimeStockWebProject.Services.Tests.Unit_Tests
                     ReleaseDate = book2.ReleaseDate.Date,
                     PrintType = book2.PrintType.ToString(),
                     Price = book2.Price
-                },
-                new BookViewModel()
-                {
-                    Id = book3.Id,
-                    Title = book3.Title,
-                    Author = book3.Author,
-                    Illustrator = book3.Illustrator,
-                    Description = book3.Description,
-                    BookType = book3.BookType.Name,
-                    ReleaseDate = book3.ReleaseDate.Date,
-                    PrintType = book3.PrintType.ToString(),
-                    Price = book3.Price
                 }
             };
 
@@ -180,18 +168,6 @@ namespace AnimeStockWebProject.Services.Tests.Unit_Tests
                     ReleaseDate = book2.ReleaseDate.Date,
                     PrintType = book2.PrintType.ToString(),
                     Price = book2.Price
-                },
-                new BookViewModel()
-                {
-                    Id = book3.Id,
-                    Title = book3.Title,
-                    Author = book3.Author,
-                    Illustrator = book3.Illustrator,
-                    Description = book3.Description,
-                    BookType = book3.BookType.Name,
-                    ReleaseDate = book3.ReleaseDate.Date,
-                    PrintType = book3.PrintType.ToString(),
-                    Price = book3.Price
                 }
             };
 

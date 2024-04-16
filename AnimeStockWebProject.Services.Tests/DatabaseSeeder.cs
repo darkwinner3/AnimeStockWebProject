@@ -37,6 +37,20 @@
             new Picture()
             {
                 Id = 2, Path = "/cover/test/path", BookId = 2, IsDeleted = false
+            },
+            new Picture()
+            {
+                Id = 3,
+                Path = "/cover/test/path",
+                BookId = 1,
+                IsDeleted = false
+            },
+            new Picture()
+            {
+                Id = 4,
+                Path = "/cover/test/path",
+                BookId = 3,
+                IsDeleted = false
             });
             animeStockDbContext.SaveChanges();
         }
@@ -306,11 +320,6 @@
                 new FavoriteProducts()
                 {
                     BookId = 2,
-                    UserId = Guid.Parse("b9a4d407-7518-4aea-a72d-b94c7e389b70")
-                },
-                new FavoriteProducts()
-                {
-                    BookId = 3,
                     UserId = Guid.Parse("b9a4d407-7518-4aea-a72d-b94c7e389b70")
                 }
             };
