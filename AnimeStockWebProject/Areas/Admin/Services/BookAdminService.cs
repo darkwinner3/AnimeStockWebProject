@@ -1,13 +1,11 @@
 ﻿using AnimeStockWebProject.Areas.Admin.Contracts;
 using AnimeStockWebProject.Areas.Admin.Models.Book;
-using AnimeStockWebProject.Areas.Admin.Models.BookTag;
 using AnimeStockWebProject.Areas.Admin.Models.Pictures;
 using AnimeStockWebProject.Core.Models.BookTags;
 using AnimeStockWebProject.Core.Models.Pager;
 using AnimeStockWebProject.Infrastructure.Data;
 using AnimeStockWebProject.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using NuGet.ProjectModel;
 using System.Net;
 
 namespace AnimeStockWebProject.Areas.Admin.Services
@@ -466,7 +464,10 @@ namespace AnimeStockWebProject.Areas.Admin.Services
                     if (!string.IsNullOrWhiteSpace(book.FilePath))
                     {
                         string? FilePath = Path.Join(env.WebRootPath, book.FilePath);
-                        File.Delete(FilePath);
+                        if (File.Exists(FilePath))
+                        {
+                            File.Delete(FilePath);
+                        }
                     }
                     await animeStockDbContext.SaveChangesAsync();
                     animeStockDbContext.Remove(book);

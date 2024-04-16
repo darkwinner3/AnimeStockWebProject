@@ -184,6 +184,12 @@ namespace AnimeStockWebProject.Core.Services
             //web application location
             string fullPath = @"C:\home\site\wwwroot\wwwroot\" + filePath;
             string? path = Path.Combine(fullPath);
+
+            if (!File.Exists(fullPath))
+            {
+                return null;
+            }
+
             using (MemoryStream outputStream = new MemoryStream())
             {
                 using (PdfDocument outputDocument = new PdfDocument())
