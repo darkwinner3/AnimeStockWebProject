@@ -99,13 +99,20 @@ async function deletePicture(pictureId, event) {
 
             if (buttonClicked.textContent == "Recover") {
                 buttonClicked.textContent = 'Delete';
+                buttonClicked.style.backgroundColor = '#dc3545';
+                buttonClicked.style.borderColor = '#dc3545';
                 buttonClicked.setAttribute('onclick', `deletePicture(${pictureId}, event)`);
 
             }
             else {
                 buttonClicked.textContent = 'Recover';
+                buttonClicked.style.backgroundColor = '#198754';
+                buttonClicked.style.borderColor = '#198754';
                 buttonClicked.setAttribute('onclick', `recoverPicture(${pictureId}, event)`);
             }
+        }
+        else if (data.isNotDeleted) {
+            window.location.reload();
         }
     } catch (error) {
         console.error(error);
@@ -131,11 +138,15 @@ async function recoverPicture(pictureId, event) {
 
             if (buttonClicked.textContent == "Recover") {
                 buttonClicked.textContent = 'Delete';
+                buttonClicked.style.backgroundColor = '#dc3545';
+                buttonClicked.style.borderColor = '#dc3545';
                 buttonClicked.setAttribute('onclick', `deletePicture(${pictureId}, event)`);
 
             }
             else {
                 buttonClicked.textContent = 'Recover';
+                buttonClicked.style.backgroundColor = '#198754';
+                buttonClicked.style.borderColor = '#198754';
                 buttonClicked.setAttribute('onclick', `recoverPicture(${pictureId}, event)`);
             }
         }
