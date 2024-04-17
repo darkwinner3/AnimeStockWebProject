@@ -4,6 +4,8 @@
     {
         public const string DefaultErrorMessage = "Something went wrong, please try again later";
 
+        public const string UnsuccessfullDeletionOfCoverImg = "There must be at least one cover img not deleted";
+
         public const string SuccessfullyUpdatedAccount = "Accaunt updated";
 
         public const string SuccessFullyPostedComment = "You have successfully posted your comment";
