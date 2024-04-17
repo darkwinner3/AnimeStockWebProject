@@ -84,6 +84,16 @@ input[type="file"] {
         background-color: #c82333;
     }
 
+.recover {
+    background-color: #198754;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .cover-img-container {
     width: 150px;
     height: 150px;
