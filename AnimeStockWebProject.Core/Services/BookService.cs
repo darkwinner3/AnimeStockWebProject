@@ -356,7 +356,7 @@ namespace AnimeStockWebProject.Core.Services
 
             if (!string.IsNullOrEmpty(bookQueryViewModel.SearchQuery))
             {
-                books = books.Where(b => b.Title.Contains(bookQueryViewModel.SearchQuery));
+                books = books.Where(b => b.Title.ToLower().Contains(bookQueryViewModel.SearchQuery.ToLower()));
             }
 
             return books;
