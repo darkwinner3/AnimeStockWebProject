@@ -327,7 +327,9 @@
         sidebar.classList.toggle('visible');
         sidebarToggle.classList.toggle('active');
         if (sidebar.classList.contains('visible')) {
-            body.style.overflow = 'hidden'; // Disable scrolling
+            if (window.innerWidth < 768) {
+                body.style.overflow = 'hidden'; // Disable scrolling
+            }
         } else {
             body.style.overflow = ''; // Enable scrolling
         }
@@ -339,7 +341,9 @@
         sidebar.classList.toggle('visible');
         sidebarToggle.classList.toggle('active');
         if (sidebar.classList.contains('visible')) {
-            body.style.overflow = 'hidden'; // Disable scrolling
+            if (window.innerWidth < 768) {
+                body.style.overflow = 'hidden'; // Disable scrolling
+            }
         } else {
             body.style.overflow = ''; // Enable scrolling
         }
