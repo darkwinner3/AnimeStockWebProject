@@ -27,9 +27,16 @@ namespace AnimeStockWebProject.Areas.Admin.Controllers
             }
             try
             {
-                await pictureAdminService.DeletePictureAsync(id);
-                TempData[SuccessMessage] = SuccessfullyDeletedImage;
-                return Json(new { success = true });
+                if (await pictureAdminService.DeletePictureAsync(id))
+                {
+                    TempData[SuccessMessage] = SuccessfullyDeletedImage;
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    TempData[WarningMessage] = UnsuccessfullDeletionOfCoverImg;
+                    return Json(new { isNotDeleted = true });
+                }
             }
             catch (Exception)
             {

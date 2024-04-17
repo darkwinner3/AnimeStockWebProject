@@ -4,7 +4,7 @@
     {
         Task<bool> PictureExistsByIdAsync(int pictureId);
 
-        Task DeletePictureAsync(int pictureId);
+        Task<bool>  DeletePictureAsync(int pictureId);
 
         Task RecoverPictureAsync(int pictureId);
 

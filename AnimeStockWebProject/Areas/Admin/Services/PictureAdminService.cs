@@ -18,12 +18,22 @@ namespace AnimeStockWebProject.Areas.Admin.Services
             this.env = env;
         }
 
-        public async Task DeletePictureAsync(int pictureId)
+        public async Task<bool> DeletePictureAsync(int pictureId)
         {
             var picture = await animeStockDbContext.Pictures.FirstAsync(p => p.Id == pictureId);
 
-            picture.IsDeleted = true;
-            await animeStockDbContext.SaveChangesAsync();
+            var pictures = await animeStockDbContext.Pictures.Where(p => p.Path.Contains("cover") && !p.IsDeleted && p.BookId == picture.BookId).ToArrayAsync();
+
+            if (picture.Path.Contains("cover") && pictures.Count() < 2)
+            {
+                return false;
+            }
+            else
+            {
+                picture.IsDeleted = true;
+                await animeStockDbContext.SaveChangesAsync();
+                return true;
+            }
         }
         //Deleting picture every 3 days
         public async Task DeletePicturesAsync()

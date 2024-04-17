@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeStockWebProject.Infras
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeStockWebProject.Core", "AnimeStockWebProject.Core\AnimeStockWebProject.Core.csproj", "{73F40225-C672-4750-B9AC-E221629F33C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeStockWebProject.Services.Tests", "AnimeStockWebProject.Services.Tests\AnimeStockWebProject.Services.Tests.csproj", "{83A43F04-ABFC-4B03-8E40-7EA1EEBA7F4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeStockWebProject.Services.Tests", "AnimeStockWebProject.Services.Tests\AnimeStockWebProject.Services.Tests.csproj", "{83A43F04-ABFC-4B03-8E40-7EA1EEBA7F4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

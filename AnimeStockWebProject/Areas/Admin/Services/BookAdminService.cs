@@ -69,7 +69,7 @@ namespace AnimeStockWebProject.Areas.Admin.Services
             await BookFile(book, fileName, currentBookTitle, bookFile);
             await animeStockDbContext.SaveChangesAsync();
         }
-        
+
 
         public async Task CreateBookPicturesAsync(int bookId, BookAddViewModel bookAddViewModel)
         {
